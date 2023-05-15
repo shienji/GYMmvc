@@ -13,6 +13,7 @@ Laravel   : v10.1.1</br>
 Database  : MySQL 10.5.16-MariaDB</br>
 ---------------------------------------------</br>
 &emsp;&emsp;&emsp;&emsp; Host      : localhost</br>
+&emsp;&emsp;&emsp;&emsp; DBname    : id20719376_gymmvc</br>
 &emsp;&emsp;&emsp;&emsp; Username  : id20719376_gymmvc</br>
 &emsp;&emsp;&emsp;&emsp; Password  : GYMmvc@123</br>
 &emsp;&emsp;&emsp;&emsp; Server charset: UTF-8 Unicode (utf8)</br>
