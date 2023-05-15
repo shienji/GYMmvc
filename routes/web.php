@@ -43,4 +43,5 @@ Route::prefix("/transaksi")->group(function(){
 
 Route::prefix("/laporan")->group(function(){
     Route::get('/',[LaporanController::class, 'tampil'])->name("tampil-laporan");
+
 });
