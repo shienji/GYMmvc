@@ -1,11 +1,15 @@
 <?php
 
-use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\LayoutController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::prefix("/layout")->group(function(){
+    Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
 });
 
 Route::prefix("/transaksi")->group(function(){
@@ -34,9 +38,4 @@ Route::prefix("/transaksi")->group(function(){
         Route::get('/event',[TransaksiController::class, 'lapEvent'])->name("trans-levent");
         Route::get('/jual',[TransaksiController::class, 'lapJual'])->name("trans-ljual");
     });
-});
-
-// joger
-Route::prefix("/transaksi")->group(function(){
-    Route::get('/',[LaporanController::class, 'tampil'])->name("tampil-laporan");
 });
