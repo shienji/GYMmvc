@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class Transaksi extends Controller
+class TransaksiController extends Controller
 {
     public function viewBayar(){
-        return view("transaksi.bayarAnggota");
+        return view('transaksi.bayarAnggota');
     }
 }
