@@ -7,10 +7,11 @@
     <title>Document</title>
 
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}">
+    <link href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet"/>
 
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('plugins/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 </head>
 <body>
     <div class="container">
@@ -46,7 +47,9 @@
 
     <script>
         $(document).ready(function () {
-            $('.tabel-laporan').DataTable();
+            $('.tabel-laporan').DataTable({
+
+            });
         });
     </script>
 </body>
