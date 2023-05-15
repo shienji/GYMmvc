@@ -20,15 +20,12 @@
 
     <nav class="main-header navbar navbar-expand navbar-white navbar-light">
         <ul class="navbar-nav">
-        <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-        </li>
+          <li class="nav-item">
+              <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+          </li>
+          <li class="nav-item d-none d-sm-inline-block">
+              <a href="{{route('trans-vflow')}}" class="nav-link">Flow Registration</a>
+          </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">      
@@ -65,35 +62,7 @@
       
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">      
-          <li class="nav-item menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                Transaksi
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="{{ route('trans-vbayar')}}" class="nav-link active">
-                  <i class="far fa-circle nav-icon  text-warning"></i>
-                  <p>Pembayaran Anggota</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('trans-vupdate')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon  text-success"></i>
-                  <p>Perpanjangan Anggota</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('trans-vevent')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon text-info"></i>
-                  <p>Registrasi Kegiatan</p>
-                </a>
-              </li>
-            </ul>
-          </li>
+          @include('transaksi._menu')
         </ul>
       </nav>      
     </div>    
