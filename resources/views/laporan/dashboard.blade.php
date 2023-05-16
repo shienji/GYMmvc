@@ -10,7 +10,7 @@
                             <h3>User</h3>
                             <p>...</p>
                         </div>
-                        <a href="#" class="small-box-footer">Cek</a>
+                        <a href="{{ route('laporan-user') }}" class="small-box-footer">Cek</a>
                     </div>
                 </div>
 
@@ -20,7 +20,7 @@
                             <h3>Transaksi</h3>
                             <p>...</p>
                         </div>
-                        <a href="#" class="small-box-footer">Cek</a>
+                        <a href="" class="small-box-footer">Cek</a>
                     </div>
                 </div>
 
@@ -30,7 +30,7 @@
                             <h3>Fasilitas</h3>
                             <p>...</p>
                         </div>
-                        <a href="#" class="small-box-footer">Cek</a>
+                        <a href="" class="small-box-footer">Cek</a>
                     </div>
                 </div>
 
@@ -40,7 +40,7 @@
                             <h3>Acara</h3>
                             <p>...</p>
                         </div>
-                        <a href="#" class="small-box-footer">Cek</a>
+                        <a href="" class="small-box-footer">Cek</a>
                     </div>
                 </div>
             </div>

@@ -6,12 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>@yield('title', 'LAPORAN')</title>
 
-    {{-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> --}}
-    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('dist/css/ionicons.min.css') }}">
-    @yield('stylesheet1')
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-    @yield('stylesheet2')
+    <link href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+
+    <script src="{{ asset('plugins/jquery/jquery.js') }}"></script>
+    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -104,12 +104,6 @@
             </div>
         </footer>
     </div>
-
-    <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    @yield('script1')
-    <script src="{{ asset('dist/js/adminlte.js') }}"></script>
-    @yield('script2')
 </body>
 
 </html>
