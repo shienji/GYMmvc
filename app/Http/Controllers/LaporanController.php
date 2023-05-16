@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class LaporanController extends Controller
 {
     public function tampil(){
-        return view('laporan.master');
+        return view('laporan.dashboard');
     }
 }
