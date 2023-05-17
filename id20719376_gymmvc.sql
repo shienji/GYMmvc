@@ -59,7 +59,7 @@ CREATE TABLE `fasilitas` (
 
 CREATE TABLE `pelatih` (
   `pelatih_id` int(11) NOT NULL,
-  `pelatih_nik` int(11) DEFAULT NULL,
+  `pelatih_nik` text DEFAULT NULL,
   `pelatih_role` varchar(255) DEFAULT NULL,
   `pelatih_nama` varchar(255) DEFAULT NULL,
   `pelatih_keahlian` varchar(255) DEFAULT NULL,
@@ -92,7 +92,7 @@ CREATE TABLE `peralatan` (
 CREATE TABLE `role` (
   `role_id` int(11) NOT NULL,
   `role_nama` varchar(255) DEFAULT NULL,
-  `role_harga` varchar(255) DEFAULT NULL,
+  `role_harga` int(11) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL
@@ -125,9 +125,9 @@ CREATE TABLE `user` (
   `user_nama` varchar(255) DEFAULT NULL,
   `user_password` text DEFAULT NULL,
   `user_role` varchar(255) DEFAULT NULL,
-  `user_nik` int(11) DEFAULT NULL,
+  `user_nik` text DEFAULT NULL,
   `user_tgllahir` date DEFAULT NULL,
-  `user_nohp` int(11) DEFAULT NULL,
+  `user_nohp` varchar(255) DEFAULT NULL,
   `user_email` varchar(255) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,

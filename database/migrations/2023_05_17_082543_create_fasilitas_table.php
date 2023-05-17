@@ -11,15 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user', function (Blueprint $table) {
-            $table->integer('user_id')->primary();
-            $table->string('user_nama')->nullable();
-            $table->text('user_password')->nullable();
-            $table->string('user_role')->nullable();
-            $table->text('user_nik')->nullable();
-            $table->date('user_tgllahir')->nullable();
-            $table->string('user_nohp')->nullable();
-            $table->string('user_email')->nullable();
+        Schema::create('fasilitas', function (Blueprint $table) {
+            $table->integer('fasilitas_id')->primary();
+            $table->string('fasilitas_nama')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
@@ -31,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user');
+        Schema::dropIfExists('fasilitas');
     }
 };
