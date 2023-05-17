@@ -1,13 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Home Master</title>
-</head>
-<body>
+@extends('Master.template_home_master')
 
-    <h1>master</h1>
-</body>
-</html>
+
+@section('konten')
+    <h1>Home Master</h1>
+@endsection
