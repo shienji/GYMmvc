@@ -20,7 +20,7 @@
                             <h3>Transaksi</h3>
                             <p>...</p>
                         </div>
-                        <a href="" class="small-box-footer">Cek</a>
+                        <a href="{{ route('laporan-transaksi') }}" class="small-box-footer">Cek</a>
                     </div>
                 </div>
 

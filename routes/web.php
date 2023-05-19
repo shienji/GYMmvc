@@ -45,8 +45,11 @@ Route::prefix("/transaksi")->group(function(){
 Route::prefix("/laporan")->group(function(){
     Route::get('/',[LaporanController::class, 'dashboard'])->name("laporan-dashboard");
     Route::get('/user',[LaporanController::class, 'user'])->name("laporan-user");
+    Route::get('/transaksi', function(){
+        return view ('laporan.transaksi');
+    })->name('laporan-transaksi');
+    Route::get('/transaksi/data',[LaporanController::class, 'transaksi'])->name('data_transaksi');
 });
-
 
 Route::prefix("/Master")->group(function(){
     Route::get('/',[MasterController::class, 'home_master'])->name("home_master");

@@ -4,14 +4,31 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@yield('title', 'LAPORAN')</title>
+    <title>@yield('title', 'Ini Laporan')</title>
 
+
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/ionicons.min.css') }}">
+    @yield('stylesheet1')
     <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
-    <link href="{{ asset('plugins/datatables-bs4/css/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+    @yield('stylesheet2')
 
-    <script src="{{ asset('plugins/jquery/jquery.js') }}"></script>
-    <script src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    {{-- datatable --}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+        integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link href="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.css" rel="stylesheet" />
+    {{-- /datatable --}}
+
+    {{-- datatable --}}
+    <script src="https://code.jquery.com/jquery-3.7.0.js" integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous">
+    </script>
+    <script src="https://cdn.datatables.net/v/bs4/dt-1.13.4/datatables.min.js"></script>
+    {{-- /datatable --}}
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -24,7 +41,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="" class="nav-link">LAPORAN</a>
+                    <a href="{{ route('trans-vflow') }}" class="nav-link">Ini Laporan</a>
                 </li>
             </ul>
 
@@ -49,6 +66,7 @@
                 <span class="brand-text font-weight-light">GYMmvc</span>
             </a>
 
+
             <div class="sidebar">
                 <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                     <div class="image">
@@ -59,6 +77,7 @@
                         <a href="#" class="d-block">Johanes Gerald</a>
                     </div>
                 </div>
+
 
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
@@ -73,14 +92,18 @@
             <div class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
-                        <div class="col-sm-6"></div>
+                        <div class="col-sm-6">
+
+                        </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
+
                             </ol>
                         </div>
                     </div>
                 </div>
             </div>
+
 
             <div class="content">
                 <div class="container-fluid">
@@ -104,6 +127,14 @@
             </div>
         </footer>
     </div>
+
+
+
+    {{-- <script src="{{ asset('plugins/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    @yield('script1') --}}
+    <script src="{{ asset('dist/js/adminlte.js') }}"></script>
+    @yield('script2')
 </body>
 
 </html>

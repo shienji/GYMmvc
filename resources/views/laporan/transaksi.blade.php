@@ -16,14 +16,17 @@
         </div>
     </div>
 
-    <table id="tabel-laporan-user" class="table table-bordered table-hover table-sm text-center">
+    <table id="tabel-laporan-transaksi" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
-                <th style="width: 5%">#</th>
-                <th style="width: 45%">NAMA</th>
+                <th style="width: 5%">ID</th>
+                <th style="width: 45%">DAFTAR</th>
+                <th style="width: 45%">EXPIRED</th>
+                {{-- <th style="width: 5%">AKSI</th> --}}
             </tr>
         </thead>
         <tbody>
+
         </tbody>
     </table>
 
@@ -32,14 +35,18 @@
             $('#tabel-laporan-transaksi').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('laporan-user') }}',
+                ajax: '{{ route('data_transaksi') }}',
                 columns: [{
                         data: 'user_id',
                         name: 'user_id'
                     },
                     {
-                        data: 'user_nama',
-                        name: 'user_nama'
+                        data: 'transaksi_daftar',
+                        name: 'transaksi_daftar'
+                    },
+                    {
+                        data: 'transaksi_expired',
+                        name: 'transaksi_expired'
                     },
                 ]
             });
