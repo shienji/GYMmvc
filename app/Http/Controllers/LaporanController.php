@@ -32,6 +32,12 @@ class LaporanController extends Controller
         return DataTables::of($query_transaksi)->make(true);
     }
 
+    // FASILITAS
+    public function view_fasilitas()
+    {
+        return view('laporan.fasilitas');
+    }
+
     // EVENT
     public function view_event()
     {

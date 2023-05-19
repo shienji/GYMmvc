@@ -3,7 +3,7 @@
 @section('konten')
     <div class="row mb-3">
         <div class="col-lg-3">
-            <a href="" style="text-decoration: none;"><button
+            <a href="{{ route('laporan-user') }}" style="text-decoration: none;"><button
                     class="btn btn-md btn-secondary btn-block font-weight-bold">USER</button></a>
         </div>
         <div class="col-lg-3">
@@ -11,7 +11,7 @@
                     class="btn btn-md btn-secondary btn-block font-weight-bold">TRANSAKSI</button></a>
         </div>
         <div class="col-lg-3">
-            <a href="" style="text-decoration: none;"><button
+            <a href="{{ route('laporan-fasilitas') }}" style="text-decoration: none;"><button
                     class="btn btn-md btn-secondary btn-block font-weight-bold">FASILITAS</button></a>
         </div>
         <div class="col-lg-3">
@@ -27,7 +27,6 @@
                 <th style="width: 25%">NAMA</th>
                 <th style="width: 25%">MULAI</th>
                 <th style="width: 25%">BERAKHIR</th>
-                {{-- <th style="width: 5%">AKSI</th> --}}
             </tr>
         </thead>
         <tbody>
