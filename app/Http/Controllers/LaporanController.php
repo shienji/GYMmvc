@@ -14,21 +14,33 @@ class LaporanController extends Controller
         return view('laporan.dashboard');
     }
 
-    public function user(){
-        return DataTables::of(User::query())
-        ->addColumn('action', function($model){
-            return '<a href="'.route('edit', $model->id).'"><button class="btn btn-primary btn-sm">Edit</button></a>';
-        })
-        // ->make(true);
-        ->toJson();
+    // USER
+    public function view_user()
+    {
+        return view('laporan.user');
     }
 
-    public function transaksi(){
-        return DataTables::of(Transaksi::query())
-        // ->addColumn('action', function($model){
-        //     return '<a href="'.route('edit', $model->id).'"><button class="btn btn-primary btn-sm">Edit</button></a>';
-        // })
-        ->make(true);
-        // ->toJson();
+    // TRANSAKSI
+    public function view_transaksi()
+    {
+        return view('laporan.transaksi');
+    }
+
+    public function data_transaksi(){
+        $query_transaksi = DB::table('transaksi')->join('user','user.user_id','=','transaksi.user_id')->get();
+
+        return DataTables::of($query_transaksi)->make(true);
+    }
+
+    // EVENT
+    public function view_event()
+    {
+        return view('laporan.event');
+    }
+
+    public function data_event(){
+        $query_event = DB::table('event')->get();
+
+        return DataTables::of($query_event)->make(true);
     }
 }

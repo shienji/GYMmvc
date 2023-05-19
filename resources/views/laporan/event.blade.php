@@ -8,7 +8,7 @@
         </div>
         <div class="col-lg-3">
             <a href="{{ route('laporan-transaksi') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-success btn-block font-weight-bold">TRANSAKSI</button></a>
+                    class="btn btn-md btn-secondary btn-block font-weight-bold">TRANSAKSI</button></a>
         </div>
         <div class="col-lg-3">
             <a href="" style="text-decoration: none;"><button
@@ -16,17 +16,17 @@
         </div>
         <div class="col-lg-3">
             <a href="{{ route('laporan-event') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">EVENT</button></a>
+                    class="btn btn-md btn-danger btn-block font-weight-bold">EVENT</button></a>
         </div>
     </div>
 
-    <table id="tabel-laporan-transaksi" class="table table-bordered table-hover table-sm text-center">
+    <table id="tabel-laporan-event" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
-                <th style="width: 25%">ID TRANSAKSI</th>
+                <th style="width: 25%">ID EVENT</th>
                 <th style="width: 25%">NAMA</th>
-                <th style="width: 25%">DAFTAR</th>
-                <th style="width: 25%">EXPIRED</th>
+                <th style="width: 25%">MULAI</th>
+                <th style="width: 25%">BERAKHIR</th>
                 {{-- <th style="width: 5%">AKSI</th> --}}
             </tr>
         </thead>
@@ -37,25 +37,25 @@
 
     <script>
         $(document).ready(function() {
-            $('#tabel-laporan-transaksi').DataTable({
+            $('#tabel-laporan-event').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('data-transaksi') }}',
+                ajax: '{{ route('data-event') }}',
                 columns: [{
-                        data: 'user_id',
-                        name: 'user_id'
+                        data: 'event_id',
+                        name: 'event_id'
                     },
                     {
-                        data: 'user_nama',
-                        name: 'user_nama'
+                        data: 'event_nama',
+                        name: 'event_nama'
                     },
                     {
-                        data: 'transaksi_daftar',
-                        name: 'transaksi_daftar'
+                        data: 'event_start',
+                        name: 'event_start'
                     },
                     {
-                        data: 'transaksi_expired',
-                        name: 'transaksi_expired'
+                        data: 'event_end',
+                        name: 'event_end'
                     },
                 ],
                 "info": false
