@@ -36,7 +36,8 @@
 </li>
 
 {{-- LAPORAN --}}
-<li class="nav-item">
+
+{{-- <li class="nav-item">
     <a href="#" class="nav-link side-trans-lap">
       <i class="nav-icon fas fa-chart-pie"></i>
       <p>
@@ -68,6 +69,7 @@
           <i class="far fa-circle nav-icon text-danger"></i>
           <p>Penjualan Barang</p>
         </a>
-      </li>
+      </li> --}}
+      
     </ul>
 </li>
