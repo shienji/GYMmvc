@@ -1,5 +1,8 @@
 @extends('laporan.master')
 
+@section('title', 'LAPORAN TRANSAKSI')
+@section('nav-title', 'LAPORAN TRANSAKSI')
+
 @section('konten')
     <div class="row mb-3">
         <div class="col-lg-3">
@@ -56,7 +59,9 @@
                         name: 'transaksi_expired'
                     },
                 ],
-                "info": false
+                "info": false,
+                dom: 'Bfrtip',
+                buttons: ["csv", "excel", "pdf", "print"],
             });
         });
     </script>
