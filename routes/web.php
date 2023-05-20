@@ -8,7 +8,7 @@ use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home');
 
 Route::prefix("/layout")->group(function(){
     Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
