@@ -809,8 +809,7 @@
         </div>
         <div class="container border-top border-dark pt-5">
             <p class="m-0 text-center text-white">
-                &copy; <a class="text-white font-weight-bold" href="#">Your Site Name</a>. All Rights Reserved. Designed by
-                <a class="text-white font-weight-bold" href="https://htmlcodex.com">HTML Codex</a>
+                &copy; <a class="text-white font-weight-bold" href="#">GYMmvc</a>. All Rights Reserved.
             </p>
         </div>
     </div>
