@@ -2,7 +2,7 @@
 
 @section('konten')
     <div class="row">
-        <div class="col-lg-12">
+        <div class="col-lg-6 col-md-12">
             <div class="card">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
@@ -16,14 +16,19 @@
                 <div class="card-body">
                     <form class="form-horizontal">
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="exampleInputEmail1">Email address</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                            </div>
-                            <div class="form-group">
-                                <label for="exampleInputPassword1">Password</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-                            </div>
+                            @php
+                                $mjenis = [
+                                    'kode'  => 'kode1',
+                                    'nama' => 'Nama1'
+                                ];
+                            @endphp
+                            <x-inputcomp type="text" label="Tanggal" name="tgldaftar"></x-inputcomp>
+                            @foreach ($mjenis as $i)
+                                    <pre>{{ $i[0] }}</pre>
+                                @endforeach
+                            <select name="jenis" id="jenis">
+                                
+                            </select>
                         </div>
                         
                         <div class="card-footer">
@@ -36,6 +41,10 @@
 
                 </div>
             </div>
+        </div>
+
+        <div class="col-lg-6 col-md-12">
+
         </div>
     </div>
 @endsection
