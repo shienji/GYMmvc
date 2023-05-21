@@ -1,5 +1,8 @@
 @extends('laporan.master')
 
+@section('title', 'LAPORAN USER')
+@section('nav-title', 'LAPORAN USER')
+
 @section('konten')
     <div class="row mb-3">
         <div class="col-lg-3">

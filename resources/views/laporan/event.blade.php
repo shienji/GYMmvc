@@ -1,5 +1,8 @@
 @extends('laporan.master')
 
+@section('title', 'LAPORAN EVENT')
+@section('nav-title', 'LAPORAN EVENT')
+
 @section('konten')
     <div class="row mb-3">
         <div class="col-lg-3">
@@ -57,7 +60,9 @@
                         name: 'event_end'
                     },
                 ],
-                "info": false
+                "info": false,
+                dom: 'Bfrtip',
+                buttons: ["csv", "excel", "pdf", "print"],
             });
         });
     </script>
