@@ -1,4 +1,9 @@
 <div class="form-group">
-    <label for="exampleInputEmail1">Email address</label>
-    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
+    <label>{{ $label ?? $name }}</label>
+    <input type="{{ $type ?? "text" }}" name="{{ $name }}" class="form-control @error($name) is-invalid @enderror" value="{{ $value ?? old($name) ?? "" }}">
+    @error($name)
+    <div class="invalid-feedback">
+        {{ $message }}
+    </div>
+    @enderror
 </div>
