@@ -38,13 +38,13 @@
                     <a href="about.html" class="nav-item nav-link">About Us</a>
                     <a href="feature.html" class="nav-item nav-link">Our Features</a>
                     <a href="class.html" class="nav-item nav-link">Classes</a>
-                    <div class="nav-item dropdown">
+                    {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu text-capitalize">
                             <a href="blog.html" class="dropdown-item">Blog Grid</a>
                             <a href="single.html" class="dropdown-item">Blog Detail</a>
                         </div>
-                    </div>
+                    </div> --}}
                     <a href="contact.html" class="nav-item nav-link">Contact</a>
                 </div>
             </div>
