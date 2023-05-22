@@ -19,7 +19,7 @@ Database  : MySQL 10.5.16-MariaDB</br>
 &emsp;&emsp;&emsp;&emsp; Server charset: UTF-8 Unicode (utf8)</br>
 <hr>
 ---------------------------------------------LOKAL KOMPUTER</br>
-Langkah :
+Langkah :</br>
 1. Clone Repository Github (https://github.com/shienji/GYMmvc.git)</br>
 2. Buka Terminal </br>
     Ketikkan Kode Berikut : </br>
