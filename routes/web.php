@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {return view('welcome');})->name('home');
+Route::get('/about', function () {return view('welcome');})->name('about');
+Route::get('/feature', function () {return view('welcome');})->name('feature');
+Route::get('/class', function () {return view('welcome');})->name('class');
 Route::get('/contact', function () {return view('welcome');})->name('contact');
 
 Route::prefix("/layout")->group(function(){
@@ -15,8 +18,6 @@ Route::prefix("/layout")->group(function(){
 
 Route::prefix("/transaksi")->group(function(){
     Route::get('/',[TransaksiController::class, 'viewDash'])->name("trans-vdashboard");
-    Route::get('/member/get',[TransaksiController::class, 'getDataNewMember'])->name("trans-vdataregister");
-    Route::get('/member/getrenewal',[TransaksiController::class, 'getDataRenewal'])->name("trans-vdatarenewal");
     Route::prefix("/register")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewRegister'])->name("trans-vregister");
         Route::post('/save',[TransaksiController::class, 'viewRegSave'])->name("trans-vregsave");
@@ -35,12 +36,12 @@ Route::prefix("/transaksi")->group(function(){
     });
     Route::get('/flow',[TransaksiController::class, 'viewFlow'])->name("trans-vflow");
 
-    // Route::prefix("/laporan")->group(function(){
-    //     Route::get('/register',[TransaksiController::class, 'lapRegister'])->name("trans-lregister");
-    //     Route::get('/renewal',[TransaksiController::class, 'lapRenewal'])->name("trans-lrenewal");
-    //     Route::get('/event',[TransaksiController::class, 'lapEvent'])->name("trans-levent");
-    //     Route::get('/jual',[TransaksiController::class, 'lapJual'])->name("trans-ljual");
-    // });
+    Route::prefix("/laporan")->group(function(){
+        Route::get('/register',[TransaksiController::class, 'lapRegister'])->name("trans-lregister");
+        Route::get('/renewal',[TransaksiController::class, 'lapRenewal'])->name("trans-lrenewal");
+        Route::get('/event',[TransaksiController::class, 'lapEvent'])->name("trans-levent");
+        Route::get('/jual',[TransaksiController::class, 'lapJual'])->name("trans-ljual");
+    });
 });
 
 Route::prefix("/laporan")->group(function(){

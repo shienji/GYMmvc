@@ -106,7 +106,6 @@
 
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-<script src="{{asset('plugins/moment/moment.min.js')}}"></script>
 @yield('script1')
 <script src="{{asset('dist/js/adminlte.js')}}"></script>
 @yield('script2')

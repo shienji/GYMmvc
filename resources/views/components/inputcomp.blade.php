@@ -1,7 +1,6 @@
-<div class="form-group row">
+<div class="form-group">
     <label>{{ $label ?? $name }}</label>
-    <input type="{{ $type ?? "text" }}" name="{{ $name }}" id="{{ $name }}" class="form-control {{$class ?? ""}}@error($name) is-invalid @enderror" 
-        value="{{ $value ?? old($name) ?? "" }}" @isset($readonly) readonly @endisset >
+    <input type="{{ $type ?? "text" }}" name="{{ $name }}" id="{{ $name }}" class="form-control @error($name) is-invalid @enderror" value="{{ $value ?? old($name) ?? "" }}">
     @error($name)
     <div class="invalid-feedback">
         {{ $message }}

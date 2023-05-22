@@ -35,18 +35,17 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-1 ">
                     <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
-                    <a href="#div-About" class="nav-item nav-link">About Us</a>
-                    <a href="#div-Features" class="nav-item nav-link">Our Features</a>
-                    <a href="#div-Classes" class="nav-item nav-link">Classes</a>
-                    <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                    <a href="{{ route('about') }}" class="nav-item nav-link">About Us</a>
+                    <a href="{{ route('feature') }}" class="nav-item nav-link">Our Features</a>
+                    <a href="{{ route('class') }}" class="nav-item nav-link">Classes</a>
                     {{-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Contact</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
                         <div class="dropdown-menu text-capitalize">
-                            <a href="{{ route('contact') }}" class="dropdown-item">Contact Us</a>
-                            <a href="{{ route('layout-loginpage') }}" class="dropdown-item">Login</a>
+                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
+                            <a href="single.html" class="dropdown-item">Blog Detail</a>
                         </div>
                     </div> --}}
-                    <a href="{{ route('layout-loginpage') }}" class="nav-item nav-link">Login</a>
+                    <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                 </div>
             </div>
         </nav>
@@ -116,7 +115,7 @@
 
 
     <!-- About Start -->
-    <div class="container py-5" id="div-About">
+    <div class="container py-5">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <img class="img-fluid mb-4 mb-lg-0" src="{{ asset('dist/img/about.jpg')}}" alt="Image">
@@ -144,7 +143,7 @@
 
 
     <!-- Features Start -->
-    <div class="container-fluid my-5" id="div-Features">
+    <div class="container-fluid my-5">
         <div class="row">
             <div class="col-lg-4 p-0">
                 <div class="d-flex align-items-center bg-secondary text-white px-5" style="min-height: 300px;">
@@ -258,7 +257,7 @@
 
 
     <!-- Class Timetable Start -->
-    <div class="container gym-feature py-5" id="div-Classes">
+    <div class="container gym-feature py-5">
         <div class="d-flex flex-column text-center mb-5">
             <h4 class="text-primary font-weight-bold">Class Timetable</h4>
             <h4 class="display-4 font-weight-bold">Working Hours and Class Time</h4>
