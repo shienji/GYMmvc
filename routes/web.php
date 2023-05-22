@@ -35,12 +35,12 @@ Route::prefix("/transaksi")->group(function(){
     });
     Route::get('/flow',[TransaksiController::class, 'viewFlow'])->name("trans-vflow");
 
-    Route::prefix("/laporan")->group(function(){
-        Route::get('/register',[TransaksiController::class, 'lapRegister'])->name("trans-lregister");
-        Route::get('/renewal',[TransaksiController::class, 'lapRenewal'])->name("trans-lrenewal");
-        Route::get('/event',[TransaksiController::class, 'lapEvent'])->name("trans-levent");
-        Route::get('/jual',[TransaksiController::class, 'lapJual'])->name("trans-ljual");
-    });
+    // Route::prefix("/laporan")->group(function(){
+    //     Route::get('/register',[TransaksiController::class, 'lapRegister'])->name("trans-lregister");
+    //     Route::get('/renewal',[TransaksiController::class, 'lapRenewal'])->name("trans-lrenewal");
+    //     Route::get('/event',[TransaksiController::class, 'lapEvent'])->name("trans-levent");
+    //     Route::get('/jual',[TransaksiController::class, 'lapJual'])->name("trans-ljual");
+    // });
 });
 
 Route::prefix("/laporan")->group(function(){
