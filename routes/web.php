@@ -48,7 +48,7 @@ Route::prefix("/laporan")->group(function(){
 
     // USER
     Route::get('/user',[LaporanController::class, 'view_user'])->name("laporan-user");
-    // Route::get('/transaksi/data',[LaporanController::class, 'data_user'])->name('data-user');
+    Route::get('/user/data',[LaporanController::class, 'data_user'])->name('data-user');
 
     // TRANSAKSI
     Route::get('/transaksi',[LaporanController::class, 'view_transaksi'])->name('laporan-transaksi');
@@ -56,7 +56,7 @@ Route::prefix("/laporan")->group(function(){
 
     // FASILITAS
     Route::get('/fasilitas',[LaporanController::class, 'view_fasilitas'])->name('laporan-fasilitas');
-    // Route::get('/fasilitas/data',[LaporanController::class, 'data_fasilitas'])->name('data-fasilitas');
+    Route::get('/fasilitas/data',[LaporanController::class, 'data_fasilitas'])->name('data-fasilitas');
 
     // EVENT
     Route::get('/event',[LaporanController::class, 'view_event'])->name('laporan-event');

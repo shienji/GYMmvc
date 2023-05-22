@@ -23,12 +23,35 @@
         </div>
     </div>
 
-    <table id="tabel-laporan-event" class="table table-bordered table-hover table-sm text-center">
+    <table id="tabel-laporan-fasilitas" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
                 <th style="width: 25%">ID FASILITAS</th>
+                <th style="width: 25%">ID NAMA</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
+
+    <script>
+        $(document).ready(function() {
+            $('#tabel-laporan-fasilitas').DataTable({
+                processing: true,
+                serverSide: true,
+                ajax: '{{ route('data-fasilitas') }}',
+                columns: [{
+                        data: 'fasilitas_id',
+                        name: 'fasilitas_id'
+                    },
+                    {
+                        data: 'fasilitas_nama',
+                        name: 'fasilitas_nama'
+                    },
+                ],
+                "info": false,
+                dom: 'Bfrtip',
+                buttons: ["csv", "excel", "pdf", "print"],
+            });
+        });
+    </script>
 @endsection
