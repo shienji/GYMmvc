@@ -35,9 +35,9 @@
             <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                 <div class="navbar-nav ml-auto p-1 ">
                     <a href="{{ route('home') }}" class="nav-item nav-link active">Home</a>
-                    <a href="{{ route('about') }}" class="nav-item nav-link">About Us</a>
-                    <a href="{{ route('feature') }}" class="nav-item nav-link">Our Features</a>
-                    <a href="{{ route('class') }}" class="nav-item nav-link">Classes</a>
+                    <a href="#div-About" class="nav-item nav-link">About Us</a>
+                    <a href="#div-Features" class="nav-item nav-link">Our Features</a>
+                    <a href="#div-Classes" class="nav-item nav-link">Classes</a>
                     <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                     {{-- <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Contact</a>
@@ -116,7 +116,7 @@
 
 
     <!-- About Start -->
-    <div class="container py-5">
+    <div class="container py-5" id="div-About">
         <div class="row align-items-center">
             <div class="col-lg-6">
                 <img class="img-fluid mb-4 mb-lg-0" src="{{ asset('dist/img/about.jpg')}}" alt="Image">
@@ -144,7 +144,7 @@
 
 
     <!-- Features Start -->
-    <div class="container-fluid my-5">
+    <div class="container-fluid my-5" id="div-Features">
         <div class="row">
             <div class="col-lg-4 p-0">
                 <div class="d-flex align-items-center bg-secondary text-white px-5" style="min-height: 300px;">
@@ -258,7 +258,7 @@
 
 
     <!-- Class Timetable Start -->
-    <div class="container gym-feature py-5">
+    <div class="container gym-feature py-5" id="div-Classes">
         <div class="d-flex flex-column text-center mb-5">
             <h4 class="text-primary font-weight-bold">Class Timetable</h4>
             <h4 class="display-4 font-weight-bold">Working Hours and Class Time</h4>
