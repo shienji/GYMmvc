@@ -38,14 +38,15 @@
                     <a href="{{ route('about') }}" class="nav-item nav-link">About Us</a>
                     <a href="{{ route('feature') }}" class="nav-item nav-link">Our Features</a>
                     <a href="{{ route('class') }}" class="nav-item nav-link">Classes</a>
+                    <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
                     {{-- <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Pages</a>
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Contact</a>
                         <div class="dropdown-menu text-capitalize">
-                            <a href="blog.html" class="dropdown-item">Blog Grid</a>
-                            <a href="single.html" class="dropdown-item">Blog Detail</a>
+                            <a href="{{ route('contact') }}" class="dropdown-item">Contact Us</a>
+                            <a href="{{ route('layout-loginpage') }}" class="dropdown-item">Login</a>
                         </div>
                     </div> --}}
-                    <a href="{{ route('contact') }}" class="nav-item nav-link">Contact</a>
+                    <a href="{{ route('layout-loginpage') }}" class="nav-item nav-link">Login</a>
                 </div>
             </div>
         </nav>

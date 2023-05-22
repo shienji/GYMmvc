@@ -15,11 +15,12 @@ return new class extends Migration
             $table->integer('user_id')->primary();
             $table->string('user_nama')->nullable();
             $table->text('user_password')->nullable();
-            $table->string('user_role')->nullable();
             $table->text('user_nik')->nullable();
             $table->date('user_tgllahir')->nullable();
             $table->string('user_nohp')->nullable();
             $table->string('user_email')->nullable();
+            $table->string('user_role')->nullable();
+            $table->string('user_status')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
