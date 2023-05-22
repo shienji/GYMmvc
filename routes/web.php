@@ -7,9 +7,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {return view('welcome');})->name('home');
-Route::get('/about', function () {return view('welcome');})->name('about');
-Route::get('/feature', function () {return view('welcome');})->name('feature');
-Route::get('/class', function () {return view('welcome');})->name('class');
 Route::get('/contact', function () {return view('welcome');})->name('contact');
 
 Route::prefix("/layout")->group(function(){
