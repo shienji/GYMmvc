@@ -11,11 +11,20 @@ Spesification :</br>
 PHP       : 8.0</br>
 Laravel   : v10.1.1</br>
 Database  : MySQL 10.5.16-MariaDB</br>
----------------------------------------------</br>
+---------------------------------------------LOKAL KOMPUTER</br>
 &emsp;&emsp;&emsp;&emsp; Host      : localhost</br>
-&emsp;&emsp;&emsp;&emsp; DBname    : id20719376_gymmvc</br>
-&emsp;&emsp;&emsp;&emsp; Username  : id20719376_gymmvc</br>
-&emsp;&emsp;&emsp;&emsp; Password  : GYMmvc@123</br>
+&emsp;&emsp;&emsp;&emsp; DBname    : gymmvc</br>
+&emsp;&emsp;&emsp;&emsp; Username  : root</br>
+&emsp;&emsp;&emsp;&emsp; Password  : </br>
 &emsp;&emsp;&emsp;&emsp; Server charset: UTF-8 Unicode (utf8)</br>
 <hr>
-
+---------------------------------------------LOKAL KOMPUTER</br>
+Langkah :
+1. Clone Repository Github (https://github.com/shienji/GYMmvc.git)</br>
+2. Buka Terminal 
+    Ketikkan Kode Berikut :
+    -> Composer install
+    -> php artisan migrate:fresh
+    -> php artisan db:seed
+3. Test aplikasi dengan menjalankan perintah :
+    -> php artisan serve
