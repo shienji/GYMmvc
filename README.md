@@ -28,3 +28,6 @@ Langkah :</br>
 &emsp;&emsp;-> php artisan db:seed </br>
 3. Test aplikasi dengan menjalankan perintah : </br>
 &emsp;&emsp;-> php artisan serve </br>
+4. Jalankan Web Browser (chrome,mozilla) </br>
+&emsp;&emsp;Buka alamat Berikut : </br>
+&emsp;&emsp;-> http://localhost:8000/ </br>
