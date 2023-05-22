@@ -26,42 +26,9 @@
     <table id="tabel-laporan-user" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
-                <th style="width: 25%">ID USER</th>
-                <th style="width: 25%">NAMA</th>
-                <th style="width: 25%">ROLE</th>
-                <th style="width: 25%">HARGA</th>
+                <th style="width: 5%">ID USER</th>
             </tr>
         </thead>
         <tbody></tbody>
     </table>
-
-    <script>
-        $(document).ready(function() {
-            $('#tabel-laporan-user').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('data-user') }}',
-                columns: [{
-                        data: 'user_id',
-                        name: 'user_id'
-                    },
-                    {
-                        data: 'user_nama',
-                        name: 'user_nama'
-                    },
-                    {
-                        data: 'role_nama',
-                        name: 'role_nama'
-                    },
-                    {
-                        data: 'role_harga',
-                        name: 'role_harga'
-                    },
-                ],
-                "info": false,
-                dom: 'Bfrtip',
-                buttons: ["excel", "pdf", "print"],
-            });
-        });
-    </script>
 @endsection

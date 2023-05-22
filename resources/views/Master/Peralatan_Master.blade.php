@@ -1,4 +1,5 @@
-@extends('Master.Home_Master')
+{{-- @extends('Master.Home_Master') --}}
+@extends('transaksi.master')
 
 @section("title", "Peralatan Master")
 
