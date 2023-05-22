@@ -26,8 +26,8 @@
     <table id="tabel-laporan-fasilitas" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
-                <th style="width: 25%">ID FASILITAS</th>
-                <th style="width: 25%">ID NAMA</th>
+                <th style="width: 50%">ID FASILITAS</th>
+                <th style="width: 50%">ID NAMA</th>
             </tr>
         </thead>
         <tbody></tbody>
