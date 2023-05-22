@@ -23,8 +23,8 @@ Langkah :</br>
 1. Clone Repository Github (https://github.com/shienji/GYMmvc.git)</br>
 2. Buka Terminal </br>
 &emsp;&emsp;Ketikkan Kode Berikut : </br>
-&emsp;&emsp;&emsp;&emsp;-> Composer install </br>
-&emsp;&emsp;&emsp;&emsp;-> php artisan migrate:fresh </br>
-&emsp;&emsp;&emsp;&emsp;-> php artisan db:seed </br>
+&emsp;&emsp;-> Composer install </br>
+&emsp;&emsp;-> php artisan migrate:fresh </br>
+&emsp;&emsp;-> php artisan db:seed </br>
 3. Test aplikasi dengan menjalankan perintah : </br>
-&emsp;&emsp;&emsp;&emsp;-> php artisan serve </br>
+&emsp;&emsp;-> php artisan serve </br>
