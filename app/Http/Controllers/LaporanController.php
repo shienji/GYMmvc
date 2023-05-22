@@ -20,6 +20,12 @@ class LaporanController extends Controller
         return view('laporan.user');
     }
 
+    public function data_user(){
+        $query_user = DB::table('user')->join('role','role.role_id','=','user.user_role')->get();
+
+        return DataTables::of($query_user)->make(true);
+    }
+
     // TRANSAKSI
     public function view_transaksi()
     {
@@ -36,6 +42,12 @@ class LaporanController extends Controller
     public function view_fasilitas()
     {
         return view('laporan.fasilitas');
+    }
+
+    public function data_fasilitas(){
+        $query_fasilitas = DB::table('fasilitas')->get();
+
+        return DataTables::of($query_fasilitas)->make(true);
     }
 
     // EVENT

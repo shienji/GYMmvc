@@ -15,8 +15,6 @@ Route::prefix("/layout")->group(function(){
 
 Route::prefix("/transaksi")->group(function(){
     Route::get('/',[TransaksiController::class, 'viewDash'])->name("trans-vdashboard");
-    Route::get('/member/get',[TransaksiController::class, 'getDataNewMember'])->name("trans-vdataregister");
-    Route::get('/member/getrenewal',[TransaksiController::class, 'getDataRenewal'])->name("trans-vdatarenewal");
     Route::prefix("/register")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewRegister'])->name("trans-vregister");
         Route::post('/save',[TransaksiController::class, 'viewRegSave'])->name("trans-vregsave");
@@ -35,12 +33,12 @@ Route::prefix("/transaksi")->group(function(){
     });
     Route::get('/flow',[TransaksiController::class, 'viewFlow'])->name("trans-vflow");
 
-    // Route::prefix("/laporan")->group(function(){
-    //     Route::get('/register',[TransaksiController::class, 'lapRegister'])->name("trans-lregister");
-    //     Route::get('/renewal',[TransaksiController::class, 'lapRenewal'])->name("trans-lrenewal");
-    //     Route::get('/event',[TransaksiController::class, 'lapEvent'])->name("trans-levent");
-    //     Route::get('/jual',[TransaksiController::class, 'lapJual'])->name("trans-ljual");
-    // });
+    Route::prefix("/laporan")->group(function(){
+        Route::get('/register',[TransaksiController::class, 'lapRegister'])->name("trans-lregister");
+        Route::get('/renewal',[TransaksiController::class, 'lapRenewal'])->name("trans-lrenewal");
+        Route::get('/event',[TransaksiController::class, 'lapEvent'])->name("trans-levent");
+        Route::get('/jual',[TransaksiController::class, 'lapJual'])->name("trans-ljual");
+    });
 });
 
 Route::prefix("/laporan")->group(function(){
@@ -48,7 +46,7 @@ Route::prefix("/laporan")->group(function(){
 
     // USER
     Route::get('/user',[LaporanController::class, 'view_user'])->name("laporan-user");
-    // Route::get('/transaksi/data',[LaporanController::class, 'data_user'])->name('data-user');
+    Route::get('/user/data',[LaporanController::class, 'data_user'])->name('data-user');
 
     // TRANSAKSI
     Route::get('/transaksi',[LaporanController::class, 'view_transaksi'])->name('laporan-transaksi');
@@ -56,7 +54,7 @@ Route::prefix("/laporan")->group(function(){
 
     // FASILITAS
     Route::get('/fasilitas',[LaporanController::class, 'view_fasilitas'])->name('laporan-fasilitas');
-    // Route::get('/fasilitas/data',[LaporanController::class, 'data_fasilitas'])->name('data-fasilitas');
+    Route::get('/fasilitas/data',[LaporanController::class, 'data_fasilitas'])->name('data-fasilitas');
 
     // EVENT
     Route::get('/event',[LaporanController::class, 'view_event'])->name('laporan-event');

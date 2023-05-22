@@ -61,7 +61,7 @@
                 ],
                 "info": false,
                 dom: 'Bfrtip',
-                buttons: ["csv", "excel", "pdf", "print"],
+                buttons: ["excel", "pdf", "print"],
             });
         });
     </script>
