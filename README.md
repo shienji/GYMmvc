@@ -18,13 +18,13 @@ Database  : MySQL 10.5.16-MariaDB</br>
 &emsp;&emsp;&emsp;&emsp; Password  : </br>
 &emsp;&emsp;&emsp;&emsp; Server charset: UTF-8 Unicode (utf8)</br>
 <hr>
----------------------------------------------LOKAL KOMPUTER</br>
+---------:*PERSIAPAN*:------------------------------------</br>
 Langkah :</br>
-1. Clone Repository Github (https://github.com/shienji/GYMmvc.git)</br>
-2. Buka Terminal </br>
-    Ketikkan Kode Berikut : </br>
-    -> Composer install </br>
-    -> php artisan migrate:fresh </br>
-    -> php artisan db:seed </br>
-3. Test aplikasi dengan menjalankan perintah : </br>
-    -> php artisan serve </br>
+&emsp;&emsp;1. Clone Repository Github (https://github.com/shienji/GYMmvc.git)</br>
+&emsp;&emsp;2. Buka Terminal </br>
+&emsp;&emsp;Ketikkan Kode Berikut : </br>
+&emsp;&emsp;&emsp;&emsp;-> Composer install </br>
+&emsp;&emsp;&emsp;&emsp;-> php artisan migrate:fresh </br>
+&emsp;&emsp;&emsp;&emsp;-> php artisan db:seed </br>
+&emsp;&emsp;3. Test aplikasi dengan menjalankan perintah : </br>
+&emsp;&emsp;&emsp;&emsp;-> php artisan serve </br>
