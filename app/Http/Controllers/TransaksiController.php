@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class TransaksiController extends Controller
 {
@@ -10,10 +12,27 @@ class TransaksiController extends Controller
         return view('transaksi.dashboard');
     }
     public function viewRegister(){
-        return view('transaksi.register');
+        $vjenis=DB::table('role')->select("role_id","role_nama")->get();
+        return view('transaksi.register')->with("vjenis",$vjenis);
+    }
+    public function getDataNewMember(){
+        $data=DB::table("user")->where("user_status","Process")        
+        ->get();
+
+        return $data;
+    }
+    public function getDataRenewal(){
+        $data=DB::table("user")
+        ->leftjoin("transaksi as t","t.user_id","user.user_id")
+        ->where("user.user_status","!=","Process")
+        ->select("user.*","t.transaksi_daftar","t.transaksi_expired")
+        ->get();
+
+        return $data;
     }
     public function viewRenewal(){
-        return view('transaksi.renewal');
+        $vjenis=DB::table('role')->select("role_id","role_nama")->get();        
+        return view('transaksi.renewal')->with("vjenis",$vjenis);
     }
     public function viewEvent(){
         return view('transaksi.event');
@@ -21,7 +40,7 @@ class TransaksiController extends Controller
     public function viewJual(){
         return view('transaksi.jual');
     }
-
+    
 
     public function lapRegister(){
         return view('transaksi.register');
