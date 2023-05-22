@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>@yield('title',"Transaksi | Pembayaran")</title>
+  <title>@yield('title',"GYMmvc")</title>
 
   
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">  
@@ -50,16 +50,16 @@
 
     
     <div class="sidebar">
+      @isset($islogin)
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="{{asset('dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Ghofur Kusmantoro</a>
+          <a href="#" class="d-block">{{$islogin->user_nama}}</a>    
         </div>
       </div>
-
-      
+      @endisset
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">      
           @include('transaksi._menu')
