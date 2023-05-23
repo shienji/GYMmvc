@@ -1,9 +1,9 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\MasterController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TransaksiController;
 
 Route::get('/', function () {return view('welcome');})->name('home');
