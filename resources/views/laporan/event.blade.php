@@ -1,4 +1,5 @@
-@extends('laporan.master')
+@extends('transaksi.master')
+{{-- @extends('laporan.master') --}}
 
 @section('title', 'LAPORAN EVENT')
 @section('nav-title', 'LAPORAN EVENT')
