@@ -23,11 +23,11 @@ Langkah :</br>
 1. Clone Repository Github (https://github.com/shienji/GYMmvc.git)</br>
 2. copy-paste .env.example ditempat yang sama</br>
 &emsp;&emsp;ganti dengan nama .env</br>
+&emsp;&emsp;Ubah konfigurasi seperti catatan diatas.</br>
 3. Buka Terminal </br>
 &emsp;&emsp;Ketikkan Kode Berikut : </br>
 &emsp;&emsp;-> Composer install </br>
-&emsp;&emsp;-> php artisan migrate:fresh </br>
-&emsp;&emsp;-> php artisan db:seed </br>
+&emsp;&emsp;-> php artisan migrate:fresh --seed </br>
 4. Test aplikasi dengan menjalankan perintah : </br>
 &emsp;&emsp;-> php artisan serve </br>
 5. Jalankan Web Browser (chrome,mozilla) </br>
