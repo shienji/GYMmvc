@@ -1,8 +1,8 @@
 @extends('transaksi.master')
 {{-- @extends('laporan.master') --}}
 
-@section('title', 'LAPORAN TRANSAKSI')
-@section('nav-title', 'LAPORAN TRANSAKSI')
+{{-- @section('title', 'LAPORAN TRANSAKSI')
+@section('nav-title', 'LAPORAN TRANSAKSI') --}}
 
 @section('konten')
     <div class="row mb-3">

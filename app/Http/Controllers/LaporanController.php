@@ -21,7 +21,7 @@ class LaporanController extends Controller
     }
 
     public function data_user(){
-        $query_user = DB::table('user')->join('role','role.role_id','=','user.user_role')->get();
+        $query_user = DB::table('user')->join('role','role.role_nama','=','user.user_role')->get();
 
         return DataTables::of($query_user)->make(true);
     }
