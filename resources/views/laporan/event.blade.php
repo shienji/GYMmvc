@@ -4,6 +4,12 @@
 {{-- @section('title', 'LAPORAN EVENT') --}}
 {{-- @section('nav-title', 'LAPORAN EVENT') --}}
 
+@section('stylesheet1')    
+    <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
+    <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+@endsection
+
 @section('konten')
     <div class="row mb-3">
         <div class="col-lg-3">
@@ -37,34 +43,51 @@
 
         </tbody>
     </table>
+@endsection
 
-    <script>
-        $(document).ready(function() {
-            $('#tabel-laporan-event').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('data-event') }}',
-                columns: [{
-                        data: 'event_id',
-                        name: 'event_id'
-                    },
-                    {
-                        data: 'event_nama',
-                        name: 'event_nama'
-                    },
-                    {
-                        data: 'event_start',
-                        name: 'event_start'
-                    },
-                    {
-                        data: 'event_end',
-                        name: 'event_end'
-                    },
-                ],
-                "info": false,
-                dom: 'Bfrtip',
-                buttons: ["csv", "excel", "pdf", "print"],
-            });
+@section('script1')
+    <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-responsive/js/responsive.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/dataTables.buttons.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.bootstrap4.min.js')}}"></script>
+    <script src="{{asset('plugins/jszip/jszip.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/pdfmake.min.js')}}"></script>
+    <script src="{{asset('plugins/pdfmake/vfs_fonts.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
+    <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+@endsection
+
+@section('script2')
+<script>
+    $(document).ready(function() {
+        $('#tabel-laporan-event').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '{{ route('data-event') }}',
+            columns: [{
+                    data: 'event_id',
+                    name: 'event_id'
+                },
+                {
+                    data: 'event_nama',
+                    name: 'event_nama'
+                },
+                {
+                    data: 'event_start',
+                    name: 'event_start'
+                },
+                {
+                    data: 'event_end',
+                    name: 'event_end'
+                },
+            ],
+            "info": false,
+            dom: 'Bfrtip',
+            buttons: ["csv", "excel", "pdf", "print"],
         });
-    </script>
+    });
+</script>
 @endsection
