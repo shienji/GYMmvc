@@ -4,24 +4,28 @@
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endsection
+
+@if(Session::has('success'))
+    <input type="hidden" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
+@endif
+
 @section('konten')
     <div class="row">
         <div class="col-lg-5 col-md-12">
-            <div class="card card-primary">
+            <form class="form-horizontal" action="{{route('trans-vregsave')}}" method="POST">
+            @csrf
+            <div class="card card-secondary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Approval New Member</h3>
+                        <h3 class="card-title">Approval</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
                 </div>
-                <form class="form-horizontal">
                 <div class="card-body">
                         <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="NIK" name="nik" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="Nama" name="nama" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="Handphone" name="nohp" readonly></x-inputcomp>
+                        <x-inputhcomp type="hidden" label="user_id" name="user_id" readonly></x-inputcomp>
 
                         <div class="form-group row">
                             <label for="inputEmail3" class="col-sm-3 col-form-label">Tipe</label>
@@ -34,19 +38,25 @@
                                 </select>
                             </div>
                         </div>
-                        <x-inputhcomp type="text" label="Berlaku sampai" name="expired" readonly></x-inputcomp>
+                        <x-inputhcomp type="text" label="NIK" name="nik" readonly></x-inputcomp>                        
+                        <x-inputhcomp type="text" label="Nama" name="nama" readonly></x-inputcomp>
+                        <x-inputhcomp type="text" label="Handphone" name="nohp" readonly></x-inputcomp>
+                        <x-inputhcomp type="text" label="Email" name="email" readonly></x-inputcomp>
+                        <x-inputhcomp type="text" label="Tgl Lahir" name="tgllahir" readonly ></x-inputcomp>
+                        <x-textareahcomp label="Alamat" name="alamat" readonly></x-inputcomp>
+                        <x-inputhcomp type="text" label="Berlaku sampai" name="tglexpired" readonly></x-inputcomp>
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-default">Cancel</button>
+                    <button type="reset" class="btn btn-default">Cancel</button>
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
-                </form>
             </div>
+            </form>
         </div>
 
         <div class="col-lg-7 col-md-12">
-            <div class="card card-success">
+            <div class="card card-secondary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">List New Member</h3>
@@ -70,7 +80,6 @@
                             
                         </tbody>
                         </table>
-                                
                 </div>
 
                 <div class="card-footer">

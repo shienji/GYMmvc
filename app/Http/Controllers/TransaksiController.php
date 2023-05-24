@@ -11,8 +11,10 @@ class TransaksiController extends Controller
     public function viewDash(){
         return view('transaksi.dashboard');
     }
+
+    // Register
     public function viewRegister(){
-        $vjenis=DB::table('role')->select("role_id","role_nama")->get();
+        $vjenis=DB::table('role')->select("role_id","role_nama","role_harga")->where("deleted_at",null)->get();
         return view('transaksi.register')->with("vjenis",$vjenis);
     }
     public function getDataNewMember(){
@@ -21,27 +23,53 @@ class TransaksiController extends Controller
 
         return $data;
     }
-    public function getDataRenewal(){
-        $data=DB::table("user")
-        ->leftjoin("transaksi as t","t.user_id","user.user_id")
-        ->where("user.user_status","!=","Process")
-        ->select("user.*","t.transaksi_daftar","t.transaksi_expired")
-        ->get();
+    public function viewRegisterSave(Request $r){        
+        $cek1=$r->validate([
+            'user_id' => 'required|numeric|min:1',
+            'role' => 'required'
+        ]);
+        $vharga=DB::table("role")->where("deleted_at",null)->where("role_nama",$r->role)->first();        
+        $cek2=DB::table("transaksi")->insert(            
+            ["user_id"=>$r->user_id,
+            "transaksi_daftar"=>Carbon::now()->format('Y-m-d H:i:s'),
+            "transaksi_expired"=>Carbon::createFromFormat('Y-m-d H:i:s', $r->tglexpired." ".date('H:i:s') ),
+            "transaksi_role"=>$r->role,
+            "transaksi_harga"=>$vharga->role_harga
+        ]);
 
-        return $data;
+        $cek3=DB::table("user")->where("user_id",$r->user_id)
+        ->update(['user_status' => 'Active']);
+
+        return back()->with("success","Data telah disimpan");
     }
+    // Renewal
     public function viewRenewal(){
-        $vjenis=DB::table('role')->select("role_id","role_nama")->get();        
+        $vjenis=DB::table('role')->select("role_id","role_nama")->where("deleted_at",null)->get();        
         return view('transaksi.renewal')->with("vjenis",$vjenis);
     }
-    public function viewEvent(){
-        return view('transaksi.event');
+    public function getDataRenewal(){
+        $data=DB::select("select a.*,
+        (select transaksi_daftar from transaksi t where t.deleted_at is null and t.user_id=a.user_id order by t.transaksi_id desc limit 1 ) as transaksi_daftar,
+        (select transaksi_expired from transaksi t where t.deleted_at is null and t.user_id=a.user_id order by t.transaksi_id desc limit 1 ) as transaksi_expired
+        from user as a 
+        where a.deleted_at is null and a.user_role !='Admin' and a.user_status !='Process' ");
+        return $data;
     }
+
+    // Event
+    public function viewEvent(){
+        $data=DB::table('event')
+        ->where("deleted_at",null)
+        ->get();
+        return view('transaksi.event')->with('vevent',$data);
+    }
+
+    // Penjualan (Cafe)
     public function viewJual(){
         return view('transaksi.jual');
     }
-    
 
+    // temporary
     public function lapRegister(){
         return view('transaksi.register');
     }

@@ -52,6 +52,7 @@ class DatabaseSeeder extends Seeder
             'user_tgllahir' => "2023/01/01",
             'user_nohp' => "085232546580",
             'user_role' => "Admin",
+            'user_status' => "Active",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
