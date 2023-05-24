@@ -1,5 +1,5 @@
 @extends('transaksi.master')
-@section('stylesheet1')    
+@section('stylesheet2')    
     <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
@@ -24,27 +24,27 @@
                     </div>
                 </div>
                 <div class="card-body">
-                        <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
-                        <x-inputhcomp type="hidden" label="user_id" name="user_id" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
+                    <x-inputhcomp type="hidden" label="user_id" name="user_id" readonly></x-inputcomp>
 
-                        <div class="form-group row">
-                            <label for="inputEmail3" class="col-sm-3 col-form-label">Tipe</label>
-                            <div class="col-sm-9">
-                                <select class="custom-select form-control-border border-width-2" id="role" name="role">
-                                    <option value=""></option>
-                                    @foreach ($vjenis as $i)
-                                        <option value="{{$i->role_nama}}">{{$i->role_nama}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
+                    <div class="form-group row">
+                        <label for="inputEmail3" class="col-sm-3 col-form-label">Tipe</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select form-control-border border-width-2" id="role" name="role">
+                                <option value=""></option>
+                                @foreach ($vjenis as $i)
+                                    <option value="{{$i->role_nama}}">{{$i->role_nama}}</option>
+                                @endforeach
+                            </select>
                         </div>
-                        <x-inputhcomp type="text" label="NIK" name="nik" readonly></x-inputcomp>                        
-                        <x-inputhcomp type="text" label="Nama" name="nama" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="Handphone" name="nohp" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="Email" name="email" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="Tgl Lahir" name="tgllahir" readonly ></x-inputcomp>
-                        <x-textareahcomp label="Alamat" name="alamat" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="Berlaku sampai" name="tglexpired" readonly></x-inputcomp>
+                    </div>
+                    <x-inputhcomp type="text" label="NIK" name="nik" readonly></x-inputcomp>                        
+                    <x-inputhcomp type="text" label="Nama" name="nama" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="Handphone" name="nohp" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="Email" name="email" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="Tgl Lahir" name="tgllahir" readonly ></x-inputcomp>
+                    <x-textareahcomp label="Alamat" name="alamat" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="Berlaku sampai" name="tglexpired" readonly></x-inputcomp>
                 </div>
 
                 <div class="card-footer">
@@ -79,7 +79,7 @@
                         <tbody>
                             
                         </tbody>
-                        </table>
+                    </table>
                 </div>
 
                 <div class="card-footer">

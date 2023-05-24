@@ -1,4 +1,5 @@
 $(function () {
+    $(".card-tools .btn-group").hide();
     setInterval(updateTime,1000);
     loadListNewMember("#tabel_reg");
     flashpesan("flashpesan"); 
@@ -8,6 +9,8 @@ $(function () {
         $('#nohp').removeClass( "is-warning" );
         $('#tglexpiredold').removeClass( "is-warning" );
         $('#tglexpired').removeClass( "is-valid" );
+
+        $(".card-tools .btn-group").hide();
     });
 
     function updateTime(){
@@ -23,7 +26,7 @@ $(function () {
             xtitle=myEle.value;
             xToast = Swal.mixin({
                 toast: true,
-                position: 'center',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 3000
             }).fire({
@@ -87,6 +90,9 @@ $(function () {
                     }, {
                         "data": "user_id",
                         "visible": false
+                    }, {
+                        "data": "transaksi_id",
+                        "visible": false
                     }
                 ],
                 order: [[0, "desc"], [1, "desc"]]
@@ -96,6 +102,8 @@ $(function () {
             $(namanya + ' tbody').on('click', 'tr', function () {
                 data = nmTabel.row(this).data();
                 exDate = moment(new Date(data.transaksi_expired), "DD-MM-YYYY").add(1, 'Month').format("YYYY-MM-DD");
+                $('#user_id').val(data.transaksi_id);
+                $('#user_id').val(data.user_id);
                 $('#email').val(data.user_email);
                 $('#nama').val(data.user_nama);
                 $('#nohp').val(data.user_nohp);
@@ -103,7 +111,6 @@ $(function () {
                 $('#tgllahir').val(data.user_tgllahir);
                 $('#alamat').val(data.user_alamat);
                 $('#role').val(data.user_role);
-                $('#user_id').val(data.user_id);
                 $('#tglexpiredold').val(data.transaksi_expired);
                 $('#tglexpired').val(exDate);
 
@@ -111,6 +118,8 @@ $(function () {
                 $('#nohp').addClass( "is-warning" );
                 $('#tglexpiredold').addClass( "is-warning" );
                 $('#tglexpired').addClass( "is-valid" );
+
+                $(".card-tools .btn-group").show();
             });         
         }
     }

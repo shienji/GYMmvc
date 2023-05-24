@@ -14,17 +14,30 @@
         <div class="col-lg-5 col-md-12">
             <form class="form-horizontal" id="form-input" action="{{route('trans-vrensave')}}" method="POST">
             @csrf
+            @method('DELETE')
             <div class="card card-secondary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">Revewal</h3>
                         <div class="card-tools">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" data-offset="-62">
+                                  <i class="fas fa-bars"></i>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                  <a href="{{route('trans-vrendel')}}" class="dropdown-item" style="color:black">Hapus Renewal</a>
+                                  <div class="dropdown-divider"></div>
+                                  <a href="#" class="dropdown-item" style="color:black">History Transaksi</a>
+                                  <a href="#" class="dropdown-item" style="color:black">History Event</a>
+                                </div>
+                            </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
+                    <x-inputhcomp type="hidden" label="transaksi_id" name="transaksi_id" readonly></x-inputcomp>
                     <x-inputhcomp type="hidden" label="user_id" name="user_id" readonly></x-inputcomp>
 
                     <div class="form-group row">

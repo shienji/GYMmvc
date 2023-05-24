@@ -6,6 +6,7 @@ use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\TransaksiController;
 
+
 Route::get('/', function () {return view('welcome');})->name('home');
 Route::get('/contact', function () {return view('welcome');})->name('contact');
 
@@ -24,7 +25,8 @@ Route::prefix("/transaksi")->group(function(){
     });
     Route::prefix("/renewal")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewRenewal'])->name("trans-vrenewal");
-        Route::post('/',[TransaksiController::class, 'viewRenSave'])->name("trans-vrensave");
+        Route::post('/',[TransaksiController::class, 'viewRenewalSave'])->name("trans-vrensave");
+        Route::delete('/del',[TransaksiController::class, 'viewRenewalDel'])->name("trans-vrendel");
     });
     Route::prefix("/revent")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewEvent'])->name("trans-vevent");

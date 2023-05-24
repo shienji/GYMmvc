@@ -1,7 +1,7 @@
 $(function () {
     setInterval(updateTime,1000);
     loadListNewMember("#tabel_reg");
-    flashpesan("flashpesan"); 
+    flashpesan("flashpesan");
 
     $("form").on( "reset", function(e) {        
         $('#role').removeClass( "is-warning" );
@@ -23,7 +23,7 @@ $(function () {
             xtitle=myEle.value;
             xToast = Swal.mixin({
                 toast: true,
-                position: 'center',
+                position: 'top-end',
                 showConfirmButton: false,
                 timer: 3000
             }).fire({
@@ -106,7 +106,7 @@ $(function () {
 
                 $('#role').addClass( "is-warning" );
                 $('#nohp').addClass( "is-warning" );                
-                $('#tglexpired').addClass( "is-valid" );
+                $('#tglexpired').addClass( "is-valid" );                
             });
         }
     }
