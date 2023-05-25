@@ -31,12 +31,15 @@ class LaporanController extends Controller
 
         if ($x == '-') {
             $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
                 ->get();
         } else {
             $query_user_filter = DB::table('user')
-            ->join('role','role.role_nama','=','user.user_role')->where('user.user_role','=',$x)
-            ->get();
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->where('user.user_role','=',$x)
+                ->get();
         }
 
         return DataTables::of($query_user_filter)->make(true);
