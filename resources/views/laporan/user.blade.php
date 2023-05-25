@@ -4,30 +4,24 @@
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/jquery-ui/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 @endsection
 
 @section('konten')
-    {{-- <div class="row mb-3">
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-user') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-info btn-block font-weight-bold">USER</button></a>
+    <div class="card bg-gradient-danger">
+        <div class="card-header border-0">
+            <h3 class="card-title pt-1">
+                <i class="fas fa-filter mr-1"></i>
+                Filter
+            </h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-transaksi') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">TRANSAKSI</button></a>
-        </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-fasilitas') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">FASILITAS</button></a>
-        </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-event') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">EVENT</button></a>
-        </div>
-    </div> --}}
-
-    <div class="card">
-        <div class="card-body">
+        <div class="card-body" style="margin-bottom: -20px;">
             <div class="form-group row">
                 <div class="col-1 pt-1">
                     <label>ROLE :</label>
@@ -40,6 +34,22 @@
                         <option value="Bronze">Bronze</option>
                         <option value="Admin">Admin</option>
                     </select>
+                </div>
+                <div class="col-5"></div>
+                <div class="col-1 pt-1">
+                    <label>TANGGAL :</label>
+                </div>
+                <div class="col-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control float-right" id="filter-tanggal">
+                        <input type="hidden" id="start-date" name="start_date" />
+                        <input type="hidden" id="end-date" name="end_date" />
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,11 +82,13 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
+    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 @endsection
 
 @section('script2')
     <script>
-        function panggil_tabel_user(x) {
+        function panggil_tabel_user(aksi, x, y, z) {
             $('#tabel-laporan-user').DataTable({
                 bDestroy: true,
                 processing: true,
@@ -85,7 +97,10 @@
                     type: 'get',
                     'url': '{{ route('data-user-filter') }}',
                     'data': {
-                        x
+                        aksi,
+                        x,
+                        y,
+                        z
                     },
                 },
                 columns: [{
@@ -120,13 +135,46 @@
             });
         }
 
+        $('#filter-tanggal').daterangepicker({
+            locale: {
+                format: 'DD/MM/YYYY'
+            }
+        });
+
+        $('#filter-tanggal').on('apply.daterangepicker', function(ev, picker) {
+            var startDate = picker.startDate.format('YYYY-MM-DD');
+            var endDate = picker.endDate.format('YYYY-MM-DD');
+
+            $('#start-date').val(startDate);
+            $('#end-date').val(endDate);
+        });
+
         $(document).ready(function() {
+            $('.card:first').find('[data-card-widget="collapse"]').click();
+
+            var aksi = 'role';
             var x = $('#filter-role').val();
-            panggil_tabel_user(x);
+            var y = '-';
+            var z = '-';
+            panggil_tabel_user(aksi, x, y, z);
 
             $('#filter-role').on('change', function() {
+                var aksi = 'role';
                 var x = $(this).val();
-                panggil_tabel_user(x);
+                var y = '-';
+                var z = '-';
+                panggil_tabel_user(aksi, x, y, z);
+            });
+
+            $('#filter-tanggal').on('change', function() {
+                setTimeout(() => {
+                    var aksi = 'tanggal';
+                    var x = '-';
+                    var y = $('#start-date').val() + ' 00:00:00';
+                    var z = $('#end-date').val() + ' 23:59:59';
+                    alert(y + ' ' + z)
+                    panggil_tabel_user(aksi, x, y, z);
+                }, 500);
             });
         });
     </script>
