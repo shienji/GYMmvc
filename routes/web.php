@@ -52,6 +52,7 @@ Route::prefix("/laporan")->group(function(){
     // USER
     Route::get('/user',[LaporanController::class, 'view_user'])->name("laporan-user");
     Route::get('/user/data',[LaporanController::class, 'data_user'])->name('data-user');
+    Route::get('/user/data-filter',[LaporanController::class, 'data_user_filter'])->name('data-user-filter');
 
     // TRANSAKSI
     Route::get('/transaksi',[LaporanController::class, 'view_transaksi'])->name('laporan-transaksi');

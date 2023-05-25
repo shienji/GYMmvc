@@ -26,6 +26,22 @@ class LaporanController extends Controller
         return DataTables::of($query_user)->make(true);
     }
 
+    public function data_user_filter(Request $request){
+        $x = $request->query('x');
+
+        if ($x == '-') {
+            $query_user_filter = DB::table('user')
+                ->join('role','role.role_nama','=','user.user_role')
+                ->get();
+        } else {
+            $query_user_filter = DB::table('user')
+            ->join('role','role.role_nama','=','user.user_role')->where('user.user_role','=',$x)
+            ->get();
+        }
+
+        return DataTables::of($query_user_filter)->make(true);
+    }
+
     // TRANSAKSI
     public function view_transaksi()
     {
