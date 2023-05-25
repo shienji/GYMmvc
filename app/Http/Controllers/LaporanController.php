@@ -32,30 +32,13 @@ class LaporanController extends Controller
         $y = $request->query('y');
         $z = $request->query('z');
 
-        if($aksi = 'role'){
-            if ($x == '-') {
-                $query_user_filter = DB::table('user')
-                    ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-                    ->join('role','role.role_nama','=','user.user_role')
-                    ->get();
-            } else {
-                $query_user_filter = DB::table('user')
-                    ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-                    ->join('role','role.role_nama','=','user.user_role')
-                    ->where('user.user_role','=',$x)
-                    ->get();
-            }
-        } else if($aksi == 'tanggal'){
-            $query_user_filter = DB::table('user')
-                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-                ->join('role','role.role_nama','=','user.user_role')
+        $query_user_filter = DB::table('user')
+                // ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                // ->join('role','role.role_nama','=','user.user_role')
                 ->whereBetween('created_at', [$y, $z])
                 ->get();
-        } else {
 
-        }
-
-        // if ($y == '-') {
+        // if($aksi = 'role'){
         //     if ($x == '-') {
         //         $query_user_filter = DB::table('user')
         //             ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
@@ -68,13 +51,14 @@ class LaporanController extends Controller
         //             ->where('user.user_role','=',$x)
         //             ->get();
         //     }
+        // } else if ($aksi == 'tanggal'){
+        //     $query_user_filter = DB::table('user')
+        //         // ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+        //         // ->join('role','role.role_nama','=','user.user_role')
+        //         ->whereBetween('created_at', [$y, $z])
+        //         ->get();
         // } else {
 
-        //     $query_user_filter = DB::table('user')
-        //         ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-        //         ->join('role','role.role_nama','=','user.user_role')
-        //         ->where('user.created_at', 'BETWEEN', $yx .'00:00:00', 'AND', $yy .'23:59:59')
-        //         ->get();
         // }
 
         return DataTables::of($query_user_filter)->make(true);

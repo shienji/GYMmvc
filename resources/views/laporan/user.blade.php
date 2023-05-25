@@ -47,8 +47,6 @@
                             </span>
                         </div>
                         <input type="text" class="form-control float-right" id="filter-tanggal">
-                        <input type="hidden" id="start-date" name="start_date" />
-                        <input type="hidden" id="end-date" name="end_date" />
                     </div>
                 </div>
             </div>
@@ -135,19 +133,6 @@
             });
         }
 
-        $('#filter-tanggal').daterangepicker({
-            locale: {
-                format: 'DD/MM/YYYY'
-            }
-        });
-
-        $('#filter-tanggal').on('apply.daterangepicker', function(ev, picker) {
-            var startDate = picker.startDate.format('YYYY-MM-DD');
-            var endDate = picker.endDate.format('YYYY-MM-DD');
-
-            $('#start-date').val(startDate);
-            $('#end-date').val(endDate);
-        });
 
         $(document).ready(function() {
             $('.card:first').find('[data-card-widget="collapse"]').click();
@@ -166,15 +151,21 @@
                 panggil_tabel_user(aksi, x, y, z);
             });
 
-            $('#filter-tanggal').on('change', function() {
-                setTimeout(() => {
-                    var aksi = 'tanggal';
-                    var x = '-';
-                    var y = $('#start-date').val() + ' 00:00:00';
-                    var z = $('#end-date').val() + ' 23:59:59';
-                    alert(y + ' ' + z)
-                    panggil_tabel_user(aksi, x, y, z);
-                }, 500);
+            $('#filter-tanggal').daterangepicker({
+                locale: {
+                    format: 'DD/MM/YYYY'
+                }
+            });
+
+            $('#filter-tanggal').on('apply.daterangepicker', function(ev, picker) {
+                var y = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
+                var z = picker.endDate.format('YYYY-MM-DD') + ' 23:59:59';
+
+                alert(y + ' | ' + z);
+
+                var aksi = 'tanggal';
+                var x = '-';
+                panggil_tabel_user(aksi, x, y, z);
             });
         });
     </script>
