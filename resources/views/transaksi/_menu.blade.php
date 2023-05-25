@@ -73,9 +73,36 @@
 </li>
 
 {{-- LAPORAN --}}
-<li class="nav-item">
-    <a href="{{ route('laporan') }}" class="nav-link side-trans-lap">
+<li class="nav-item menu-open">
+    <a href="#" class="nav-link side-trans-lap">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>Laporan</p>
+        <i class="right fas fa-angle-left"></i>
     </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('laporan-user') }}" class="nav-link side-trans-vdashboard">
+                <i class="far fa-circle nav-icon  text-danger"></i>
+                <p>User</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('laporan-transaksi') }}" class="nav-link side-trans-vregister">
+                <i class="far fa-circle nav-icon  text-warning"></i>
+                <p>Transaksi</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('laporan-fasilitas') }}" class="nav-link side-trans-vrenewal">
+                <i class="far fa-circle nav-icon  text-success"></i>
+                <p>Fasilitas</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('laporan-event') }}" class="nav-link">
+                <i class="far fa-circle nav-icon text-info"></i>
+                <p>Event</p>
+            </a>
+        </li>
+    </ul>
 </li>
