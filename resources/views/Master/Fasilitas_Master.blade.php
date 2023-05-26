@@ -30,7 +30,7 @@
                     <x-inputhcomp type="text" label="id" name="role_id" readonly></x-inputcomp>
                         <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
                         <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
-                        <x-inputhcomp type="number" label="Harga" name="Harga" ></x-inputcomp>
+
 
 
                 </div>
@@ -63,7 +63,6 @@
                             <tr>
                                 <th>ID</th>
                                 <th>Nama</th>
-                                <th>Harga</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
