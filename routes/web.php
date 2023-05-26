@@ -87,5 +87,7 @@ Route::prefix("/Master")->group(function(){
     Route::prefix("/Fasilitas")->group(function(){
         Route::get('/',[MasterController::class, 'fasilitas_master'])->name("fasilitas_master");
         Route::post('/',[MasterController::class, 'fasilitas_masterpost'])->name("fasilitas_masterpost");
+        Route::post('/delete',[MasterController::class, 'fasilitas_masterdel'])->name("fasilitas_masterdel");
+        Route::get('/get',[MasterController::class, 'getDataFasilitas'])->name("getDataFasilitas");
     });
 });
