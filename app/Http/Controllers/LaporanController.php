@@ -38,25 +38,49 @@ class LaporanController extends Controller
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
                 ->get();
-        // hanya filter role
+        // hanya filter tanggal
         } else if ($x=='-' && $y!='-' && $z!='-' && $a=='-') {
             $query_user_filter = DB::table('user')
-                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-                ->join('role','role.role_nama','=','user.user_role')
-                ->whereBetween('user.created_at', [$y, $z])
-                ->get();
-        // hanya filter tanggal
+            ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+            ->join('role','role.role_nama','=','user.user_role')
+            ->whereBetween('user.created_at', [$y, $z])
+            ->get();
+        // hanya filter role
         } else if ($x!='-' && $y=='-' && $z=='-' && $a=='-') {
-            $query_user_filter = DB::table('user')
-                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-                ->join('role','role.role_nama','=','user.user_role')
-                ->where('user.user_role','=',$x)
-                ->get();
+        $query_user_filter = DB::table('user')
+            ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+            ->join('role','role.role_nama','=','user.user_role')
+            ->where('user.user_role','=',$x)
+            ->get();
         // hanya filter status
         } else if ($x=='-' && $y=='-' && $z=='-' && $a!='-') {
             $query_user_filter = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
+                ->where('user.user_status','=',$a)
+                ->get();
+        // filter role & status
+        } else if ($x!='-' && $y=='-' && $z=='-' && $a!='-') {
+            $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->where('user.user_role','=',$x)
+                ->where('user.user_status','=',$a)
+                ->get();
+        // filter role & tanggal
+        } else if ($x!='-' && $y!='-' && $z!='-' && $a=='-') {
+            $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->where('user.user_role','=',$x)
+                ->whereBetween('user.created_at', [$y, $z])
+                ->get();
+        // filter tanggal & status
+        } else if ($x=='-' && $y!='-' && $z!='-' && $a!='-') {
+            $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->whereBetween('user.created_at', [$y, $z])
                 ->where('user.user_status','=',$a)
                 ->get();
         // filter semua
