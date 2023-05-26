@@ -9,7 +9,75 @@
 @endsection
 
 @section('konten')
-    <div class="card bg-gradient-danger">
+    <style>
+        .wrapper {
+            background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+            background-size: 1800% 1800%;
+
+            -webkit-animation: rainbow 18s ease infinite;
+            -z-animation: rainbow 18s ease infinite;
+            -o-animation: rainbow 18s ease infinite;
+            animation: rainbow 18s ease infinite;
+        }
+
+        @-webkit-keyframes rainbow {
+            0% {
+                background-position: 0% 82%
+            }
+
+            50% {
+                background-position: 100% 19%
+            }
+
+            100% {
+                background-position: 0% 82%
+            }
+        }
+
+        @-moz-keyframes rainbow {
+            0% {
+                background-position: 0% 82%
+            }
+
+            50% {
+                background-position: 100% 19%
+            }
+
+            100% {
+                background-position: 0% 82%
+            }
+        }
+
+        @-o-keyframes rainbow {
+            0% {
+                background-position: 0% 82%
+            }
+
+            50% {
+                background-position: 100% 19%
+            }
+
+            100% {
+                background-position: 0% 82%
+            }
+        }
+
+        @keyframes rainbow {
+            0% {
+                background-position: 0% 82%
+            }
+
+            50% {
+                background-position: 100% 19%
+            }
+
+            100% {
+                background-position: 0% 82%
+            }
+        }
+    </style>
+
+    <div class="card wrapper text-white">
         <div class="card-header border-0">
             <h3 class="card-title pt-1">
                 <i class="fas fa-filter mr-1"></i>
@@ -188,8 +256,10 @@
                 $('#startDate').val(y);
                 $('#endDate').val(z);
 
-                // alert(y + ' | ' + z);
-                panggil_tabel_user(x, y, z, a);
+                var b = $('#filter-role').val();
+                var c = $('#filter-status').val();
+
+                panggil_tabel_user(b, y, z, c);
             });
         });
     </script>
