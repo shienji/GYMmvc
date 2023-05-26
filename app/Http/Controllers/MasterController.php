@@ -33,21 +33,20 @@ class MasterController extends Controller
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
-                'harga' => 'required'
+                'Harga' => 'required'
             ]);
-            $vharga = DB::table("role")->where("deleted_at", null)->where("role_nama", $r->role)->first();
-            $cek2 = DB::table("transaksi")->insert(
+
+            $cek2 = DB::table("role")->insert(
                 [
-                    "user_id" => $r->user_id,
-                    "transaksi_daftar" => Carbon::now()->format('Y-m-d H:i:s'),
-                    "transaksi_expired" => Carbon::createFromFormat('Y-m-d H:i:s', $r->tglexpired . " " . date('H:i:s')),
-                    "transaksi_role" => $r->role,
-                    "transaksi_harga" => $vharga->role_harga
+                    "role_nama" => $r->nama,
+                    "role_harga" => $r->Harga,
+                    "created_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                    "role_status" => 'aktif',
                 ]
             );
 
-            $cek3 = DB::table("user")->where("user_id", $r->user_id)
-                ->update(['user_status' => 'Active']);
+            // $cek3 = DB::table("user")->where("user_id", $r->user_id)
+            //     ->update(['user_status' => 'Active']);
 
             return back()->with("success", "Data telah disimpan");
         }
