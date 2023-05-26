@@ -47,8 +47,8 @@
                             </span>
                         </div>
                         <input type="text" class="form-control float-right" id="filter-tanggal">
-                        <input type="text" class="form-control" id="startDate" value="-">
-                        <input type="text" class="form-control" id="endDate" value="-">
+                        <input type="hidden" class="form-control" id="startDate" value="-">
+                        <input type="hidden" class="form-control" id="endDate" value="-">
                     </div>
                 </div>
             </div>
