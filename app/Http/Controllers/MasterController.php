@@ -26,6 +26,8 @@ class MasterController extends Controller
         return $data;
     }
 
+
+
     public function role_masterpost(Request $r)
     {
         if ($r->role_id != "") {
@@ -83,7 +85,7 @@ class MasterController extends Controller
             ->update([
                 'role_status' => 'aktif',
                 "deleted_at" => null,
-                "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),   
+                "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
         return back()->with("success", "Data telah restore");
@@ -102,5 +104,13 @@ class MasterController extends Controller
     public function fasilitas_master()
     {
         return view('Master.Fasilitas_Master');
+    }
+
+    public function getDataFasilitas()
+    {
+        $data = DB::table("fasilitas")
+            ->get();
+
+        return $data;
     }
 }
