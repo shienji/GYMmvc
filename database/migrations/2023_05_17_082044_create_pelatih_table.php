@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('pelatih', function (Blueprint $table) {
             $table->increments('pelatih_id');
             $table->text('pelatih_nik')->nullable();
-            $table->string('pelatih_role')->nullable();
             $table->string('pelatih_nama')->nullable();
             $table->string('pelatih_keahlian')->nullable();
             $table->timestamp('created_at')->nullable();
