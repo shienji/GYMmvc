@@ -11,6 +11,8 @@
     <input type="" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
 @endif
 @section('konten')
+<h1 style="text-align: center">Master Role</h1>
+<br>
     <div class="row">
         <div class="col-lg-5 col-md-12">
             <div class="card card-primary">
