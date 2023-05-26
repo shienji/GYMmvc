@@ -64,12 +64,26 @@ class MasterController extends Controller
         }
     }
 
-    public function role_masterdel($xid)
+    public function role_masterdel(Request $r)
     {
+        $status=DB::table("role")->select("role_status")->where("role_id",$r->role_id2)->first();
+
+        if($status=="aktif"){
+            return back()->with("success", "Data telah hapus");
+
+        }
+        else{
+            // $cek3 = DB::table("role")->where("role_id", $r->role_id)
+            // ->update([
+            //     'role_nama' => $r->nama,
+            //     'role_harga' => $r->Harga,
+            //     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+            // ]);
+
+        return back()->with("success", "Data telah restore");
+        }
 
 
-            return back()->with("success", "Data telah disimpan");
-        
     }
     public function peralatan_master()
     {

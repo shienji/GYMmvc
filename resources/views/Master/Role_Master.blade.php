@@ -34,13 +34,12 @@
                 </div>
 
                 <div class="card-footer">
-                    <form action="{{ route("role_masterdel") }}" method="POST">
-                        <x-inputhcomp type="text" label="role_id2" name="role_id2" readonly></x-inputcomp>
-                        <button class="btn btn-danger">Remove/Restore</button>
-                    </form>
-
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
+                </form><form action="{{ route("role_masterdel") }}" method="POST">
+                    @csrf
+                    <x-inputhcomp type="hidden" label="role_id2" name="role_id2" readonly></x-inputcomp>
+                    <button type="submit" class="btn btn-danger">Remove/Restore</button>
                 </form>
             </div>
         </div>
