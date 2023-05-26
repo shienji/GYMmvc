@@ -22,7 +22,7 @@
                 <form class="form-horizontal">
                 <div class="card-body">
                     <x-inputhcomp type="text" label="role_id" name="role_id" readonly></x-inputcomp>
-                        {{-- <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp> --}}
+                        <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
                         <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
                         <x-inputhcomp type="number" label="Harga" name="Harga" ></x-inputcomp>
 
@@ -30,7 +30,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-default">Remove</button>
+                    <button type="submit" class="btn btn-default">Remove/Restore</button>
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
                 </form>
@@ -55,7 +55,7 @@
                                 <th>ID</th>
                                 <th>Nama</th>
                                 <th>Harga</th>
-                                /<th>Status</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
                         <tbody>
