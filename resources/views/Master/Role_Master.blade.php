@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </div>
-                <form class="form-horizontal">
+                <form class="form-horizontal"  action="{{route('role_masterpost')}}" method="POST">
                 <div class="card-body">
                     <x-inputhcomp type="text" label="role_id" name="role_id" readonly></x-inputcomp>
                         <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
