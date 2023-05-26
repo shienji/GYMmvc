@@ -24,10 +24,10 @@
                         </div>
                     </div>
                 </div>
-                <form class="form-horizontal"  action="{{ route("role_masterpost") }}" method="POST">
+                <form class="form-horizontal"  action="{{ route("fasilitas_masterpost") }}" method="POST">
                     @csrf
                 <div class="card-body">
-                    <x-inputhcomp type="text" label="id" name="role_id" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="id" name="fasilitas_id" readonly></x-inputcomp>
                         <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
                         <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
 
@@ -38,9 +38,9 @@
                 <div class="card-footer">
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
-                </form><form action="{{ route("role_masterdel") }}" method="POST">
+                </form><form action="{{ route("fasilitas_masterdel") }}" method="POST">
                     @csrf
-                    <x-inputhcomp type="hidden" label="role_id2" name="role_id2" readonly></x-inputcomp>
+                    <x-inputhcomp type="hidden" label="fasilitas_id2" name="fasilitas_id2" readonly></x-inputcomp>
                     <button type="submit" class="btn btn-danger">Remove/Restore</button>
                 </form>
             </div>
@@ -50,7 +50,7 @@
             <div class="card card-success">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">List Role</h3>
+                        <h3 class="card-title">List Fasilitas</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="master_role" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('getDataRole')}}">
+                    <table id="master_fasilitas" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('getDataFasilitas')}}">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -97,5 +97,5 @@
 @endsection
 
 @section('script2')
-    <script src="{{asset('dist/js/master_role.js')}}"></script>
+    <script src="{{asset('dist/js/master_fasilitas.js')}}"></script>
 @endsection
