@@ -103,7 +103,8 @@ class MasterController extends Controller
     }
     public function fasilitas_master()
     {
-        return view('Master.Fasilitas_Master');
+        $vjenis = DB::table('fasilitas')->select("fasilitas_id", "fasilitas_nama")->get();
+        return view('Master.Fasilitas_Master')->with("vjenis", $vjenis);
     }
 
     public function getDataFasilitas()
