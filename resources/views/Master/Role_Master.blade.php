@@ -55,7 +55,7 @@
                                 <th>ID</th>
                                 <th>Nama</th>
                                 <th>Harga</th>
-                                {{-- /<th>Status</th> --}}
+                                /<th>Status</th>
                             </tr>
                         </thead>
                         <tbody>

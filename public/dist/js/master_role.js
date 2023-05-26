@@ -33,15 +33,15 @@ $(function () {
                },
                columns: [{
                        "data": "role_id",
-                       "width": "15%"
+                       "width": "8%"
                    }, {
                        "data": "role_nama",
-                       "width": "8%"
+                       "width": "15%"
                    }, {
                        "data": "role_harga",
                        "width": "15%"
                    },{
-                    "data": "role_harga",
+                    "data": "role_status",
                     "width": "15%"
                 }
                ],
