@@ -9,75 +9,7 @@
 @endsection
 
 @section('konten')
-    <style>
-        .wrapper {
-            background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-            background-size: 1800% 1800%;
-
-            -webkit-animation: rainbow 18s ease infinite;
-            -z-animation: rainbow 18s ease infinite;
-            -o-animation: rainbow 18s ease infinite;
-            animation: rainbow 18s ease infinite;
-        }
-
-        @-webkit-keyframes rainbow {
-            0% {
-                background-position: 0% 82%
-            }
-
-            50% {
-                background-position: 100% 19%
-            }
-
-            100% {
-                background-position: 0% 82%
-            }
-        }
-
-        @-moz-keyframes rainbow {
-            0% {
-                background-position: 0% 82%
-            }
-
-            50% {
-                background-position: 100% 19%
-            }
-
-            100% {
-                background-position: 0% 82%
-            }
-        }
-
-        @-o-keyframes rainbow {
-            0% {
-                background-position: 0% 82%
-            }
-
-            50% {
-                background-position: 100% 19%
-            }
-
-            100% {
-                background-position: 0% 82%
-            }
-        }
-
-        @keyframes rainbow {
-            0% {
-                background-position: 0% 82%
-            }
-
-            50% {
-                background-position: 100% 19%
-            }
-
-            100% {
-                background-position: 0% 82%
-            }
-        }
-    </style>
-
-    <div class="card wrapper text-white">
+    <div class="card bg-gradient-danger">
         <div class="card-header border-0">
             <h3 class="card-title pt-1">
                 <i class="fas fa-filter mr-1"></i>
@@ -92,11 +24,12 @@
         <div class="card-body" style="margin-bottom: -20px;">
             <div class="form-group row">
                 <div class="col-1 pt-1">
-                    <label>ROLE :</label>
+                    <label>ROLE</label>
+                    <span class="float-right">:</span>
                 </div>
                 <div class="col-2">
                     <select class="form-control" id="filter-role">
-                        <option value="-">Semua</option>
+                        <option value="-">-</option>
                         <option value="Gold">Gold</option>
                         <option value="Silver">Silver</option>
                         <option value="Bronze">Bronze</option>
@@ -105,7 +38,8 @@
                 </div>
                 <div class="col-5"></div>
                 <div class="col-1 pt-1">
-                    <label>TANGGAL :</label>
+                    <label>TANGGAL</label>
+                    <span class="float-right">:</span>
                 </div>
                 <div class="col-3">
                     <div class="input-group">
@@ -114,7 +48,7 @@
                                 <i class="far fa-calendar-alt"></i>
                             </span>
                         </div>
-                        <input type="text" class="form-control float-right" id="filter-tanggal">
+                        <input type="text" class="form-control" id="filter-tanggal">
                         <input type="hidden" class="form-control" id="startDate" value="-">
                         <input type="hidden" class="form-control" id="endDate" value="-">
                     </div>
@@ -122,11 +56,12 @@
             </div>
             <div class="form-group row">
                 <div class="col-1 pt-1">
-                    <label>STATUS :</label>
+                    <label>STATUS</label>
+                    <span class="float-right">:</span>
                 </div>
                 <div class="col-2">
                     <select class="form-control" id="filter-status">
-                        <option value="-">Semua</option>
+                        <option value="-">-</option>
                         <option value="Active">Active</option>
                         <option value="Process">Process</option>
                         {{-- <option value="NonActive">NonActive</option> --}}
@@ -139,7 +74,7 @@
     <table id="tabel-laporan-user" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
-                <th>ID USER</th>
+                <th></th>
                 <th>NAMA</th>
                 <th>ROLE</th>
                 <th>STATUS</th>
@@ -170,7 +105,7 @@
 @section('script2')
     <script>
         function panggil_tabel_user(x, y, z, a) {
-            $('#tabel-laporan-user').DataTable({
+            var t = $('#tabel-laporan-user').DataTable({
                 async: false,
                 bDestroy: true,
                 processing: true,
@@ -186,7 +121,7 @@
                     },
                 },
                 columns: [{
-                        width: '20%',
+                        width: '5%',
                         data: 'user_id',
                         name: 'user_id'
                     },
@@ -215,17 +150,24 @@
                 dom: 'Bfrtip',
                 buttons: ["csv", "excel", "pdf", "print"],
             });
+
+            t.on('order.dt search.dt', function() {
+                let i = 1;
+
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
         }
 
 
         $(document).ready(function() {
             $('.card:first').find('[data-card-widget="collapse"]').click();
 
-            var x = $('#filter-role').val();
-            var y = '-';
-            var z = '-';
-            var a = '-';
-            panggil_tabel_user(x, y, z, a);
+            panggil_tabel_user('-', '-', '-', '-');
 
             $('#filter-role').on('change', function() {
                 var x = $(this).val();
@@ -247,7 +189,7 @@
                 locale: {
                     format: 'DD/MM/YYYY'
                 }
-            });
+            }).val("-");
 
             $('#filter-tanggal').on('apply.daterangepicker', function(ev, picker) {
                 var y = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
@@ -256,10 +198,10 @@
                 $('#startDate').val(y);
                 $('#endDate').val(z);
 
-                var b = $('#filter-role').val();
-                var c = $('#filter-status').val();
+                var x = $('#filter-role').val();
+                var a = $('#filter-status').val();
 
-                panggil_tabel_user(b, y, z, c);
+                panggil_tabel_user(x, y, z, a);
             });
         });
     </script>
