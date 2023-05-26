@@ -20,6 +20,7 @@ return new class extends Migration
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
             $table->timestamp('deleted_at')->nullable();
+            $table->string('pelatih_status')->nullable();
         });
     }
 

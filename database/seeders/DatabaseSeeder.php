@@ -25,24 +25,28 @@ class DatabaseSeeder extends Seeder
         DB::table('role')->insert([
             'role_nama' => "Gold",
             'role_harga' => 750000,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'role_status' => "aktif",
         ]);
         DB::table('role')->insert([
             'role_nama' => "Silver",
             'role_harga' => 500000,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'role_status' => "aktif",
         ]);
         DB::table('role')->insert([
             'role_nama' => "Bronze",
             'role_harga' => 250000,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'role_status' => "aktif",
         ]);
         DB::table('role')->insert([
             'role_nama' => "Admin",
             'role_harga' => 1,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'role_status' => "aktif",
         ]);
-        
+
         // TABEL USER
         DB::table('user')->insert([
             'user_email' => "ghofur@gymmvc.com",
