@@ -1,7 +1,7 @@
 {{-- @extends('Master.Home_Master') --}}
 @extends('transaksi.master')
 
-@section("title", "Role Master")
+@section("title", "Pelatih Master")
 @section('stylesheet1')
     <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
