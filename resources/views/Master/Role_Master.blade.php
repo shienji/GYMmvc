@@ -7,6 +7,9 @@
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
 @endsection
+@if(Session::has('success'))
+    <input type="" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
+@endif
 @section('konten')
     <div class="row">
         <div class="col-lg-5 col-md-12">
@@ -19,7 +22,8 @@
                         </div>
                     </div>
                 </div>
-                <form class="form-horizontal"  action="{{route('role_masterpost')}}" method="POST">
+                <form class="form-horizontal"  action="{{ route("role_masterpost") }}" method="POST">
+                    @csrf
                 <div class="card-body">
                     <x-inputhcomp type="text" label="role_id" name="role_id" readonly></x-inputcomp>
                         <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
@@ -30,7 +34,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="submit" class="btn btn-default">Remove/Restore</button>
+                    {{-- <button type="submit" class="btn btn-default">Remove/Restore</button> --}}
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
                 </form>
