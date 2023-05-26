@@ -53,6 +53,7 @@ $(function () {
                data = nmTabel.row(this).data();
                exDate = moment(new Date(), "DD-MM-YYYY").add(1, 'Month').format("YYYY-MM-DD");
                $('#role_id').val(data.role_id);
+               $('#role_id2').val(data.role_id);
                $('#nama').val(data.role_nama);
                $('#Harga').val(data.role_harga);
            });

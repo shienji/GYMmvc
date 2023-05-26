@@ -34,7 +34,11 @@
                 </div>
 
                 <div class="card-footer">
-                    {{-- <button type="submit" class="btn btn-default">Remove/Restore</button> --}}
+                    <form action="{{ route("role_masterdel") }}" method="POST">
+                        <x-inputhcomp type="text" label="role_id2" name="role_id2" readonly></x-inputcomp>
+                        <button class="btn btn-danger">Remove/Restore</button>
+                    </form>
+
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
                 </form>

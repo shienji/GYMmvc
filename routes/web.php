@@ -72,6 +72,7 @@ Route::prefix("/Master")->group(function(){
     Route::prefix("/Role")->group(function(){
         Route::get('/',[MasterController::class, 'role_master'])->name("role_master");
         Route::post('/',[MasterController::class, 'role_masterpost'])->name("role_masterpost");
+        Route::post('/delete',[MasterController::class, 'role_masterdel'])->name("role_masterdel");
         Route::get('/get',[MasterController::class, 'getDataRole'])->name("getDataRole");
     });
     Route::prefix("/Peralatan")->group(function(){

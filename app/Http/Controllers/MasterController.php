@@ -63,6 +63,14 @@ class MasterController extends Controller
             return back()->with("success", "Data telah disimpan");
         }
     }
+
+    public function role_masterdel($xid)
+    {
+
+
+            return back()->with("success", "Data telah disimpan");
+        
+    }
     public function peralatan_master()
     {
         return view('Master.Peralatan_Master');
