@@ -66,19 +66,25 @@ class MasterController extends Controller
 
     public function role_masterdel(Request $r)
     {
-        $status=DB::table("role")->select("role_status")->where("role_id",$r->role_id2)->first();
+        $status=DB::table("role")->where("role_id",$r->role_id2)->first();
 
-        if($status=="aktif"){
+        if($status->role_status=="aktif"){
+            $cek3 = DB::table("role")->where("role_id", $r->role_id2)
+            ->update([
+                'role_status' => 'Non Aktif',
+                "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+            ]);
             return back()->with("success", "Data telah hapus");
 
         }
         else{
-            // $cek3 = DB::table("role")->where("role_id", $r->role_id)
-            // ->update([
-            //     'role_nama' => $r->nama,
-            //     'role_harga' => $r->Harga,
-            //     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
-            // ]);
+            $cek3 = DB::table("role")->where("role_id", $r->role_id2)
+            ->update([
+                'role_status' => 'aktif',
+                "deleted_at" => null,
+                "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),   
+            ]);
 
         return back()->with("success", "Data telah restore");
         }

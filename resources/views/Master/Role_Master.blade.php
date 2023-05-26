@@ -25,7 +25,7 @@
                 <form class="form-horizontal"  action="{{ route("role_masterpost") }}" method="POST">
                     @csrf
                 <div class="card-body">
-                    <x-inputhcomp type="text" label="role_id" name="role_id" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="id" name="role_id" readonly></x-inputcomp>
                         <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
                         <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
                         <x-inputhcomp type="number" label="Harga" name="Harga" ></x-inputcomp>
