@@ -27,32 +27,38 @@ class LaporanController extends Controller
     }
 
     public function data_user_filter(Request $request){
-        $aksi = $request->query('aksi');
         $x = $request->query('x');
         $y = $request->query('y');
         $z = $request->query('z');
 
-        if($aksi == 'role'){
-            if ($x == '-') {
-                $query_user_filter = DB::table('user')
-                    ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-                    ->join('role','role.role_nama','=','user.user_role')
-                    ->get();
-            } else {
-                $query_user_filter = DB::table('user')
-                    ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
-                    ->join('role','role.role_nama','=','user.user_role')
-                    ->where('user.user_role','=',$x)
-                    ->get();
-            }
-        } else if ($aksi == 'tanggal'){
+        // tidak filter
+        if ($x=='-' && $y=='-' && $z=='-') {
+            $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->get();
+        // hanya filter tanggal
+        } else if ($x!='-' && $y=='-' && $z=='-') {
+            $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->where('user.user_role','=',$x)
+                ->get();
+        // hanya filter role
+        } else if ($x=='-' && $y!='-' && $z!='-') {
             $query_user_filter = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
                 ->whereBetween('user.created_at', [$y, $z])
                 ->get();
+        // filter semua
         } else {
-
+            $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->where('user.user_role','=',$x)
+                ->whereBetween('user.created_at', [$y, $z])
+                ->get();
         }
 
         return DataTables::of($query_user_filter)->make(true);

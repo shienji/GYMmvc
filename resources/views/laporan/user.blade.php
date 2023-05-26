@@ -47,6 +47,8 @@
                             </span>
                         </div>
                         <input type="text" class="form-control float-right" id="filter-tanggal">
+                        <input type="text" class="form-control" id="startDate" value="-">
+                        <input type="text" class="form-control" id="endDate" value="-">
                     </div>
                 </div>
             </div>
@@ -86,8 +88,9 @@
 
 @section('script2')
     <script>
-        function panggil_tabel_user(aksi, x, y, z) {
+        function panggil_tabel_user(x, y, z) {
             $('#tabel-laporan-user').DataTable({
+                async: false,
                 bDestroy: true,
                 processing: true,
                 serverSide: true,
@@ -95,7 +98,7 @@
                     type: 'get',
                     'url': '{{ route('data-user-filter') }}',
                     'data': {
-                        aksi,
+
                         x,
                         y,
                         z
@@ -137,18 +140,16 @@
         $(document).ready(function() {
             $('.card:first').find('[data-card-widget="collapse"]').click();
 
-            var aksi = 'role';
             var x = $('#filter-role').val();
             var y = '-';
             var z = '-';
-            panggil_tabel_user(aksi, x, y, z);
+            panggil_tabel_user(x, y, z);
 
             $('#filter-role').on('change', function() {
-                var aksi = 'role';
                 var x = $(this).val();
-                var y = '-';
-                var z = '-';
-                panggil_tabel_user(aksi, x, y, z);
+                var y = $('#startDate').val();
+                var z = $('#endDate').val();
+                panggil_tabel_user(x, y, z);
             });
 
             $('#filter-tanggal').daterangepicker({
@@ -161,11 +162,12 @@
                 var y = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
                 var z = picker.endDate.format('YYYY-MM-DD') + ' 23:59:59';
 
-                alert(y + ' | ' + z);
+                $('#startDate').val(y);
+                $('#endDate').val(z);
 
-                var aksi = 'tanggal';
-                var x = '-';
-                panggil_tabel_user(aksi, x, y, z);
+                // alert(y + ' | ' + z);
+
+                panggil_tabel_user(x, y, z);
             });
         });
     </script>
