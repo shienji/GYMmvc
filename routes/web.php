@@ -65,6 +65,7 @@ Route::prefix("/laporan")->group(function(){
     // EVENT
     Route::get('/event',[LaporanController::class, 'view_event'])->name('laporan-event');
     Route::get('/event/data',[LaporanController::class, 'data_event'])->name('data-event');
+    Route::get('/event/data-filter',[LaporanController::class, 'data_event_filter'])->name('data-event-filter');
 });
 
 Route::prefix("/Master")->group(function(){
