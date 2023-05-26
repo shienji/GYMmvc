@@ -30,26 +30,34 @@ class LaporanController extends Controller
         $x = $request->query('x');
         $y = $request->query('y');
         $z = $request->query('z');
+        $a = $request->query('a');
 
         // tidak filter
-        if ($x=='-' && $y=='-' && $z=='-') {
+        if ($x=='-' && $y=='-' && $z=='-' && $a=='-') {
             $query_user_filter = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
                 ->get();
+        // hanya filter role
+        } else if ($x=='-' && $y!='-' && $z!='-' && $a=='-') {
+            $query_user_filter = DB::table('user')
+                ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
+                ->join('role','role.role_nama','=','user.user_role')
+                ->whereBetween('user.created_at', [$y, $z])
+                ->get();
         // hanya filter tanggal
-        } else if ($x!='-' && $y=='-' && $z=='-') {
+        } else if ($x!='-' && $y=='-' && $z=='-' && $a=='-') {
             $query_user_filter = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
                 ->where('user.user_role','=',$x)
                 ->get();
-        // hanya filter role
-        } else if ($x=='-' && $y!='-' && $z!='-') {
+        // hanya filter status
+        } else if ($x=='-' && $y=='-' && $z=='-' && $a!='-') {
             $query_user_filter = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
-                ->whereBetween('user.created_at', [$y, $z])
+                ->where('user.user_status','=',$a)
                 ->get();
         // filter semua
         } else {
@@ -58,6 +66,7 @@ class LaporanController extends Controller
                 ->join('role','role.role_nama','=','user.user_role')
                 ->where('user.user_role','=',$x)
                 ->whereBetween('user.created_at', [$y, $z])
+                ->where('user.user_status','=',$a)
                 ->get();
         }
 

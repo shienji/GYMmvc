@@ -52,6 +52,19 @@
                     </div>
                 </div>
             </div>
+            <div class="form-group row">
+                <div class="col-1 pt-1">
+                    <label>STATUS :</label>
+                </div>
+                <div class="col-2">
+                    <select class="form-control" id="filter-status">
+                        <option value="-">Semua</option>
+                        <option value="Active">Active</option>
+                        <option value="Process">Process</option>
+                        {{-- <option value="NonActive">NonActive</option> --}}
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -88,7 +101,7 @@
 
 @section('script2')
     <script>
-        function panggil_tabel_user(x, y, z) {
+        function panggil_tabel_user(x, y, z, a) {
             $('#tabel-laporan-user').DataTable({
                 async: false,
                 bDestroy: true,
@@ -98,10 +111,10 @@
                     type: 'get',
                     'url': '{{ route('data-user-filter') }}',
                     'data': {
-
                         x,
                         y,
-                        z
+                        z,
+                        a
                     },
                 },
                 columns: [{
@@ -143,13 +156,23 @@
             var x = $('#filter-role').val();
             var y = '-';
             var z = '-';
-            panggil_tabel_user(x, y, z);
+            var a = '-';
+            panggil_tabel_user(x, y, z, a);
 
             $('#filter-role').on('change', function() {
                 var x = $(this).val();
                 var y = $('#startDate').val();
                 var z = $('#endDate').val();
-                panggil_tabel_user(x, y, z);
+                var a = $('#filter-status').val();
+                panggil_tabel_user(x, y, z, a);
+            });
+
+            $('#filter-status').on('change', function() {
+                var x = $('#filter-role').val();
+                var y = $('#startDate').val();
+                var z = $('#endDate').val();
+                var a = $(this).val();
+                panggil_tabel_user(x, y, z, a);
             });
 
             $('#filter-tanggal').daterangepicker({
@@ -166,8 +189,7 @@
                 $('#endDate').val(z);
 
                 // alert(y + ' | ' + z);
-
-                panggil_tabel_user(x, y, z);
+                panggil_tabel_user(x, y, z, a);
             });
         });
     </script>
