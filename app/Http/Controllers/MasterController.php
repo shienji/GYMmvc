@@ -114,4 +114,38 @@ class MasterController extends Controller
 
         return $data;
     }
+
+    public function fasilitas_masterpost(Request $r)
+    {
+        if ($r->fasilitas_id != "") {
+            $cek1 = $r->validate([
+                'nama' => 'required',
+
+            ]);
+
+
+            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $r->fasilitas_id)
+                ->update([
+                    'fasilitas_nama' => $r->nama,
+                    "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
+            return back()->with("success", "Data telah diubah");
+        } else {
+            $cek1 = $r->validate([
+                'nama' => 'required',
+            ]);
+
+            $cek2 = DB::table("fasilitas")->insert(
+                [
+                    "fasilitas_nama" => $r->nama,
+                    "created_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                    "fasilitas_status" => 'aktif',
+                ]
+            );
+
+
+
+            return back()->with("success", "Data telah disimpan");
+        }
+    }
 }
