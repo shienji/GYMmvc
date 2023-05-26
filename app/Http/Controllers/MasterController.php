@@ -1,8 +1,9 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class MasterController extends Controller
 {
@@ -10,7 +11,14 @@ class MasterController extends Controller
         return view('Master.Home_Master');
     }
     public function role_master(){
-        return view('Master.Role_Master');
+        $vjenis=DB::table('role')->select("role_id","role_nama")->get();
+        return view('Master.Role_Master')->with("vjenis",$vjenis);
+    }
+    public function getDataRole(){
+        $data=DB::table("role")
+        ->get();
+
+        return $data;
     }
     public function peralatan_master(){
         return view('Master.Peralatan_Master');
