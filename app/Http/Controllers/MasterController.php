@@ -29,11 +29,23 @@ class MasterController extends Controller
     public function role_masterpost(Request $r)
     {
         if ($r->role_id != "") {
+            $cek1 = $r->validate([
+                'nama' => 'required',
+                'Harga' => 'required|min:1'
+            ]);
+
+
+            $cek3 = DB::table("role")->where("role_id", $r->role_id)
+                ->update([
+                    'role_nama' => $r->nama,
+                    'role_harga' => $r->Harga,
+                    "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
             return back()->with("success", "Data telah diubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
-                'Harga' => 'required'
+                'Harga' => 'required|min:1'
             ]);
 
             $cek2 = DB::table("role")->insert(
