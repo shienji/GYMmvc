@@ -13,6 +13,11 @@ class MasterController extends Controller
     {
         return view('Master.Home_Master');
     }
+
+
+
+
+
     public function role_master()
     {
         $vjenis = DB::table('role')->select("role_id", "role_nama")->get();
@@ -25,9 +30,6 @@ class MasterController extends Controller
 
         return $data;
     }
-
-
-
     public function role_masterpost(Request $r)
     {
         if ($r->role_id != "") {
@@ -93,10 +95,21 @@ class MasterController extends Controller
 
 
     }
+
+
+
+
+    
     public function peralatan_master()
     {
         return view('Master.Peralatan_Master');
     }
+
+
+
+
+
+
     public function pelatih_master()
     {
         $vjenis = DB::table('pelatih')->get();
@@ -110,6 +123,13 @@ class MasterController extends Controller
 
         return $data;
     }
+
+
+
+
+
+
+
     public function fasilitas_master()
     {
         $vjenis = DB::table('fasilitas')->select("fasilitas_id", "fasilitas_nama")->get();
