@@ -117,24 +117,23 @@ class LaporanController extends Controller
         return DataTables::of($query_fasilitas)->make(true);
     }
 
-    public function data_event_event(Request $request){
+    public function data_fasilitas_filter(Request $request){
         $x = $request->query('x');
 
         //tanpa filter
-        if ($x == '-' && $y == '-' && $z == '-' && $a == '-') {
-            $query_user_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
+        if ($x == '-') {
+            $query_fasilitas_filter = DB::table('fasilitas')
+                ->select('*')
                 ->get();
         // filter status
         } else {
-            $query_user_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
-                ->whereBetween('event_start', [$x, $y])
-                ->whereBetween('event_end', [$z, $a])
+            $query_fasilitas_filter = DB::table('fasilitas')
+                ->select('*')
+                ->where('fasilitas_status','=',[$x])
                 ->get();
         }
 
-        return DataTables::of($query_user_event)->make(true);
+        return DataTables::of($query_fasilitas_filter)->make(true);
     }
 
     // EVENT

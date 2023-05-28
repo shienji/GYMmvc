@@ -7,34 +7,34 @@
 @endsection
 
 @section('konten')
-<div class="card bg-gradient-success">
-    <div class="card-header border-0">
-        <h3 class="card-title pt-1">
-            <i class="fas fa-filter mr-1"></i>
-            Filter
-        </h3>
-        <div class="card-tools">
-            <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
-                <i class="fas fa-minus"></i>
-            </button>
-        </div>
-    </div>
-    <div class="card-body" style="margin-bottom: -20px;">
-        <div class="form-group row">
-            <div class="col-1 pt-1">
-                <label>STATUS</label>
-                <span class="float-right">:</span>
-            </div>
-            <div class="col-2">
-                <select class="form-control" id="filter-status">
-                    <option value="-">-</option>
-                    <option value="Active">Active</option>
-                    <option value="Inactive">Inactive</option>
-                </select>
+    <div class="card bg-gradient-success">
+        <div class="card-header border-0">
+            <h3 class="card-title pt-1">
+                <i class="fas fa-filter mr-1"></i>
+                Filter
+            </h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
             </div>
         </div>
+        <div class="card-body" style="margin-bottom: -20px;">
+            <div class="form-group row">
+                <div class="col-1 pt-1">
+                    <label>STATUS</label>
+                    <span class="float-right">:</span>
+                </div>
+                <div class="col-2">
+                    <select class="form-control" id="filter-status">
+                        <option value="-">-</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
 
     <table id="tabel-laporan-fasilitas" class="table table-bordered table-hover table-sm text-center">
         <thead>
@@ -99,7 +99,6 @@
                 buttons: ["csv", "excel", "pdf", "print"],
             });
 
-
             t.on('order.dt search.dt', function() {
                 let i = 1;
 
@@ -118,8 +117,8 @@
             panggil_tabel_fasilitas('-');
 
             $('#filter-status').on('change', function() {
-                var x = $('#filter-role').val();
-                panggil_tabel_user(x);
+                var x = $(this).val();
+                panggil_tabel_fasilitas(x);
             });
         });
     </script>

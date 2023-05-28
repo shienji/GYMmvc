@@ -7,22 +7,32 @@
 @endsection
 
 @section('konten')
-    <div class="row mb-3">
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-user') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">USER</button></a>
+    <div class="card bg-gradient-warning">
+        <div class="card-header border-0">
+            <h3 class="card-title pt-1">
+                <i class="fas fa-filter mr-1"></i>
+                Filter
+            </h3>
+            <div class="card-tools">
+                <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                </button>
+            </div>
         </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-transaksi') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-success btn-block font-weight-bold">TRANSAKSI</button></a>
-        </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-fasilitas') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">FASILITAS</button></a>
-        </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-event') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">EVENT</button></a>
+        <div class="card-body" style="margin-bottom: -20px;">
+            <div class="form-group row">
+                <div class="col-1 pt-1">
+                    <label>STATUS</label>
+                    <span class="float-right">:</span>
+                </div>
+                <div class="col-2">
+                    <select class="form-control" id="filter-status">
+                        <option value="-">-</option>
+                        <option value="Active">Active</option>
+                        <option value="Inactive">Inactive</option>
+                    </select>
+                </div>
+            </div>
         </div>
     </div>
 
