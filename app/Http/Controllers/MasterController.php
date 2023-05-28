@@ -99,7 +99,7 @@ class MasterController extends Controller
 
 
 
-    
+
     public function peralatan_master()
     {
         return view('Master.Peralatan_Master');
@@ -122,6 +122,45 @@ class MasterController extends Controller
             ->get();
 
         return $data;
+    }
+      public function pelatih_masterpost(Request $r)
+    {
+        if ($r->pelatih_id != "") {
+            $cek1 = $r->validate([
+                'nama' => 'required',
+                'nik' => 'required|min:1',
+                'keahlian' => 'required'
+            ]);
+
+
+            $cek3 = DB::table("pelatih")->where("pelatih_id", $r->pelatih_id)
+                ->update([
+                    'pelatih_nama' => $r->nama,
+                    'pelatih_nik' => $r->nik,
+                    'pelatih_keahlian' => $r->keahlian,
+                    "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
+            return back()->with("success", "Data telah diubah");
+        } else {
+            $cek1 = $r->validate([
+                'nama' => 'required',
+                'Harga' => 'required|min:1'
+            ]);
+
+            $cek2 = DB::table("role")->insert(
+                [
+                    "role_nama" => $r->nama,
+                    "role_harga" => $r->Harga,
+                    "created_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                    "role_status" => 'aktif',
+                ]
+            );
+
+            // $cek3 = DB::table("user")->where("user_id", $r->user_id)
+            //     ->update(['user_status' => 'Active']);
+
+            return back()->with("success", "Data telah disimpan");
+        }
     }
 
 
@@ -205,4 +244,5 @@ class MasterController extends Controller
 
 
     }
+
 }
