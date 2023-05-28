@@ -35,8 +35,8 @@
                             </span>
                         </div>
                         <input type="text" class="form-control filter-tanggal" id="filter-tanggal-event-mulai">
-                        <input type="text" class="form-control" id="startDate-mulai" value="-">
-                        <input type="text" class="form-control" id="endDate-mulai" value="-">
+                        <input type="hidden" class="form-control" id="startDate-mulai" value="-">
+                        <input type="hidden" class="form-control" id="endDate-mulai" value="-">
                     </div>
                 </div>
                 <div class="col-2"></div>
@@ -52,8 +52,8 @@
                             </span>
                         </div>
                         <input type="text" class="form-control filter-tanggal" id="filter-tanggal-event-berakhir">
-                        <input type="text" class="form-control" id="startDate-berakhir" value="-">
-                        <input type="text" class="form-control" id="endDate-berakhir" value="-">
+                        <input type="hidden" class="form-control" id="startDate-berakhir" value="-">
+                        <input type="hidden" class="form-control" id="endDate-berakhir" value="-">
                     </div>
                 </div>
             </div>
