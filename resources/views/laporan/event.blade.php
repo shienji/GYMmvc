@@ -35,8 +35,8 @@
                             </span>
                         </div>
                         <input type="text" class="form-control filter-tanggal" id="filter-tanggal-event-mulai">
-                        <input type="hidden" class="form-control" id="startDate-mulai" value="-">
-                        <input type="hidden" class="form-control" id="endDate-mulai" value="-">
+                        <input type="text" class="form-control" id="startDate-mulai" value="-">
+                        <input type="text" class="form-control" id="endDate-mulai" value="-">
                     </div>
                 </div>
                 <div class="col-2"></div>
@@ -52,8 +52,8 @@
                             </span>
                         </div>
                         <input type="text" class="form-control filter-tanggal" id="filter-tanggal-event-berakhir">
-                        <input type="hidden" class="form-control" id="startDate-berakhir" value="-">
-                        <input type="hidden" class="form-control" id="endDate-berakhir" value="-">
+                        <input type="text" class="form-control" id="startDate-berakhir" value="-">
+                        <input type="text" class="form-control" id="endDate-berakhir" value="-">
                     </div>
                 </div>
             </div>
@@ -163,8 +163,8 @@
                 var x = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
                 var y = picker.endDate.format('YYYY-MM-DD') + ' 23:59:59';
 
-                $('#startDate-mulai').val(y);
-                $('#endDate-mulai').val(z);
+                $('#startDate-mulai').val(x);
+                $('#endDate-mulai').val(y);
 
                 var z = $('#startDate-berakhir').val();
                 var a = $('#endDate-berakhir').val();
@@ -176,8 +176,8 @@
                 var z = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
                 var a = picker.endDate.format('YYYY-MM-DD') + ' 23:59:59';
 
-                $('#startDate-berakhir').val(y);
-                $('#endDate-berakhir').val(z);
+                $('#startDate-berakhir').val(z);
+                $('#endDate-berakhir').val(a);
 
                 var x = $('#startDate-mulai').val();
                 var y = $('#endDate-mulai').val();
