@@ -83,6 +83,8 @@ Route::prefix("/Master")->group(function(){
     Route::prefix("/Pelatih")->group(function(){
         Route::get('/',[MasterController::class, 'pelatih_master'])->name("pelatih_master");
         Route::post('/',[MasterController::class, 'pelatih_masterpost'])->name("pelatih_masterpost");
+        Route::post('/delete',[MasterController::class, 'pelatih_masterdel'])->name("pelatih_masterdel");
+        Route::get('/get',[MasterController::class, 'getDataPelatih'])->name("getDataPelatih");
     });
     Route::prefix("/Fasilitas")->group(function(){
         Route::get('/',[MasterController::class, 'fasilitas_master'])->name("fasilitas_master");
