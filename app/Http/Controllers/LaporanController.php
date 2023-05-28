@@ -105,12 +105,10 @@ class LaporanController extends Controller
         //tanpa filter
         if ($x == '-') {
             $query_fasilitas = DB::table('fasilitas')
-                ->select('*')
                 ->get();
         // filter status
         } else {
             $query_fasilitas = DB::table('fasilitas')
-                ->select('*')
                 ->where('fasilitas_status','=',[$x])
                 ->get();
         }

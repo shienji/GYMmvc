@@ -75,7 +75,7 @@
                 serverSide: true,
                 ajax: {
                     type: 'get',
-                    'url': '{{ route('data-fasilitas-filter') }}',
+                    'url': '{{ route('data-transaksi') }}',
                     'data': {
                         x
                     },
