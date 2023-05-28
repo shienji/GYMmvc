@@ -99,7 +99,8 @@ class MasterController extends Controller
     }
     public function pelatih_master()
     {
-        return view('Master.Pelatih_Master');
+        $vjenis = DB::table('pelatih')->get();
+        return view('Master.Pelatih_Master')->with("vjenis", $vjenis);
     }
 
     public function getDataPelatih()
