@@ -101,6 +101,14 @@ class MasterController extends Controller
     {
         return view('Master.Pelatih_Master');
     }
+
+    public function getDataPelatih()
+    {
+        $data = DB::table("pelatih")
+            ->get();
+
+        return $data;
+    }
     public function fasilitas_master()
     {
         $vjenis = DB::table('fasilitas')->select("fasilitas_id", "fasilitas_nama")->get();
