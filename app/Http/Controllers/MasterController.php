@@ -167,7 +167,7 @@ class MasterController extends Controller
         if($status->pelatih_status=="aktif"){
             $cek3 = DB::table("pelatih")->where("pelatih_id", $r->pelatih_id2)
             ->update([
-                'pelatih_status' => 'Non Aktif',
+                'pelatih_status' => 'Non aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
@@ -177,7 +177,7 @@ class MasterController extends Controller
         else{
             $cek3 = DB::table("pelatih")->where("pelatih_id", $r->pelatih_id2)
             ->update([
-                'pelatih_status' => 'Aktif',
+                'pelatih_status' => 'aktif',
                 "deleted_at" => null,
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
