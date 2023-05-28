@@ -148,7 +148,7 @@ class MasterController extends Controller
                 'keahlian' => 'required'
             ]);
 
-            $cek2 = DB::table("role")->insert(
+            $cek2 = DB::table("pelatih")->insert(
                 [
                     'pelatih_nama' => $r->nama,
                     'pelatih_nik' => $r->nik,
