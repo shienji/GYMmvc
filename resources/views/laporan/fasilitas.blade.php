@@ -73,7 +73,7 @@
                 serverSide: true,
                 ajax: {
                     type: 'get',
-                    'url': '{{ route('data-fasilitas-filter') }}',
+                    'url': '{{ route('data-fasilitas') }}',
                     'data': {
                         x
                     },

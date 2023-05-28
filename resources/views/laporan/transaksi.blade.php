@@ -67,6 +67,53 @@
 
 @section('script2')
     <script>
+        function panggil_tabel_transaksi(x) {
+            var t = $('#tabel-laporan-transaksi').DataTable({
+                async: false,
+                bDestroy: true,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                    type: 'get',
+                    'url': '{{ route('data-fasilitas-filter') }}',
+                    'data': {
+                        x
+                    },
+                },
+                columns: [{
+                        data: 'user_id',
+                        name: 'user_id'
+                    },
+                    {
+                        data: 'user_nama',
+                        name: 'user_nama'
+                    },
+                    {
+                        data: 'transaksi_daftar',
+                        name: 'transaksi_daftar'
+                    },
+                    {
+                        data: 'transaksi_expired',
+                        name: 'transaksi_expired'
+                    },
+                ],
+                "info": false,
+                dom: 'Bfrtip',
+                buttons: ["csv", "excel", "pdf", "print"],
+            });
+
+            t.on('order.dt search.dt', function() {
+                let i = 1;
+
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
+        }
+
         $(document).ready(function() {
             $('#tabel-laporan-transaksi').DataTable({
                 processing: true,

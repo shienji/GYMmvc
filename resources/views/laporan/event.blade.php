@@ -102,7 +102,7 @@
                 serverSide: true,
                 ajax: {
                     type: 'get',
-                    'url': '{{ route('data-event-filter') }}',
+                    'url': '{{ route('data-event') }}',
                     'data': {
                         x,
                         y,

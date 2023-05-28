@@ -111,7 +111,7 @@
                 serverSide: true,
                 ajax: {
                     type: 'get',
-                    'url': '{{ route('data-user-filter') }}',
+                    'url': '{{ route('data-user') }}',
                     'data': {
                         x,
                         y,
