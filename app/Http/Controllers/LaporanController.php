@@ -115,9 +115,9 @@ class LaporanController extends Controller
                 ->get();
         } else if ($x == '-' && $y == '-' && $z != '-' && $a != '-') {
             $query_user_event = DB::table('event')
-            ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
-            ->whereBetween('event_end', [$z, $a])
-            ->get();
+                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->whereBetween('event_end', [$z, $a])
+                ->get();
         }
 
         return DataTables::of($query_user_event)->make(true);

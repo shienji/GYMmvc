@@ -172,15 +172,15 @@
                 panggil_tabel_event(x, y, z, a);
             });
 
-            $('#filter-tanggal-event-mulai').on('apply.daterangepicker', function(ev, picker) {
+            $('#filter-tanggal-event-berakhir').on('apply.daterangepicker', function(ev, picker) {
                 var z = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
                 var a = picker.endDate.format('YYYY-MM-DD') + ' 23:59:59';
 
-                $('#startDate-mulai').val(y);
-                $('#endDate-mulai').val(z);
+                $('#startDate-berakhir').val(y);
+                $('#endDate-berakhir').val(z);
 
-                var z = $('#startDate-berakhir').val();
-                var a = $('#endDate-berakhir').val();
+                var x = $('#startDate-mulai').val();
+                var y = $('#endDate-mulai').val();
 
                 panggil_tabel_event(x, y, z, a);
             });
