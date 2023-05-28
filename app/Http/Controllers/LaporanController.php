@@ -10,10 +10,6 @@ use Yajra\DataTables\Facades\DataTables;
 
 class LaporanController extends Controller
 {
-    public function dashboard(){
-        return view('laporan.dashboard');
-    }
-
     // USER
     public function view_user()
     {
@@ -97,41 +93,6 @@ class LaporanController extends Controller
         return DataTables::of($query_user_filter)->make(true);
     }
 
-    public function data_event_filter(Request $request){
-        $x = $request->query('x');
-        $y = $request->query('y');
-        $z = $request->query('z');
-        $a = $request->query('a');
-
-        //tanpa filter
-        if ($x == '-' && $y == '-' && $z == '-' && $a == '-') {
-            $query_user_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
-                ->get();
-        // filter tanggal mulai
-        } else if ($x != '-' && $y != '-' && $z == '-' && $a == '-') {
-            $query_user_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
-                ->whereBetween('event_start', [$x, $y])
-                ->get();
-        // filter tanggal berakhir
-        } else if ($x == '-' && $y == '-' && $z != '-' && $a != '-') {
-            $query_user_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
-                ->whereBetween('event_end', [$z, $a])
-                ->get();
-        // filter semua
-        } else {
-            $query_user_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
-                ->whereBetween('event_start', [$x, $y])
-                ->whereBetween('event_end', [$z, $a])
-                ->get();
-        }
-
-        return DataTables::of($query_user_event)->make(true);
-    }
-
     // TRANSAKSI
     public function view_transaksi()
     {
@@ -156,6 +117,26 @@ class LaporanController extends Controller
         return DataTables::of($query_fasilitas)->make(true);
     }
 
+    public function data_event_event(Request $request){
+        $x = $request->query('x');
+
+        //tanpa filter
+        if ($x == '-' && $y == '-' && $z == '-' && $a == '-') {
+            $query_user_event = DB::table('event')
+                ->select('*', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
+                ->get();
+        // filter status
+        } else {
+            $query_user_event = DB::table('event')
+                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->whereBetween('event_start', [$x, $y])
+                ->whereBetween('event_end', [$z, $a])
+                ->get();
+        }
+
+        return DataTables::of($query_user_event)->make(true);
+    }
+
     // EVENT
     public function view_event()
     {
@@ -166,5 +147,40 @@ class LaporanController extends Controller
         $query_event = DB::table('event')->get();
 
         return DataTables::of($query_event)->make(true);
+    }
+
+    public function data_event_filter(Request $request){
+        $x = $request->query('x');
+        $y = $request->query('y');
+        $z = $request->query('z');
+        $a = $request->query('a');
+
+        //tanpa filter
+        if ($x == '-' && $y == '-' && $z == '-' && $a == '-') {
+            $query_event_filter = DB::table('event')
+                ->select('*', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
+                ->get();
+        // filter tanggal mulai
+        } else if ($x != '-' && $y != '-' && $z == '-' && $a == '-') {
+            $query_event_filter = DB::table('event')
+                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->whereBetween('event_start', [$x, $y])
+                ->get();
+        // filter tanggal berakhir
+        } else if ($x == '-' && $y == '-' && $z != '-' && $a != '-') {
+            $query_event_filter = DB::table('event')
+                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->whereBetween('event_end', [$z, $a])
+                ->get();
+        // filter semua
+        } else {
+            $query_event_filter = DB::table('event')
+                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->whereBetween('event_start', [$x, $y])
+                ->whereBetween('event_end', [$z, $a])
+                ->get();
+        }
+
+        return DataTables::of($query_event_filter)->make(true);
     }
 }
