@@ -39,10 +39,10 @@
     <table id="tabel-laporan-transaksi" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
-                <th style="width: 25%">ID TRANSAKSI</th>
-                <th style="width: 25%">NAMA</th>
-                <th style="width: 25%">DAFTAR</th>
-                <th style="width: 25%">EXPIRED</th>
+                <th></th>
+                <th>NAMA</th>
+                <th>DAFTAR</th>
+                <th>EXPIRED</th>
                 {{-- <th style="width: 5%">AKSI</th> --}}
             </tr>
         </thead>
@@ -81,8 +81,8 @@
                     },
                 },
                 columns: [{
-                        data: 'user_id',
-                        name: 'user_id'
+                        data: 'transaksi_id',
+                        name: 'transaksi_id'
                     },
                     {
                         data: 'user_nama',
@@ -115,31 +115,7 @@
         }
 
         $(document).ready(function() {
-            $('#tabel-laporan-transaksi').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: '{{ route('data-transaksi') }}',
-                columns: [{
-                        data: 'user_id',
-                        name: 'user_id'
-                    },
-                    {
-                        data: 'user_nama',
-                        name: 'user_nama'
-                    },
-                    {
-                        data: 'transaksi_daftar',
-                        name: 'transaksi_daftar'
-                    },
-                    {
-                        data: 'transaksi_expired',
-                        name: 'transaksi_expired'
-                    },
-                ],
-                "info": false,
-                dom: 'Bfrtip',
-                buttons: ["csv", "excel", "pdf", "print"],
-            });
+            panggil_tabel_transaksi('-');
         });
     </script>
 @endsection
