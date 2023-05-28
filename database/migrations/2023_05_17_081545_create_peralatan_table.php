@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('peralatan', function (Blueprint $table) {
             $table->increments('peralatan_id');
-            $table->integer('fasilitas_id')->nullable();
+            $table->string('fasilitas_nama')->nullable();
             $table->string('peralatan_nama')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
