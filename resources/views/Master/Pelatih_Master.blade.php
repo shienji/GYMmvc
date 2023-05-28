@@ -11,7 +11,7 @@
     <input type="" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
 @endif
 @section('konten')
-<h1 style="text-align: center">Pelatih Role</h1>
+<h1 style="text-align: center">Master Pelatih</h1>
 <br>
     <div class="row">
         <div class="col-lg-5 col-md-12">
@@ -19,7 +19,6 @@
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">Insert New Pelatih</h3>
-                        {{-- sampai sini dong --}}
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
