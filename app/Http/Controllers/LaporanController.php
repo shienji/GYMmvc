@@ -108,14 +108,23 @@ class LaporanController extends Controller
             $query_user_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
                 ->get();
+        // filter tanggal mulai
         } else if ($x != '-' && $y != '-' && $z == '-' && $a == '-') {
             $query_user_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
                 ->whereBetween('event_start', [$x, $y])
                 ->get();
+        // filter tanggal berakhir
         } else if ($x == '-' && $y == '-' && $z != '-' && $a != '-') {
             $query_user_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->whereBetween('event_end', [$z, $a])
+                ->get();
+        // filter semua
+        } else {
+            $query_user_event = DB::table('event')
+                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->whereBetween('event_start', [$x, $y])
                 ->whereBetween('event_end', [$z, $a])
                 ->get();
         }
