@@ -61,8 +61,7 @@ class MasterController extends Controller
                 ]
             );
 
-            // $cek3 = DB::table("user")->where("user_id", $r->user_id)
-            //     ->update(['user_status' => 'Active']);
+          
 
             return back()->with("success", "Data telah disimpan");
         }
@@ -157,9 +156,6 @@ class MasterController extends Controller
                     "pelatih_status" => 'aktif',
                 ]
             );
-
-            // $cek3 = DB::table("user")->where("user_id", $r->user_id)
-            //     ->update(['user_status' => 'Active']);
 
             return back()->with("success", "Data telah disimpan");
         }
