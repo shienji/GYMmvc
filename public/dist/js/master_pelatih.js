@@ -1,6 +1,6 @@
 $(function () {
     setInterval(updateTime,1000);
-   loadListNewMember("#master_role");
+   loadListNewMember("#master_pelatih");
    function updateTime(){
        var serverOffset=0;
        timestamp=moment().add(serverOffset,'ms').format('DD-MM-YYYY HH:mm:ss');
@@ -32,18 +32,21 @@ $(function () {
                    dataSrc: ""
                },
                columns: [{
-                       "data": "role_id",
+                       "data": "pelatih_id",
                        "width": "8%"
                    }, {
-                       "data": "role_nama",
+                       "data": "pelatih_nik",
                        "width": "15%"
                    }, {
-                       "data": "role_harga",
+                       "data": "pelatih_nama",
                        "width": "15%"
                    },{
-                    "data": "role_status",
+                    "data": "pelatih_keahlian",
                     "width": "15%"
-                }
+                    },{
+                    "data": "pelatih_status",
+                    "width": "15%"
+                     }
                ],
                 order: [[0, "asc"], [1, "desc"]]
 
@@ -52,10 +55,11 @@ $(function () {
            $(namanya + ' tbody').on('click', 'tr', function () {
                data = nmTabel.row(this).data();
                exDate = moment(new Date(), "DD-MM-YYYY").add(1, 'Month').format("YYYY-MM-DD");
-               $('#role_id').val(data.role_id);
-               $('#role_id2').val(data.role_id);
-               $('#nama').val(data.role_nama);
-               $('#Harga').val(data.role_harga);
+               $('#pelatih_id').val(data.pelatih_id);
+               $('#pelatih_id2').val(data.pelatih_id);
+               $('#nama').val(data.pelatih_nama);
+               $('#nik').val(data.pelatih_nik);
+               $('#keahlian').val(data.pelatih_keahlian);
            });
        }
    }
