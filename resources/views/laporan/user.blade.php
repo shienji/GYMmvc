@@ -64,7 +64,6 @@
                         <option value="-">-</option>
                         <option value="Active">Active</option>
                         <option value="Process">Process</option>
-                        {{-- <option value="NonActive">NonActive</option> --}}
                     </select>
                 </div>
             </div>

@@ -61,6 +61,7 @@ Route::prefix("/laporan")->group(function(){
     // FASILITAS
     Route::get('/fasilitas',[LaporanController::class, 'view_fasilitas'])->name('laporan-fasilitas');
     Route::get('/fasilitas/data',[LaporanController::class, 'data_fasilitas'])->name('data-fasilitas');
+    Route::get('/fasilitas/data-filter',[LaporanController::class, 'data_fasilitas_filter'])->name('data-fasilitas-filter');
 
     // EVENT
     Route::get('/event',[LaporanController::class, 'view_event'])->name('laporan-event');

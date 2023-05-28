@@ -7,30 +7,41 @@
 @endsection
 
 @section('konten')
-    <div class="row mb-3">
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-user') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">USER</button></a>
-        </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-transaksi') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">TRANSAKSI</button></a>
-        </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-fasilitas') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-warning btn-block font-weight-bold">FASILITAS</button></a>
-        </div>
-        <div class="col-lg-3">
-            <a href="{{ route('laporan-event') }}" style="text-decoration: none;"><button
-                    class="btn btn-md btn-secondary btn-block font-weight-bold">EVENT</button></a>
+<div class="card bg-gradient-success">
+    <div class="card-header border-0">
+        <h3 class="card-title pt-1">
+            <i class="fas fa-filter mr-1"></i>
+            Filter
+        </h3>
+        <div class="card-tools">
+            <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                <i class="fas fa-minus"></i>
+            </button>
         </div>
     </div>
+    <div class="card-body" style="margin-bottom: -20px;">
+        <div class="form-group row">
+            <div class="col-1 pt-1">
+                <label>STATUS</label>
+                <span class="float-right">:</span>
+            </div>
+            <div class="col-2">
+                <select class="form-control" id="filter-status">
+                    <option value="-">-</option>
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
 
     <table id="tabel-laporan-fasilitas" class="table table-bordered table-hover table-sm text-center">
         <thead>
             <tr>
-                <th style="width: 50%">ID FASILITAS</th>
-                <th style="width: 50%">ID NAMA</th>
+                <th></th>
+                <th>NAMA</th>
+                <th>STATUS</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -54,23 +65,61 @@
 
 @section('script2')
     <script>
-        $(document).ready(function() {
-            $('#tabel-laporan-fasilitas').DataTable({
+        function panggil_tabel_fasilitas(x) {
+            var t = $('#tabel-laporan-fasilitas').DataTable({
+                async: false,
+                bDestroy: true,
                 processing: true,
                 serverSide: true,
-                ajax: '{{ route('data-fasilitas') }}',
+                ajax: {
+                    type: 'get',
+                    'url': '{{ route('data-fasilitas-filter') }}',
+                    'data': {
+                        x
+                    },
+                },
                 columns: [{
+                        width: '5%',
                         data: 'fasilitas_id',
                         name: 'fasilitas_id'
                     },
                     {
+                        width: '40%',
                         data: 'fasilitas_nama',
                         name: 'fasilitas_nama'
+                    },
+                    {
+                        width: '40%',
+                        data: 'fasilitas_status',
+                        name: 'fasilitas_status'
                     },
                 ],
                 "info": false,
                 dom: 'Bfrtip',
                 buttons: ["csv", "excel", "pdf", "print"],
+            });
+
+
+            t.on('order.dt search.dt', function() {
+                let i = 1;
+
+                t.cells(null, 0, {
+                    search: 'applied',
+                    order: 'applied'
+                }).every(function(cell) {
+                    this.data(i++);
+                });
+            }).draw();
+        }
+
+        $(document).ready(function() {
+            $('.card:first').find('[data-card-widget="collapse"]').click();
+
+            panggil_tabel_fasilitas('-');
+
+            $('#filter-status').on('change', function() {
+                var x = $('#filter-role').val();
+                panggil_tabel_user(x);
             });
         });
     </script>
