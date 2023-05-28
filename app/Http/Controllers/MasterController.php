@@ -144,15 +144,17 @@ class MasterController extends Controller
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
-                'Harga' => 'required|min:1'
+                'nik' => 'required|min:1',
+                'keahlian' => 'required'
             ]);
 
             $cek2 = DB::table("role")->insert(
                 [
-                    "role_nama" => $r->nama,
-                    "role_harga" => $r->Harga,
+                    'pelatih_nama' => $r->nama,
+                    'pelatih_nik' => $r->nik,
+                    'pelatih_keahlian' => $r->keahlian,
                     "created_at" => Carbon::now()->format('Y-m-d H:i:s'),
-                    "role_status" => 'aktif',
+                    "pelatih_status" => 'aktif',
                 ]
             );
 
