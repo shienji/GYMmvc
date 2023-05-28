@@ -98,10 +98,79 @@ class MasterController extends Controller
 
 
 
-
     public function peralatan_master()
     {
-        return view('Master.Peralatan_Master');
+        $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
+        return view('Master.Peralatan_Master')->with("vjenis",$vjenis);
+    }
+    public function getDataPeralatan()
+    {
+        $data = DB::table("peralatan")->get();
+
+        return $data;
+    }
+    public function peralatan_masterpost(Request $r)
+    {
+        if ($r->peralatan_id != "") {
+            $cek1 = $r->validate([
+                'nama' => 'required',
+                'fasilitas_nama' => 'required'
+            ]);
+
+
+            $cek3 = DB::table("peralatan")->where("peralatan_id", $r->peralatan_id)
+                ->update([
+                    'peralatan_nama' => $r->nama,
+                    'fasilitas_nama' => $r->fasilitas_nama,
+                    "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                ]);
+            return back()->with("success", "Data telah diubah");
+        } else {
+            $cek1 = $r->validate([
+                'nama' => 'required',
+                'fasilitas_nama' => 'required'
+            ]);
+
+            $cek2 = DB::table("peralatan")->insert(
+                [
+                    "peralatan_nama" => $r->nama,
+                    "fasilitas_nama" => $r->fasilitas_nama,
+                    "created_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                    "peralatan_status" => 'aktif',
+                ]
+            );
+
+
+
+            return back()->with("success", "Data telah disimpan");
+        }
+    }
+    public function peralatan_masterdel(Request $r)
+    {
+        $status=DB::table("peralatan")->where("peralatan_id",$r->peralatan_id2)->first();
+
+        if($status->peralatan_status=="aktif"){
+            $cek3 = DB::table("peralatan")->where("peralatan_id", $r->peralatan_id2)
+            ->update([
+                'peralatan_status' => 'Non Aktif',
+                "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
+                "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+            ]);
+            return back()->with("success", "Data telah hapus");
+
+        }
+        else{
+            $cek3 = DB::table("peralatan")->where("peralatan_id", $r->peralatan_id2)
+            ->update([
+                'peralatan_status' => 'aktif',
+                "deleted_at" => null,
+                "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
+            ]);
+
+        return back()->with("success", "Data telah restore");
+        }
+
+
     }
 
 
