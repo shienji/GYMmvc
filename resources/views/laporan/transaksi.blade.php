@@ -63,12 +63,12 @@
                     <span class="float-right">:</span>
                 </div>
                 <div class="col-2">
-                    <select class="form-control" id="filter-role">
+                    <select class="form-control" id="filter-role-transaksi">
                         <option value="-">-</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Bronze">Bronze</option>
-                        <option value="Admin">Admin</option>
+                        <option value="1">Gold</option>
+                        <option value="2">Silver</option>
+                        <option value="3">Bronze</option>
+                        <option value="4">Admin</option>
                     </select>
                 </div>
             </div>
@@ -84,7 +84,6 @@
                 <th>EXPIRED</th>
                 <th>ROLE</th>
                 <th>HARGA</th>
-                {{-- <th style="width: 5%">AKSI</th> --}}
             </tr>
         </thead>
         <tbody></tbody>
@@ -110,7 +109,7 @@
 
 @section('script2')
     <script>
-        function panggil_tabel_transaksi(x) {
+        function panggil_tabel_transaksi(x, y, z, a, b) {
             var t = $('#tabel-laporan-transaksi').DataTable({
                 async: false,
                 bDestroy: true,
@@ -120,7 +119,11 @@
                     type: 'get',
                     'url': '{{ route('data-transaksi') }}',
                     'data': {
-                        x
+                        x,
+                        y,
+                        z,
+                        a,
+                        b
                     },
                 },
                 columns: [{
@@ -168,13 +171,53 @@
         $(document).ready(function() {
             $('.card:first').find('[data-card-widget="collapse"]').click();
 
-            panggil_tabel_transaksi('-');
+            panggil_tabel_transaksi('-', '-', '-', '-', '-');
 
             $('.filter-tanggal').daterangepicker({
                 locale: {
                     format: 'DD/MM/YYYY',
                 }
             }).val("-");
+
+            $('#filter-tanggal-transaksi-daftar').on('apply.daterangepicker', function(ev, picker) {
+                var x = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
+                var y = picker.endDate.format('YYYY-MM-DD') + ' 23:59:59';
+
+                $('#startDate-daftar').val(x);
+                $('#endDate-daftar').val(y);
+
+                var z = $('#startDate-expired').val();
+                var a = $('#endDate-expired').val();
+
+                var b = $('#filter-role-transaksi').val();
+
+                panggil_tabel_transaksi(x, y, z, a, b);
+            });
+
+            $('#filter-tanggal-transaksi-expired').on('apply.daterangepicker', function(ev, picker) {
+                var z = picker.startDate.format('YYYY-MM-DD') + ' 00:00:00';
+                var a = picker.endDate.format('YYYY-MM-DD') + ' 23:59:59';
+
+                $('#startDate-expired').val(z);
+                $('#endDate-expired').val(a);
+
+                var x = $('#startDate-daftar').val();
+                var y = $('#endDate-daftar').val();
+
+                var b = $('#filter-role-transaksi').val();
+
+                panggil_tabel_transaksi(x, y, z, a, b);
+            });
+
+            $('#filter-role-transaksi').on('change', function() {
+                var x = $('#startDate-daftar').val();
+                var y = $('#endDate-daftar').val();
+                var z = $('#startDate-expired').val();
+                var a = $('#endDate-expired').val();
+                var b = $(this).val();
+
+                panggil_tabel_transaksi(x, y, z, a, b);
+            });
         });
     </script>
 @endsection

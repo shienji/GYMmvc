@@ -95,12 +95,80 @@ class LaporanController extends Controller
 
     public function data_transaksi(Request $request){
         $x = $request->query('x');
+        $y = $request->query('y');
+        $z = $request->query('z');
+        $a = $request->query('a');
+        $b = $request->query('b');
 
-        $query_transaksi = DB::table('transaksi')
-            ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-            ->join('role','role.role_id','=','transaksi.transaksi_role')
-            ->join('user','user.user_id','=','transaksi.user_id')
-            ->get();
+        // tanpa filter
+        if ($x=='-' && $y=='-' && $z=='-' && $a=='-' && $b=='-') {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->get();
+        // filter daftar
+        } else if ($x!='-' && $y!='-' && $z=='-' && $a=='-' && $b=='-') {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
+                ->get();
+        // filter expired
+        } else if ($x=='-' && $y=='-' && $z!='-' && $a!='-' && $b=='-') {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->whereBetween('transaksi.transaksi_expired', [$z, $a])
+                ->get();
+        // filter role
+        } else if ($x=='-' && $y=='-' && $z=='-' && $a=='-' && $b!='-') {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->where('transaksi.transaksi_role','=',$b)
+                ->get();
+        // filter daftar & expired
+        } else if ($x!='-' && $y!='-' && $z!='-' && $a!='-' && $b=='-') {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
+                ->whereBetween('transaksi.transaksi_expired', [$z, $a])
+                ->get();
+        // filter daftar & role
+        } else if ($x!='-' && $y!='-' && $z=='-' && $a=='-' && $b=='-') {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
+                ->where('transaksi.transaksi_role','=',$b)
+                ->get();
+        // filter expired & role
+        } else if ($x=='-' && $y=='-' && $z!='-' && $a!='-' && $b!='-') {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->whereBetween('transaksi.transaksi_expired', [$z, $a])
+                ->where('transaksi.transaksi_role','=',$b)
+                ->get();
+        // tanpa filter
+        } else {
+            $query_transaksi = DB::table('transaksi')
+                ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
+                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('user','user.user_id','=','transaksi.user_id')
+                ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
+                ->whereBetween('transaksi.transaksi_expired', [$z, $a])
+                ->where('transaksi.transaksi_role','=',$b)
+                ->get();
+        }
 
         return DataTables::of($query_transaksi)->make(true);
     }
