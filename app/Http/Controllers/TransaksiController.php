@@ -32,8 +32,8 @@ class TransaksiController extends Controller
             'jmlbulan' => 'required'
         ]);
         $tglsekarang=Carbon::now()->format('Y-m-d H:i:s');
-        $vharga=DB::table("role")->where("deleted_at",null)->where("role_nama",$r->role)->first();        
-        
+        $vharga=DB::table("role")->where("deleted_at",null)->where("role_nama",$r->role)->first();
+
         $cek2=DB::table("transaksi")->insert(
             ["user_id"=>$r->user_id,
             "transaksi_daftar"=>$tglsekarang,
@@ -59,7 +59,7 @@ class TransaksiController extends Controller
         (select transaksi_daftar from transaksi t where t.deleted_at is null and t.user_id=a.user_id order by t.transaksi_id desc limit 1 ) as transaksi_daftar,
         (select transaksi_expired from transaksi t where t.deleted_at is null and t.user_id=a.user_id order by t.transaksi_id desc limit 1 ) as transaksi_expired,
         (select transaksi_id from transaksi t where t.deleted_at is null and t.user_id=a.user_id order by t.transaksi_id desc limit 1 ) as transaksi_id
-        from user as a 
+        from user as a
         where a.deleted_at is null and a.user_role !='Admin' and a.user_status !='Process' ");
 
         return $data;
@@ -92,7 +92,7 @@ class TransaksiController extends Controller
             'tglexpired' => 'required',
             'jmlbulan' => 'required'
         ]);
-        
+
         $vharga=DB::table("role")->where("deleted_at",null)->where("role_nama",$r->role)->first();
         $cek2=DB::table("transaksi")->insert(
             ["user_id"=>$r->user_id,
@@ -109,7 +109,7 @@ class TransaksiController extends Controller
         return redirect()->back()->with("success","Data telah disimpan");
     }
     public function viewRenewalDel(Request $r){
-        if(isset($r->id)){            
+        if(isset($r->id)){
             $trans_id=$r->id;
             $uid=$r->userid;
             $cek1=DB::table("transaksi")->where("transaksi_id",$trans_id)
@@ -126,8 +126,10 @@ class TransaksiController extends Controller
     }
 
     // Event
-    public function viewEvent(){        
-        return view('transaksi.event');
+    public function viewEvent(){
+        $vevent=DB::table('event')->where("deleted_at",null)->get();
+        $vmember=DB::table('user')->where("user_status","Active")->get();
+        return view('transaksi.event')->with("vevent",$vevent)->with("vmember",$vmember);
     }
     public function getDataEvent(){
         $data=DB::table("event")->where("deleted_at",null)->get();
@@ -137,15 +139,15 @@ class TransaksiController extends Controller
     public function viewEventSave(Request $r){
         $cek1=$r->validate([
             'nama' => 'required',
-            'tglawal' => 'required',
-            'tglakhir' => 'required'            
+            'valtglawal' => 'required',
+            'valtglakhir' => 'required'
         ]);
-        dd($cek1);
+
         $cek2=DB::table("event")->insert(
             ["event_nama"=>$r->nama,
-            "event_start"=>$r->tglawal,
-            "event_end"=>$r->tglakhir
-        ]);        
+            "event_start"=>$r->valtglawal,
+            "event_end"=>$r->valtglakhir
+        ]);
 
         return back()->with("success","Data telah disimpan");
     }
