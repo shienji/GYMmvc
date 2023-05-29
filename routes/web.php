@@ -5,14 +5,14 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\TransaksiController;
-
+use App\Http\Middleware\isAdmin;
 
 Route::get('/', function () {return view('welcome');})->name('home');
 Route::get('/contact', function () {return view('welcome');})->name('contact');
 
-Route::prefix("/layout")->group(function(){
+Route::prefix("/user")->group(function(){
     Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
-    Route::get('/user/register', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
+    Route::get('/register', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
 });
 //Route::get('posts', 'PostController@index')->middleware('admin');
 

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class Login
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -19,6 +19,7 @@ class Login
         if (Auth::check() && Auth::user()->user_role == 'Admin') {
             return $next($request);
         }
+
         return redirect('/');
     }
 }
