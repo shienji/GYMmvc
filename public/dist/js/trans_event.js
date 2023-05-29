@@ -10,27 +10,43 @@ $(function () {
     $("form").on( "submit", function(e) {
         
     });
-    $("#btnsubmit").on("click", function(e) {
-        xtglawal = $('#tglawal').datetimepicker('viewDate');
-        tglawal=$("#valtglawal").val();
-        tglakhir=$("#valtglakhir").val();
+    // $("#btnsubmit").on("click", function(e) {
+    //     xtglawal = $('#tglawal').datetimepicker('viewDate');
+    //     tglawal=$("#valtglawal").val();
+    //     tglakhir=$("#valtglakhir").val();
         
-        cektglawal=moment(tglawal,true).isValid();
-        if(!cektglawal){
-            alert("Tanggal awal tidak valid");
-            return;
-        }
-        cektglawal=moment(tglakhir,true).isValid();
-        if(!cektglawal){
-            alert("Tanggal akhir tidak valid");            
-            return;
-        }
+    //     cektglawal=moment(tglawal,true).isValid();
+    //     if(!cektglawal){
+    //         alert("Tanggal awal tidak valid");
+    //         return;
+    //     }
+    //     cektglawal=moment(tglakhir,true).isValid();
+    //     if(!cektglawal){
+    //         alert("Tanggal akhir tidak valid");            
+    //         return;
+    //     }
 
-        nama=$("#nama").val();
-        tglawal=moment(tglawal).format("YYYY-MM-DD");
-        tglakhir=moment(tglakhir).format("YYYY-MM-DD");
+    //     $.ajax({
+    //         url: xurl,
+    //         type: 'POST',
+    //         data:{
+    //             'nama': data.transaksi_id,
+    //             'tglawal': data.user_id,
+    //             'tglakhir': data.user_id,
+    //             '_token': $('#tokennya').val(),
+    //         },
+    //         success: function(result) {
+    //             if(result=="success"){
+    //                 nmTabel2.ajax.reload();
+    //                 $("form").trigger('reset');
+    //             }
+    //         },
+    //         error:function(result) {
+    //             alert(JSON.stringify(result));
+    //         }
+    //     });
         
-    });
+    // });
 
     function loadAwal(){
         // document.getElementById('tglawal').valueAsDate = new Date();

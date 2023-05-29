@@ -20,7 +20,7 @@
 @section('konten')
     <div class="row">
         <div class="col-lg-5 col-md-12">
-            <form class="form-horizontal" id="form-input" action="{{route('trans-vrensave')}}" method="POST">
+            <form class="form-horizontal" id="form-input" action="{{route('trans-veventsave')}}" method="POST">
             @csrf
             <div class="card card-secondary">
                 <div class="card-header border-0">
@@ -49,7 +49,7 @@
 
                 <div class="card-footer">
                     <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="button" id="btnsubmit" class="btn btn-info float-right">Submit</button>
+                    <button type="submit" id="btnsubmit" class="btn btn-info float-right">Submit</button>
                 </div>
             </div>
             </form>    

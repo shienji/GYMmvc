@@ -9,7 +9,8 @@ use Carbon\Carbon;
 class TransaksiController extends Controller
 {
     public function viewDash(){
-        return view('transaksi.dashboard');
+        // return view('transaksi.dashboard');
+        return redirect()->route('trans-vregister');
     }
 
     // Register
@@ -132,6 +133,21 @@ class TransaksiController extends Controller
         $data=DB::table("event")->where("deleted_at",null)->get();
 
         return $data;
+    }
+    public function viewEventSave(Request $r){
+        $cek1=$r->validate([
+            'nama' => 'required',
+            'tglawal' => 'required',
+            'tglakhir' => 'required'            
+        ]);
+        dd($cek1);
+        $cek2=DB::table("event")->insert(
+            ["event_nama"=>$r->nama,
+            "event_start"=>$r->tglawal,
+            "event_end"=>$r->tglakhir
+        ]);        
+
+        return back()->with("success","Data telah disimpan");
     }
 
     // Penjualan (Cafe)
