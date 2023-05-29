@@ -3,18 +3,24 @@ $(function () {
     loadListEvent("#tabel_reg");
     flashpesan("flashpesan");
     loadAwal();
-    
+
     $("form").on( "reset", function(e) {
 
     });
     $("form").on( "submit", function(e) {
-        
+
     });
+    $("#modal-event").on("shown.bs.modal",function(){
+        uid=$('#modal_eventid').val();
+        xurl=$("#tabel_history").attr('dataLoad')+"?user_id="+uid;
+        $('#tabel_history').DataTable().ajax.url(xurl).load();
+    });
+
     // $("#btnsubmit").on("click", function(e) {
     //     xtglawal = $('#tglawal').datetimepicker('viewDate');
     //     tglawal=$("#valtglawal").val();
     //     tglakhir=$("#valtglakhir").val();
-        
+
     //     cektglawal=moment(tglawal,true).isValid();
     //     if(!cektglawal){
     //         alert("Tanggal awal tidak valid");
@@ -22,7 +28,7 @@ $(function () {
     //     }
     //     cektglawal=moment(tglakhir,true).isValid();
     //     if(!cektglawal){
-    //         alert("Tanggal akhir tidak valid");            
+    //         alert("Tanggal akhir tidak valid");
     //         return;
     //     }
 
@@ -45,20 +51,20 @@ $(function () {
     //             alert(JSON.stringify(result));
     //         }
     //     });
-        
+
     // });
 
     function loadAwal(){
         // document.getElementById('tglawal').valueAsDate = new Date();
         // document.getElementById('tglakhir').valueAsDate = new Date();
         $('#tglawal').datetimepicker({
-            format: 'YYYY-MM-DD'            
+            format: 'YYYY-MM-DD'
         });
         $('#tglakhir').datetimepicker({
             format: 'YYYY-MM-DD'
         });
     }
-    
+
     function updateTime(){
         var serverOffset=0;
         timestamp=moment().add(serverOffset,'ms').format('YYYY-MM-DD HH:mm:ss');
@@ -66,7 +72,7 @@ $(function () {
     }
 
     function flashpesan(el){
-        myEle = document.getElementById(el);        
+        myEle = document.getElementById(el);
         if (myEle) {
             xicon=myEle.getAttribute("icon");
             xtitle=myEle.value;
@@ -84,6 +90,7 @@ $(function () {
 
     function loadListEvent(namanya) {
         if (namanya) {
+            let xurl=$(namanya).attr('dataLoad');
             var nmTabel = $(namanya).DataTable({
                 scrollY: false,
                 scrollX: true,
@@ -103,60 +110,36 @@ $(function () {
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
                 dom: "<'row'<'col-md-2' f><'col-md-6'><'col-md-4'> >" + "<'row'<'col-md-12'rt>> <'row'<'col-md-4'i><'col-md-8'p>>",
                 ajax: {
-                    url: $(namanya).attr('dataLoad'),
+                    url: xurl,
                     dataSrc: ""
                 },
                 columns: [{
-                        "data": "created_at",
-                        "width": "15%"                        
-                    }, {
-                        "data": "user_nama",
-                        "width": "8%"
-                    }, {
-                        "data": "user_nohp",
+                        "data": "event_nama",
                         "width": "15%"
                     }, {
-                        "data": "user_role",
-                        "width": "5%"
+                        "data": "event_start",
+                        "width": "8%"
                     }, {
-                        "data": "user_alamat",
-                        "visible": false
+                        "data": "event_end",
+                        "width": "8%"
+                    },{
+                        "data": null,
+                        "width": "5%",
+                        "className": "center",
+                        "defaultContent": "0"
                     }, {
-                        "data": "user_email",
-                        "visible": false
-                    }, {
-                        "data": "user_tgllahir",
-                        "visible": false
-                    }, {
-                        "data": "user_nik",
-                        "visible": false
-                        
-                    }, {
-                        "data": "user_id",
+                        "data": "event_id",
                         "visible": false
                     }
                 ],
                 order: [[0, "desc"], [1, "desc"]]
-                
+
             });
-        
+
             $(namanya + ' tbody').on('click', 'tr', function () {
                 data = nmTabel.row(this).data();
-                $('#email').val(data.user_email);
-                $('#nama').val(data.user_nama);
-                $('#nohp').val(data.user_nohp);
-                $('#nik').val(data.user_nik);
-                $('#tgllahir').val(data.user_tgllahir);
-                $('#alamat').val(data.user_alamat);
-                $('#role').val(data.user_role);
-                $('#user_id').val(data.user_id);
-
-                $('#role').addClass( "is-warning" );
-                $('#nohp').addClass( "is-valid" );                
-                $('#tglexpired').addClass( "is-valid" ); 
-                $('#totalbyr').addClass( "is-valid" );
-                $('#role').addClass( "is-valid" );
-                $('#role').trigger("change");
+                $('#modal_eventid').val(data.event_id);
+                $('#modal-event').modal("show");
             });
         }
     }

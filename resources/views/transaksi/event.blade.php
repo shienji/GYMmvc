@@ -1,5 +1,5 @@
 @extends('transaksi.master')
-@section('stylesheet1')    
+@section('stylesheet1')
     <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
@@ -25,7 +25,7 @@
             <div class="card card-secondary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Registrasi Event</h3>
+                        <h3 class="card-title">Tambah Event</h3>
                         <div class="card-tools">
                             <div class="btn-group" style="display: none;">
                                 <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" data-offset="-62">
@@ -41,10 +41,10 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>                                        
+                    <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
                     <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
                     <x-inputhcomp type="datesaja" label="Tgl Mulai" name="tglawal" ></x-inputcomp>
-                    <x-inputhcomp type="datesaja" label="Tgl Selesai" name="tglakhir" ></x-inputcomp>                        
+                    <x-inputhcomp type="datesaja" label="Tgl Selesai" name="tglakhir" ></x-inputcomp>
                 </div>
 
                 <div class="card-footer">
@@ -52,7 +52,7 @@
                     <button type="submit" id="btnsubmit" class="btn btn-info float-right">Submit</button>
                 </div>
             </div>
-            </form>    
+            </form>
         </div>
 
         <div class="col-lg-7 col-md-12">
@@ -77,9 +77,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            
+
                         </tbody>
-                    </table>                    
+                    </table>
                 </div>
 
                 <div class="card-footer">
@@ -88,9 +88,86 @@
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card card-secondary">
+                <div class="card-header border-0">
+                    <div class="d-flex justify-content-between">
+                        <h3 class="card-title">Registrasi Event</h3>
+                        <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <form action="">
+                <div class="card-body">
+                    <div class="form-group row">
+                        <label for="role" class="col-sm-3 col-form-label">Nama Event</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select form-control-border border-width-2" id="nm_event" name="nm_event">
+                                <option value=""></option>
+                                @foreach ($vevent as $i)
+                                    <option value="{{$i->event_id}}" >{{$i->event_nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="role" class="col-sm-3 col-form-label">Nama Peserta</label>
+                        <div class="col-sm-9">
+                            <select class="custom-select form-control-border border-width-2" id="nm_event" name="nm_event">
+                                <option value=""></option>
+                                @foreach ($vmember as $i)
+                                    <option value="{{$i->user_id}}" >{{$i->user_nama}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                </form>
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modal-event">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Detail Peserta</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" name="modal_eventid" id="modal_eventid" value="">
+
+                <table id="tabel_event" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vrenhis')}}" dataDel="{{route('trans-vrendel')}}">
+                    <thead>
+                        <tr>
+                            <th>Tgl Transaksi</th>
+                            <th>Jenis</th>
+                            <th>Harga</th>
+                            <th>Bulan</th>
+                            <th>Tgl Expired</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    </div>
 @endsection
 
-@section('script1')        
+@section('script1')
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
