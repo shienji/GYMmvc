@@ -13,6 +13,7 @@ Route::get('/contact', function () {return view('welcome');})->name('contact');
 Route::prefix("/layout")->group(function(){
     Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
 });
+//Route::get('posts', 'PostController@index')->middleware('admin');
 
 Route::prefix("/transaksi")->group(function(){
     Route::get('/',[TransaksiController::class, 'viewDash'])->name("trans-vdashboard");
