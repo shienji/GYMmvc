@@ -92,5 +92,122 @@ class DatabaseSeeder extends Seeder
             'user_role' => "Bronze",
             'created_at' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-04-01 01:00:00')
         ]);
+        DB::table('fasilitas')->insert([
+            'fasilitas_nama' => "Sauna",
+            'fasilitas_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('fasilitas')->insert([
+            'fasilitas_nama' => "Kolam Renang",
+            'fasilitas_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('fasilitas')->insert([
+            'fasilitas_nama' => "Aerobic",
+            'fasilitas_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('fasilitas')->insert([
+            'fasilitas_nama' => "Sumba",
+            'fasilitas_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        DB::table('peralatan')->insert([
+            'fasilitas_nama' => "Kolam Renang",
+            'peralatan_nama' => "Kaca Mata renang",
+            'peralatan_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('peralatan')->insert([
+            'fasilitas_nama' => "Kolam Renang",
+            'peralatan_nama' => "Pelampung",
+            'peralatan_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('peralatan')->insert([
+            'fasilitas_nama' => "Kolam Renang",
+            'peralatan_nama' => "Swim Cap",
+            'peralatan_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('peralatan')->insert([
+            'fasilitas_nama' => "Aerobic",
+            'peralatan_nama' => "Dumbel",
+            'peralatan_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('peralatan')->insert([
+            'fasilitas_nama' => "Aerobic",
+            'peralatan_nama' => "Hula Hoop",
+            'peralatan_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('peralatan')->insert([
+            'fasilitas_nama' => "Sauna",
+            'peralatan_nama' => "Handuk",
+            'peralatan_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('pelatih')->insert([
+            'pelatih_nama' => "Melvin",
+            'pelatih_nik' => "1536598462156398",
+            'pelatih_keahlian' => "Renang Gaya Bebas",
+            'pelatih_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('pelatih')->insert([
+            'pelatih_nama' => "Nicklaus",
+            'pelatih_nik' => "5698745632695876",
+            'pelatih_keahlian' => "Aerobic",
+            'pelatih_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('pelatih')->insert([
+            'pelatih_nama' => "Niko",
+            'pelatih_nik' => "5963654987632695",
+            'pelatih_keahlian' => "Renang Gaya Punggung",
+            'pelatih_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('pelatih')->insert([
+            'pelatih_nama' => "Felix",
+            'pelatih_nik' => "6596654987456932",
+            'pelatih_keahlian' => "Sumba",
+            'pelatih_status' => "aktif",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+
+        //event
+        DB::table('event')->insert([
+            'event_nama' => "Lompat Tali",
+            'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-29 12:00:00'),
+            'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-25 01:00:00'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('event')->insert([
+            'event_nama' => "Renang",
+            'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-30 09:00:00'),
+            'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-01 01:00:00'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('event')->insert([
+            'event_nama' => "Lari Marathon",
+            'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-29 01:00:00'),
+            'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-15 01:00:00'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('event')->insert([
+            'event_nama' => "Tenggelam",
+            'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-25 06:00:00'),
+            'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-07-01 01:00:00'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
+        DB::table('event')->insert([
+            'event_nama' => "Balap Karung",
+            'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-30 09:00:00'),
+            'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-11 01:00:00'),
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
+        ]);
     }
 }

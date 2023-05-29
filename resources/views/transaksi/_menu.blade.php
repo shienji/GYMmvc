@@ -77,7 +77,7 @@
     <a href="#" class="nav-link side-trans">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
-            Transaksi
+            Laporan
             <i class="right fas fa-angle-left"></i>
         </p>
     </a>
