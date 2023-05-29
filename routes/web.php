@@ -12,6 +12,7 @@ Route::get('/contact', function () {return view('welcome');})->name('contact');
 
 Route::prefix("/layout")->group(function(){
     Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
+    Route::get('/user/register', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
 });
 //Route::get('posts', 'PostController@index')->middleware('admin');
 

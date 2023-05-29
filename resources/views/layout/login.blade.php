@@ -84,13 +84,13 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="../../index2.html"><b>GYMMVC</b></a>
+            <a href="#"><b>GYMMVC</b></a>
         </div>
 
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in</p>
-                <form action="../../index3.html" method="post">
+                <form action="" method="post">
                     <div class="input-group mb-3">
                         <input type="email" class="form-control" placeholder="Email">
                         <div class="input-group-append">
@@ -125,7 +125,7 @@
                 </form>
                 <div class="social-auth-links text-center mb-3">
                     <p>- OR -</p>
-                    <a href="#" class="btn btn-block btn-danger">
+                    <a href="{{ route("layout-registerpage")}}" class="btn btn-block btn-danger">
                         Register a new membership
                     </a>
                     {{-- <a href="#" class="btn btn-block btn-danger">
