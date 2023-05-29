@@ -4,6 +4,8 @@
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('/plugins/jquery-ui/jquery-ui.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 @endsection
 
 @section('konten')
@@ -21,15 +23,52 @@
         </div>
         <div class="card-body" style="margin-bottom: -20px;">
             <div class="form-group row">
+                <div class="col-2 pt-1">
+                    <label>TANGGAL DAFTAR</label>
+                    <span class="float-right">:</span>
+                </div>
+                <div class="col-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control filter-tanggal" id="filter-tanggal-transaksi-daftar">
+                        <input type="hidden" class="form-control" id="startDate-daftar" value="-">
+                        <input type="hidden" class="form-control" id="endDate-daftar" value="-">
+                    </div>
+                </div>
+                <div class="col-2"></div>
+                <div class="col-2 pt-1">
+                    <label>TANGGAL EXPIRED</label>
+                    <span class="float-right">:</span>
+                </div>
+                <div class="col-3">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                <i class="far fa-calendar-alt"></i>
+                            </span>
+                        </div>
+                        <input type="text" class="form-control filter-tanggal" id="filter-tanggal-transaksi-expired">
+                        <input type="hidden" class="form-control" id="startDate-expired" value="-">
+                        <input type="hidden" class="form-control" id="endDate-expired" value="-">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
                 <div class="col-1 pt-1">
-                    <label>STATUS</label>
+                    <label>ROLE</label>
                     <span class="float-right">:</span>
                 </div>
                 <div class="col-2">
-                    <select class="form-control" id="filter-status">
+                    <select class="form-control" id="filter-role">
                         <option value="-">-</option>
-                        <option value="Active">Active</option>
-                        <option value="Inactive">Inactive</option>
+                        <option value="Gold">Gold</option>
+                        <option value="Silver">Silver</option>
+                        <option value="Bronze">Bronze</option>
+                        <option value="Admin">Admin</option>
                     </select>
                 </div>
             </div>
@@ -43,6 +82,8 @@
                 <th>NAMA</th>
                 <th>DAFTAR</th>
                 <th>EXPIRED</th>
+                <th>ROLE</th>
+                <th>HARGA</th>
                 {{-- <th style="width: 5%">AKSI</th> --}}
             </tr>
         </thead>
@@ -63,6 +104,8 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
+    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 @endsection
 
 @section('script2')
@@ -96,6 +139,14 @@
                         data: 'transaksi_expired',
                         name: 'transaksi_expired'
                     },
+                    {
+                        data: 'role_nama',
+                        name: 'role_nama'
+                    },
+                    {
+                        data: 'transaksi_harga',
+                        name: 'transaksi_harga'
+                    },
                 ],
                 "info": false,
                 dom: 'Bfrtip',
@@ -115,7 +166,15 @@
         }
 
         $(document).ready(function() {
+            $('.card:first').find('[data-card-widget="collapse"]').click();
+
             panggil_tabel_transaksi('-');
+
+            $('.filter-tanggal').daterangepicker({
+                locale: {
+                    format: 'DD/MM/YYYY',
+                }
+            }).val("-");
         });
     </script>
 @endsection
