@@ -10,6 +10,7 @@
 @endif
 
 @section('konten')
+    <input type="hidden" id="tokennya" name="tokennya" value="{{ csrf_token() }}">
     <div class="row">
         <div class="col-lg-5 col-md-12">
             <form class="form-horizontal" id="form-input" action="{{route('trans-vrensave')}}" method="POST">
@@ -145,7 +146,7 @@
                         <tbody>
                             
                         </tbody>
-                    </table>
+                    </table>                    
                 </div>
 
                 <div class="card-footer">
@@ -165,21 +166,22 @@
               </button>
             </div>
             <div class="modal-body">
-                <table id="tabel_history" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vrenhis')}}">
+                
+                <table id="tabel_history" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vrenhis')}}" dataDel="{{route('trans-vrendel')}}">
                     <thead>
                         <tr>
                             <th>Tgl Transaksi</th>
                             <th>Jenis</th>
                             <th>Harga</th>
-                            <th>Bulan</th>
-                            <th>Total</th>
-                            <th>Tgl Expired</th>
+                            <th>Bulan</th>                            
+                            <th>Tgl Expired</th>                            
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         
                     </tbody>
-                    </table>
+                </table>
             </div>
             <div class="modal-footer justify-content-between">
               <button type="button" class="btn btn-default ml-auto" data-dismiss="modal">Close</button>

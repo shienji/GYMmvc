@@ -27,7 +27,8 @@ class TransaksiController extends Controller
         $cek1=$r->validate([
             'user_id' => 'required|numeric|min:1',
             'role' => 'required',
-            'tglexpired' => 'required'
+            'tglexpired' => 'required',
+            'jmlbulan' => 'required'
         ]);
         $tglsekarang=Carbon::now()->format('Y-m-d H:i:s');
         $vharga=DB::table("role")->where("deleted_at",null)->where("role_nama",$r->role)->first();        
@@ -37,7 +38,8 @@ class TransaksiController extends Controller
             "transaksi_daftar"=>$tglsekarang,
             "transaksi_expired"=>Carbon::createFromFormat('Y-m-d H:i:s', $r->tglexpired." ".date('H:i:s') ),
             "transaksi_role"=>$r->role,
-            "transaksi_harga"=>$vharga->role_harga
+            "transaksi_harga"=>$vharga->role_harga,
+            "transaksi_bulan"=>$r->jmlbulan
         ]);
 
         $cek3=DB::table("user")->where("user_id",$r->user_id)
@@ -61,9 +63,16 @@ class TransaksiController extends Controller
 
         return $data;
     }
-    public function viewRenewalHis($userid){
-        $data=DB::select("select a.* from transaksi t where ");
-        $data=(object)[];
+    public function viewRenewalHis(Request $r){
+        $cek1=$r->validate([
+            'user_id' => 'required',
+        ]);
+
+        $data=DB::table('transaksi as t')
+        ->where('t.deleted_at',null)
+        ->where('t.user_id',$r->user_id)
+        ->orderby('t.transaksi_id','desc')
+        ->get();
 
         return $data;
     }
@@ -71,32 +80,43 @@ class TransaksiController extends Controller
     public function viewRenewalSave(Request $r){
         $cek1=$r->validate([
             'user_id' => 'required|numeric|min:1',
-            'role' => 'required'
+            'role' => 'required',
+            'tglexpired' => 'required',
+            'jmlbulan' => 'required'
         ]);
+        
         $vharga=DB::table("role")->where("deleted_at",null)->where("role_nama",$r->role)->first();
-        $cek2=DB::table("transaksi")->insert(            
+        $cek2=DB::table("transaksi")->insert(
             ["user_id"=>$r->user_id,
             "transaksi_daftar"=>Carbon::now()->format('Y-m-d H:i:s'),
             "transaksi_expired"=>Carbon::createFromFormat('Y-m-d H:i:s', $r->tglexpired." ".date('H:i:s') ),
             "transaksi_role"=>$r->role,
-            "transaksi_harga"=>$vharga->role_harga
+            "transaksi_harga"=>$vharga->role_harga,
+            "transaksi_bulan"=>$r->jmlbulan
         ]);
 
         $cek3=DB::table("user")->where("user_id",$r->user_id)
         ->update(['user_status' => 'Active']);
 
-        return back()->with("success","Data telah disimpan");
+        return redirect()->back()->with("success","Data telah disimpan");
     }
-    public function viewRenewalDel($trans_id){
-        if($trans_id){
-            if($trans_id>0){
-                $cek1=DB::table("transaksi")->where("transaksi_id",$trans_id)
-                ->delete();
+    public function viewRenewalDel(Request $r){
+        if(isset($r->id)){            
+            $trans_id=$r->id;
+            $uid=$r->userid;
+            $cek1=DB::table("transaksi")->where("transaksi_id",$trans_id)
+            ->update(["deleted_at"=>Carbon::now()->format('Y-m-d H:i:s')]);
 
-                return back()->with("success","Data telah diHAPUS");
+            $cek2=DB::table("transaksi")->where("user_id",$uid)
+            ->where("deleted_at",null)->first();
+            if(!$cek2){
+                $cek3=DB::table("user")->where("user_id",$uid)
+                ->update(['user_status' => 'Banned']);
             }
+            return "success";
         }
     }
+
     // Event
     public function viewEvent(){
         $data=DB::table('event')
