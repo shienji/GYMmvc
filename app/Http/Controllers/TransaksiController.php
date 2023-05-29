@@ -23,28 +23,32 @@ class TransaksiController extends Controller
 
         return $data;
     }
-    public function viewRegisterSave(Request $r){        
+    public function viewRegisterSave(Request $r){
         $cek1=$r->validate([
             'user_id' => 'required|numeric|min:1',
-            'role' => 'required'
+            'role' => 'required',
+            'tglexpired' => 'required'
         ]);
+        $tglsekarang=Carbon::now()->format('Y-m-d H:i:s');
         $vharga=DB::table("role")->where("deleted_at",null)->where("role_nama",$r->role)->first();        
+        
         $cek2=DB::table("transaksi")->insert(
             ["user_id"=>$r->user_id,
-            "transaksi_daftar"=>Carbon::now()->format('Y-m-d H:i:s'),
+            "transaksi_daftar"=>$tglsekarang,
             "transaksi_expired"=>Carbon::createFromFormat('Y-m-d H:i:s', $r->tglexpired." ".date('H:i:s') ),
             "transaksi_role"=>$r->role,
             "transaksi_harga"=>$vharga->role_harga
         ]);
 
         $cek3=DB::table("user")->where("user_id",$r->user_id)
-        ->update(['user_status' => 'Active']);
+        ->update(['user_status' => 'Active',"created_at"=>$tglsekarang]);
 
         return back()->with("success","Data telah disimpan");
     }
+
     // Renewal
     public function viewRenewal(){
-        $vjenis=DB::table('role')->select("role_id","role_nama")->where("deleted_at",null)->get();
+        $vjenis=DB::table('role')->select("role_id","role_nama","role_harga")->where("deleted_at",null)->get();
         return view('transaksi.renewal')->with("vjenis",$vjenis);
     }
     public function getDataRenewal(){
@@ -57,6 +61,13 @@ class TransaksiController extends Controller
 
         return $data;
     }
+    public function viewRenewalHis($userid){
+        $data=DB::select("select a.* from transaksi t where ");
+        $data=(object)[];
+
+        return $data;
+    }
+
     public function viewRenewalSave(Request $r){
         $cek1=$r->validate([
             'user_id' => 'required|numeric|min:1',

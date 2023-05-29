@@ -27,6 +27,7 @@ Route::prefix("/transaksi")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewRenewal'])->name("trans-vrenewal");
         Route::post('/',[TransaksiController::class, 'viewRenewalSave'])->name("trans-vrensave");
         Route::delete('/del',[TransaksiController::class, 'viewRenewalDel'])->name("trans-vrendel");
+        Route::get('/history',[TransaksiController::class, 'viewRenewalHis'])->name("trans-vrenhis");
     });
     Route::prefix("/revent")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewEvent'])->name("trans-vevent");
