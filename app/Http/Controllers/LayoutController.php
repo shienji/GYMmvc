@@ -9,4 +9,8 @@ class LayoutController extends Controller
     public function loginPage(){
         return view('layout.login');
     }
+
+    public function registerPage(){
+        return view('layout.User_Register');
+    }
 }
