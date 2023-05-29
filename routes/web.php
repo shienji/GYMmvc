@@ -18,6 +18,7 @@ Route::prefix("/transaksi")->group(function(){
     Route::get('/',[TransaksiController::class, 'viewDash'])->name("trans-vdashboard");
     Route::get('/member/get',[TransaksiController::class, 'getDataNewMember'])->name("trans-vdataregister");
     Route::get('/member/getrenewal',[TransaksiController::class, 'getDataRenewal'])->name("trans-vdatarenewal");
+    Route::get('/member/getevent',[TransaksiController::class, 'getDataEvent'])->name("trans-vdataevent");
 
     Route::prefix("/register")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewRegister'])->name("trans-vregister");

@@ -3,6 +3,14 @@
     <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('/plugins/jquery-ui/jquery-ui.css') }}"> --}}
+    <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{asset('/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+
+    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" /> --}}
 @endsection
 
 @if(Session::has('success'))
@@ -35,13 +43,13 @@
                 <div class="card-body">
                     <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>                                        
                     <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
-                    <x-inputhcomp type="text" label="Tgl Mulai" name="tglawal" ></x-inputcomp>
-                    <x-inputhcomp type="text" label="Tgl Selesai" name="tglakhir" ></x-inputcomp>
+                    <x-inputhcomp type="datesaja" label="Tgl Mulai" name="tglawal" ></x-inputcomp>
+                    <x-inputhcomp type="datesaja" label="Tgl Selesai" name="tglakhir" ></x-inputcomp>                        
                 </div>
 
                 <div class="card-footer">
                     <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="submit" class="btn btn-info float-right">Submit</button>
+                    <button type="button" id="btnsubmit" class="btn btn-info float-right">Submit</button>
                 </div>
             </div>
             </form>    
@@ -59,7 +67,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="tabel_reg" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vdatarenewal')}}">
+                    <table id="tabel_reg" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vdataevent')}}">
                         <thead>
                             <tr>
                                 <th>Nama</th>
@@ -82,7 +90,7 @@
     </div>
 @endsection
 
-@section('script1')    
+@section('script1')        
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
@@ -95,6 +103,9 @@
     <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    {{-- <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script> --}}
+    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 @endsection
 
 @section('script2')

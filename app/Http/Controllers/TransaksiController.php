@@ -18,7 +18,7 @@ class TransaksiController extends Controller
         return view('transaksi.register')->with("vjenis",$vjenis);
     }
     public function getDataNewMember(){
-        $data=DB::table("user")->where("user_status","Process")        
+        $data=DB::table("user")->where("deleted_at",null)->where("user_status","Process")
         ->get();
 
         return $data;
@@ -125,11 +125,13 @@ class TransaksiController extends Controller
     }
 
     // Event
-    public function viewEvent(){
-        $data=DB::table('event')
-        ->where("deleted_at",null)
-        ->get();
-        return view('transaksi.event')->with('vevent',$data);
+    public function viewEvent(){        
+        return view('transaksi.event');
+    }
+    public function getDataEvent(){
+        $data=DB::table("event")->where("deleted_at",null)->get();
+
+        return $data;
     }
 
     // Penjualan (Cafe)
