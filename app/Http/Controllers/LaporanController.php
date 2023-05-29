@@ -22,34 +22,34 @@ class LaporanController extends Controller
         $z = $request->query('z');
         $a = $request->query('a');
 
-        // tidak filter
+        // user tanpa filter
         if ($x=='-' && $y=='-' && $z=='-' && $a=='-') {
             $query_user = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
                 ->get();
-        // hanya filter tanggal
+        // user filter tanggal
         } else if ($x=='-' && $y!='-' && $z!='-' && $a=='-') {
             $query_user = DB::table('user')
             ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
             ->join('role','role.role_nama','=','user.user_role')
             ->whereBetween('user.created_at', [$y, $z])
             ->get();
-        // hanya filter role
+        // user filter role
         } else if ($x!='-' && $y=='-' && $z=='-' && $a=='-') {
         $query_user = DB::table('user')
             ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
             ->join('role','role.role_nama','=','user.user_role')
             ->where('user.user_role','=',$x)
             ->get();
-        // hanya filter status
+        // user filter status
         } else if ($x=='-' && $y=='-' && $z=='-' && $a!='-') {
             $query_user = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
                 ->join('role','role.role_nama','=','user.user_role')
                 ->where('user.user_status','=',$a)
                 ->get();
-        // filter role & status
+        // user filter role & status
         } else if ($x!='-' && $y=='-' && $z=='-' && $a!='-') {
             $query_user = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
@@ -57,7 +57,7 @@ class LaporanController extends Controller
                 ->where('user.user_role','=',$x)
                 ->where('user.user_status','=',$a)
                 ->get();
-        // filter role & tanggal
+        // user filter role & tanggal
         } else if ($x!='-' && $y!='-' && $z!='-' && $a=='-') {
             $query_user = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
@@ -65,7 +65,7 @@ class LaporanController extends Controller
                 ->where('user.user_role','=',$x)
                 ->whereBetween('user.created_at', [$y, $z])
                 ->get();
-        // filter tanggal & status
+        // user filter tanggal & status
         } else if ($x=='-' && $y!='-' && $z!='-' && $a!='-') {
             $query_user = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
@@ -73,7 +73,7 @@ class LaporanController extends Controller
                 ->whereBetween('user.created_at', [$y, $z])
                 ->where('user.user_status','=',$a)
                 ->get();
-        // filter semua
+        // user filter semua
         } else {
             $query_user = DB::table('user')
                 ->select('*', DB::raw("DATE_FORMAT(user.created_at, '%d-%m-%Y') AS created_at"))
@@ -100,14 +100,14 @@ class LaporanController extends Controller
         $a = $request->query('a');
         $b = $request->query('b');
 
-        // tanpa filter
+        // transaksi tanpa filter
         if ($x=='-' && $y=='-' && $z=='-' && $a=='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
                 ->join('role','role.role_id','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->get();
-        // filter daftar
+        // transaksi filter daftar
         } else if ($x!='-' && $y!='-' && $z=='-' && $a=='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
@@ -115,7 +115,7 @@ class LaporanController extends Controller
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
                 ->get();
-        // filter expired
+        // transaksi filter expired
         } else if ($x=='-' && $y=='-' && $z!='-' && $a!='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
@@ -123,7 +123,7 @@ class LaporanController extends Controller
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_expired', [$z, $a])
                 ->get();
-        // filter role
+        // transaksi filter role
         } else if ($x=='-' && $y=='-' && $z=='-' && $a=='-' && $b!='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
@@ -131,7 +131,7 @@ class LaporanController extends Controller
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->where('transaksi.transaksi_role','=',$b)
                 ->get();
-        // filter daftar & expired
+        // transaksi filter daftar & expired
         } else if ($x!='-' && $y!='-' && $z!='-' && $a!='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
@@ -140,7 +140,7 @@ class LaporanController extends Controller
                 ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
                 ->whereBetween('transaksi.transaksi_expired', [$z, $a])
                 ->get();
-        // filter daftar & role
+        // transaksi filter daftar & role
         } else if ($x!='-' && $y!='-' && $z=='-' && $a=='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
@@ -149,7 +149,7 @@ class LaporanController extends Controller
                 ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
                 ->where('transaksi.transaksi_role','=',$b)
                 ->get();
-        // filter expired & role
+        // transaksi filter expired & role
         } else if ($x=='-' && $y=='-' && $z!='-' && $a!='-' && $b!='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
@@ -158,7 +158,7 @@ class LaporanController extends Controller
                 ->whereBetween('transaksi.transaksi_expired', [$z, $a])
                 ->where('transaksi.transaksi_role','=',$b)
                 ->get();
-        // tanpa filter
+        // transaksi tanpa filter
         } else {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
@@ -182,11 +182,11 @@ class LaporanController extends Controller
     public function data_fasilitas(Request $request){
         $x = $request->query('x');
 
-        //tanpa filter
+        // fasilitas tanpa filter
         if ($x == '-') {
             $query_fasilitas = DB::table('fasilitas')
                 ->get();
-        // filter status
+        // fasilitas filter status
         } else {
             $query_fasilitas = DB::table('fasilitas')
                 ->where('fasilitas_status','=',[$x])
@@ -208,24 +208,24 @@ class LaporanController extends Controller
         $z = $request->query('z');
         $a = $request->query('a');
 
-        //tanpa filter
+        // event tanpa filter
         if ($x == '-' && $y == '-' && $z == '-' && $a == '-') {
             $query_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
                 ->get();
-        // filter tanggal mulai
+        // event filter tanggal mulai
         } else if ($x != '-' && $y != '-' && $z == '-' && $a == '-') {
             $query_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
                 ->whereBetween('event_start', [$x, $y])
                 ->get();
-        // filter tanggal berakhir
+        // event filter tanggal berakhir
         } else if ($x == '-' && $y == '-' && $z != '-' && $a != '-') {
             $query_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
                 ->whereBetween('event_end', [$z, $a])
                 ->get();
-        // filter semua
+        // event filter semua
         } else {
             $query_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
