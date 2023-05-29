@@ -45,12 +45,12 @@
         </p>
     </a>
     <ul class="nav nav-treeview">
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ route('trans-vdashboard') }}" class="nav-link side-trans-vdashboard">
                 <i class="far fa-circle nav-icon  text-danger"></i>
                 <p>Dashboard</p>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a href="{{ route('trans-vregister') }}" class="nav-link side-trans-vregister">
                 <i class="far fa-circle nav-icon  text-warning"></i>
