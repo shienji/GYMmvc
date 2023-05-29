@@ -3,6 +3,7 @@ $(function () {
     setInterval(updateTime,1000);
     loadListNewMember("#tabel_reg");
     loadListHisMember("#tabel_history",0);
+    loadListEventMember("#tabel_event",0);
     flashpesan("flashpesan"); 
     loadAwal();
 
@@ -211,6 +212,82 @@ $(function () {
     }
 
     function loadListHisMember(namanya,uid) {
+        if (namanya) {
+            var xurl=$(namanya).attr('dataLoad')+"?user_id="+uid;
+            var xurldel=$(namanya).attr('dataDel');
+            var nmTabel2 = $(namanya).DataTable({
+                scrollCollapse: true,
+                orderCellsTop: true,
+                fixedHeader: true,
+                processing: true,
+                serverSide: false,
+                searching: true,
+                lengthChange: true,
+                cache: false,
+                autoWidth: true,
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
+                dom: "<'row'<'col-md-2' f><'col-md-6'><'col-md-4'> >" + "<'row'<'col-md-12'rt>> <'row'<'col-md-4'i><'col-md-8'p>>",
+                ajax: {
+                    url: xurl,
+                    dataSrc: ""
+                },
+                columns: [{
+                        "data": "transaksi_daftar",
+                        "width": "15%"                        
+                    }, {
+                        "data": "transaksi_role",
+                        "width": "8%"
+                    }, {
+                        "data": "transaksi_harga",
+                        "width": "15%"
+                    }, {
+                        "data": "transaksi_bulan",
+                        "width": "5%"
+                    }, {
+                        "data": "transaksi_expired",
+                        "width": "5%"
+                    },{
+                        "data": null,
+                        "className": "center",
+                        "defaultContent": "<input type='button' value='Hapus' class='btn btn-block btn-danger'>"
+                    }, {
+                        "data": "transaksi_id",
+                        "visible": false
+                    }
+                ],
+                order: [[0, "desc"], [1, "desc"]]
+            });
+        
+            $(namanya + ' tbody').on('click', 'td input:button', function (e) {
+                indexRow=$(this).closest('tr');
+                data = nmTabel2.row(indexRow).data();
+                xtglsekarang=moment().format("YYYY-MM-DD");                                
+                $.ajax({
+                    url: xurldel,
+                    type: 'DELETE',
+                    data:{
+                        'id': data.transaksi_id,
+                        'userid': data.user_id,
+                        '_token': $('#tokennya').val(),
+                    },
+                    success: function(result) {
+                        if(result=="success"){
+                            nmTabel2.ajax.reload();
+                            $("form").trigger('reset');
+                        }
+                    },
+                    error:function(result) {
+                        alert(JSON.stringify(result));
+                    }
+                });
+            });
+
+            
+        }
+    }
+
+    function loadListEventMember(namanya,uid) {
         if (namanya) {
             var xurl=$(namanya).attr('dataLoad')+"?user_id="+uid;
             var xurldel=$(namanya).attr('dataDel');

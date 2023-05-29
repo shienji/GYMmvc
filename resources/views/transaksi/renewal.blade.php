@@ -25,10 +25,8 @@
                                   <i class="fas fa-bars"></i>
                                 </button>
                                 <div class="dropdown-menu" role="menu">
-                                  <a href="{{route('trans-vrendel')}}" class="dropdown-item" style="color:black">Hapus Renewal</a>
-                                  <div class="dropdown-divider"></div>
                                   <a href="#" data-toggle="modal" data-target="#modal-transaksi" class="dropdown-item" style="color:black">History Transaksi</a>
-                                  <a href="#" data-toggle="modal" data-target="#modal-event" class="dropdown-item" style="color:black">History Event</a>
+                                  {{-- <a href="#" data-toggle="modal" data-target="#modal-event" class="dropdown-item" style="color:black">History Event</a> --}}
                                 </div>
                             </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
