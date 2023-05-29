@@ -129,7 +129,7 @@ class TransaksiController extends Controller
     public function viewEvent(){
         $vevent=DB::table('event')->where("deleted_at",null)->get();
         $vmember=DB::table('user')->where("user_status","Active")->get();
-        return view('transaksi.event')->with(compact(["vevent","vmember"]));
+        return view('transaksi.event')->with("vevent",$vevent)->with("vmember",$vmember);
     }
     public function getDataEvent(){
         $data=DB::table("event")->where("deleted_at",null)->get();
