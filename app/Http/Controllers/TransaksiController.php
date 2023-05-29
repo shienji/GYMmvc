@@ -76,7 +76,14 @@ class TransaksiController extends Controller
 
         return $data;
     }
+    public function viewRenewalEvent(Request $r){
+        $cek1=$r->validate([
+            'user_id' => 'required',
+        ]);
 
+        $data=(object)[];
+        return $data;
+    }
     public function viewRenewalSave(Request $r){
         $cek1=$r->validate([
             'user_id' => 'required|numeric|min:1',

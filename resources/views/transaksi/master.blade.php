@@ -28,7 +28,7 @@
                             class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('trans-vflow') }}" class="nav-link">Flow Registration</a>
+                    {{-- <a href="{{ route('trans-vflow') }}" class="nav-link">Flow Registration</a> --}}
                 </li>
             </ul>
 
