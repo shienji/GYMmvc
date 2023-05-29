@@ -2,6 +2,7 @@ $(function () {
     $(".card-tools .btn-group").hide();
     setInterval(updateTime,1000);
     loadListNewMember("#tabel_reg");
+    loadListHisMember("#tabel_history",0);
     flashpesan("flashpesan"); 
     loadAwal();
 
@@ -18,10 +19,14 @@ $(function () {
         updateBayar();
     });
     $("#modal-transaksi").on("shown.bs.modal",function(){
-        
+        uid=$('#user_id').val();
+        xurl=$("#tabel_history").attr('dataLoad')+"?user_id="+uid;
+        $('#tabel_history').DataTable().ajax.url(xurl).load();
+    });
+    $("#modal-transaksi").on("hidden.bs.modal",function(){        
+        location.reload();
     });
 
-    
     function loadAwal(){
         resetClass();
         // $("#role_harga").mask('00000000');
@@ -35,9 +40,15 @@ $(function () {
         $('#usiakadaluarsa').removeClass( "is-warning is-valid is-invalid" );
     }
     function updateBayar(){
-        tglexpired=$('#tglexpiredold').val();
-        tglexpired=moment(tglexpired).format("YYYY-MM-DD");
         tglsekarang=moment().format("YYYY-MM-DD");
+        tglexpired=$('#tglexpiredold').val();        
+        cektgl=moment(tglexpired,true).isValid();
+        if(cektgl){
+            tglexpired=moment(tglexpired).format("YYYY-MM-DD");
+        }else{
+            tglexpired=tglsekarang;
+        }
+        
         if(tglexpired<tglsekarang){
             tglexpired=tglsekarang;
         }
@@ -47,7 +58,7 @@ $(function () {
         if(jmlbulan<=0){jmlbulan=1;}
         total=parseInt(harga)*parseInt(jmlbulan);
         // total = total.toLocaleString();
-
+        
         exDate = moment(tglexpired).add(jmlbulan, 'Month').format("YYYY-MM-DD");
         $('#tglexpired').val(exDate);
         $('#totalbyr').val(total);  
@@ -199,11 +210,11 @@ $(function () {
         }
     }
 
-    function loadListHisMember(namanya) {
+    function loadListHisMember(namanya,uid) {
         if (namanya) {
+            var xurl=$(namanya).attr('dataLoad')+"?user_id="+uid;
+            var xurldel=$(namanya).attr('dataDel');
             var nmTabel2 = $(namanya).DataTable({
-                scrollY: false,
-                scrollX: true,
                 scrollCollapse: true,
                 orderCellsTop: true,
                 fixedHeader: true,
@@ -213,61 +224,65 @@ $(function () {
                 lengthChange: true,
                 cache: false,
                 autoWidth: true,
-                select: {
-                    style: 'single'
-                },
                 pageLength: 10,
                 lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
                 dom: "<'row'<'col-md-2' f><'col-md-6'><'col-md-4'> >" + "<'row'<'col-md-12'rt>> <'row'<'col-md-4'i><'col-md-8'p>>",
                 ajax: {
-                    url: $(namanya).attr('dataLoad'),
+                    url: xurl,
                     dataSrc: ""
                 },
                 columns: [{
                         "data": "transaksi_daftar",
                         "width": "15%"                        
                     }, {
-                        "data": "user_nama",
+                        "data": "transaksi_role",
                         "width": "8%"
                     }, {
-                        "data": "user_nohp",
+                        "data": "transaksi_harga",
                         "width": "15%"
                     }, {
-                        "data": "user_role",
+                        "data": "transaksi_bulan",
                         "width": "5%"
                     }, {
-                        "data": "user_alamat",
-                        "visible": false
-                    }, {
-                        "data": "user_email",
-                        "visible": false
-                    }, {
-                        "data": "user_tgllahir",
-                        "visible": false
-                    }, {
-                        "data": "user_nik",
-                        "visible": false
-                    }, {
                         "data": "transaksi_expired",
-                        "visible": false
-                    }, {
-                        "data": "user_id",
-                        "visible": false
+                        "width": "5%"
+                    },{
+                        "data": null,
+                        "className": "center",
+                        "defaultContent": "<input type='button' value='Hapus' class='btn btn-block btn-danger'>"
                     }, {
                         "data": "transaksi_id",
                         "visible": false
                     }
                 ],
                 order: [[0, "desc"], [1, "desc"]]
-                
             });
         
-            $(namanya + ' tbody').on('click', 'tr', function () {
-                resetClass();
-                data = nmTabel2.row(this).data();
-                xtglsekarang=moment().format("YYYY-MM-DD");
-                
-            });         
+            $(namanya + ' tbody').on('click', 'td input:button', function (e) {
+                indexRow=$(this).closest('tr');
+                data = nmTabel2.row(indexRow).data();
+                xtglsekarang=moment().format("YYYY-MM-DD");                                
+                $.ajax({
+                    url: xurldel,
+                    type: 'DELETE',
+                    data:{
+                        'id': data.transaksi_id,
+                        'userid': data.user_id,
+                        '_token': $('#tokennya').val(),
+                    },
+                    success: function(result) {
+                        if(result=="success"){
+                            nmTabel2.ajax.reload();
+                            $("form").trigger('reset');
+                        }
+                    },
+                    error:function(result) {
+                        alert(JSON.stringify(result));
+                    }
+                });
+            });
+
+            
         }
     }
 });

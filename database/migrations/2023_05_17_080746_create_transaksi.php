@@ -18,6 +18,7 @@ return new class extends Migration
             $table->dateTime('transaksi_expired')->nullable();
             $table->string('transaksi_role')->nullable();
             $table->integer('transaksi_harga')->default(0);
+            $table->integer('transaksi_bulan')->default(1);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
