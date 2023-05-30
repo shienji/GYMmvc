@@ -70,15 +70,16 @@ Route::prefix("/laporan")->group(function(){
     Route::get('/event/data',[LaporanController::class, 'data_event'])->name('data-event');
 });
 
-Route::prefix("/Master")->group(function(){
+Route::prefix("/master")->group(function(){
     Route::get('/',[MasterController::class, 'home_master'])->name("home_master");
-    Route::prefix("/Role")->group(function(){
+    Route::prefix("/role")->group(function(){
         Route::get('/',[MasterController::class, 'role_master'])->name("role_master");
         Route::post('/',[MasterController::class, 'role_masterpost'])->name("role_masterpost");
-        Route::post('/delete',[MasterController::class, 'role_masterdel'])->name("role_masterdel");
-        Route::get('/get',[MasterController::class, 'getDataRole'])->name("getDataRole");
+        Route::get('/delete/{id}',[MasterController::class, 'role_masterdel'])->name("role_masterdel");
+        Route::get('/edit/{id}',[MasterController::class, 'getDataRole'])->name("getDataRole");
+        Route::get('/list',[MasterController::class, 'role_master_list'])->name("role_master_list");
     });
-    Route::prefix("/Peralatan")->group(function(){
+    Route::prefix("/peralatan")->group(function(){
         Route::get('/',[MasterController::class, 'peralatan_master'])->name("peralatan_master");
         Route::post('/',[MasterController::class, 'peralatan_masterpost'])->name("peralatan_masterpost");
         Route::post('/delete',[MasterController::class, 'peralatan_masterdel'])->name("peralatan_masterdel");
@@ -90,7 +91,7 @@ Route::prefix("/Master")->group(function(){
         Route::post('/delete',[MasterController::class, 'pelatih_masterdel'])->name("pelatih_masterdel");
         Route::get('/get',[MasterController::class, 'getDataPelatih'])->name("getDataPelatih");
     });
-    Route::prefix("/Fasilitas")->group(function(){
+    Route::prefix("/fasilitas")->group(function(){
         Route::get('/',[MasterController::class, 'fasilitas_master'])->name("fasilitas_master");
         Route::post('/',[MasterController::class, 'fasilitas_masterpost'])->name("fasilitas_masterpost");
         Route::post('/delete',[MasterController::class, 'fasilitas_masterdel'])->name("fasilitas_masterdel");

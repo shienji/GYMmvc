@@ -36,16 +36,16 @@
                 <form class="form-horizontal"  action="{{ route("role_masterpost") }}" method="POST">
                     @csrf
                 <div class="card-body">
-                    <x-inputhcomp type="text" label="id" name="role_id" readonly></x-inputcomp>
-                        <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
-                        <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
-                        <x-inputhcomp type="number" label="Harga" name="Harga" ></x-inputcomp>
+                    <x-inputhcomp type="text" label="id" name="role_id" value="{{$vjenisedit->role_id}}" readonly></x-inputcomp>
+                        <x-inputhcomp type="hidden" label="Tanggal"  name="tgldaftar" class="timestamp" readonly></x-inputcomp>
+                        <x-inputhcomp type="text" label="Nama" value="{{$vjenisedit->role_nama}}" name="nama" ></x-inputcomp>
+                        <x-inputhcomp type="number" label="Harga" value="{{$vjenisedit->role_harga}}" name="Harga" ></x-inputcomp>
 
 
                 </div>
 
                 <div class="card-footer">
-                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <a href="{{ route("role_master") }}"class="btn btn-default"> Cancel</a>
                     <button type="submit" class="btn btn-info float-right">Submit</button>
 
                 </div>

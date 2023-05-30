@@ -23,12 +23,15 @@ class MasterController extends Controller
         $vjenis = DB::table('role')->select("role_id", "role_nama")->get();
         return view('Master.Role_Master')->with("vjenis", $vjenis);
     }
-    public function getDataRole()
+    public function role_master_list()
     {
-        $data = DB::table("role")
-            ->get();
-
-        return $data;
+        $vjenis = DB::table('role')->get();
+        return view('Master.Role_Master_list')->with("vjenis", $vjenis);
+    }
+    public function getDataRole($id)
+    {
+        $vjenisedit = DB::table("role")->where("role_id",$id)->first();
+        return view('Master.Role_Master_edit')->with("vjenisedit", $vjenisedit);
     }
     public function role_masterpost(Request $r)
     {
@@ -45,7 +48,7 @@ class MasterController extends Controller
                     'role_harga' => $r->Harga,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+            return view('Master.Role_Master')->with("success", "Data telah diubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -67,12 +70,12 @@ class MasterController extends Controller
         }
     }
 
-    public function role_masterdel(Request $r)
+    public function role_masterdel($id)
     {
-        $status=DB::table("role")->where("role_id",$r->role_id2)->first();
+        $status=DB::table("role")->where("role_id",$id)->first();
 
         if($status->role_status=="aktif"){
-            $cek3 = DB::table("role")->where("role_id", $r->role_id2)
+            $cek3 = DB::table("role")->where("role_id", $id)
             ->update([
                 'role_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
@@ -82,7 +85,7 @@ class MasterController extends Controller
 
         }
         else{
-            $cek3 = DB::table("role")->where("role_id", $r->role_id2)
+            $cek3 = DB::table("role")->where("role_id", $id)
             ->update([
                 'role_status' => 'aktif',
                 "deleted_at" => null,
