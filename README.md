@@ -33,3 +33,25 @@ Langkah :</br>
 5. Jalankan Web Browser (chrome,mozilla) </br>
 &emsp;&emsp;Buka alamat Berikut : </br>
 &emsp;&emsp;-> http://localhost:8000/ </br> 
+
+---------:: Reconfigure apache ::----------------------------------------</br>
+1. sudo chgrp -R www-data /var/www/html/GYMmvc </br>
+2. sudo chmod -R 775 /var/www/html/GYMmvc/storage </br>
+3. cd /etc/apache2/sites-available </br>
+4. sudo nano gymmvc.conf </br>
+&emsp;&emsp;copy paste kode berikut : 
+&emsp;&emsp;<VirtualHost *:80> </br>
+&emsp;&emsp;&emsp;ServerName thedomain.com </br>
+&emsp;&emsp;&emsp;ServerAdmin webmaster@thedomain.com </br>
+&emsp;&emsp;&emsp;DocumentRoot /var/www/html/example/public </br>
+            </br>
+&emsp;&emsp;&emsp;<Directory /var/www/html/example> </br>
+&emsp;&emsp;&emsp;&emsp;AllowOverride All </br>
+&emsp;&emsp;&emsp;</Directory> </br>
+&emsp;&emsp;&emsp;ErrorLog ${APACHE_LOG_DIR}/error.log </br>
+&emsp;&emsp;&emsp;CustomLog ${APACHE_LOG_DIR}/access.log combined </br>
+&emsp;&emsp;</VirtualHost> </br>
+5. sudo a2dissite 000-default.conf </br>
+6. sudo a2ensite gymmvc </br>
+7. sudo a2enmod rewrite </br>
+8. sudo systemctl restart apache2 </br>
