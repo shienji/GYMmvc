@@ -186,13 +186,16 @@ class MasterController extends Controller
         $vjenis = DB::table('pelatih')->get();
         return view('Master.Pelatih_Master')->with("vjenis", $vjenis);
     }
-
-    public function getDataPelatih()
+    public function pelatih_master_list()
     {
-        $data = DB::table("pelatih")
-            ->get();
+        $vjenis = DB::table('pelatih')->get();
+        return view('Master.Pelatih_Master_list')->with("vjenis", $vjenis);
+    }
 
-        return $data;
+    public function getDataPelatih($id)
+    {
+        $vjenisedit = DB::table("pelatih")->where("pelatih_id",$id)->first();
+        return view('Master.Pelatih_Master_edit')->with("vjenisedit", $vjenisedit);
     }
       public function pelatih_masterpost(Request $r)
     {
@@ -211,7 +214,7 @@ class MasterController extends Controller
                     'pelatih_keahlian' => $r->keahlian,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+                return view('Master.Pelatih_Master')->with("success", "Data telah diubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -232,12 +235,12 @@ class MasterController extends Controller
             return back()->with("success", "Data telah disimpan");
         }
     }
-    public function pelatih_masterdel(Request $r)
+    public function pelatih_masterdel($id)
     {
-        $status=DB::table("pelatih")->where("pelatih_id",$r->pelatih_id2)->first();
+        $status=DB::table("pelatih")->where("pelatih_id",$id)->first();
 
         if($status->pelatih_status=="aktif"){
-            $cek3 = DB::table("pelatih")->where("pelatih_id", $r->pelatih_id2)
+            $cek3 = DB::table("pelatih")->where("pelatih_id", $id)
             ->update([
                 'pelatih_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
@@ -247,7 +250,7 @@ class MasterController extends Controller
 
         }
         else{
-            $cek3 = DB::table("pelatih")->where("pelatih_id", $r->pelatih_id2)
+            $cek3 = DB::table("pelatih")->where("pelatih_id", $id)
             ->update([
                 'pelatih_status' => 'aktif',
                 "deleted_at" => null,

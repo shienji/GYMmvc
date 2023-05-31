@@ -90,8 +90,9 @@ Route::prefix("/master")->group(function(){
     Route::prefix("/Pelatih")->group(function(){
         Route::get('/',[MasterController::class, 'pelatih_master'])->name("pelatih_master");
         Route::post('/',[MasterController::class, 'pelatih_masterpost'])->name("pelatih_masterpost");
-        Route::post('/delete',[MasterController::class, 'pelatih_masterdel'])->name("pelatih_masterdel");
-        Route::get('/get',[MasterController::class, 'getDataPelatih'])->name("getDataPelatih");
+        Route::get('/delete/{id}',[MasterController::class, 'pelatih_masterdel'])->name("pelatih_masterdel");
+        Route::get('/get/{id}',[MasterController::class, 'getDataPelatih'])->name("getDataPelatih");
+        Route::get('/list',[MasterController::class, 'pelatih_master_list'])->name("pelatih_master_list");
     });
     Route::prefix("/fasilitas")->group(function(){
         Route::get('/',[MasterController::class, 'fasilitas_master'])->name("fasilitas_master");

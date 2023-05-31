@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
 @endsection
 @if (Session::has('success'))
-    <input type="" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
+    <input type="hidden" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
 @endif
 @section('konten')
     <h1 style="text-align: center">Master Role</h1>

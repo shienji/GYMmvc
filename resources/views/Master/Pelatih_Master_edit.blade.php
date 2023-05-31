@@ -1,7 +1,7 @@
 {{-- @extends('Master.Home_Master') --}}
 @extends('transaksi.master')
 
-@section("title", "Peralatan Master")
+@section("title", "Pelatih Master")
 @section('stylesheet1')
     <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
@@ -11,57 +11,50 @@
     <input type="hidden" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
 @endif
 @section('konten')
-<h1 style="text-align: center">Master Peralatan</h1>
+<h1 style="text-align: center">Master Pelatih</h1>
+<a href="{{ route("pelatih_master_list") }}" class="btn btn-danger float-right">List</a> <br>
 <br>
     <div class="row">
-        <div class="col-lg-5 col-md-12">
+        <div class=" col-md-12">
             <div class="card card-primary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Insert New Peralatan</h3>
+                        <h3 class="card-title">Insert New Pelatih</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
                 </div>
-                <form class="form-horizontal"  action="{{ route("peralatan_masterpost") }}" method="POST">
+                <form class="form-horizontal"  action="{{ route("pelatih_masterpost") }}" method="POST">
                     @csrf
                 <div class="card-body">
-                    <x-inputhcomp type="text" label="id" name="peralatan_id" readonly></x-inputcomp>
-                    <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
-                    <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
-                    <div class="form-group row">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label">Fasilitas</label>
-                        <div class="col-sm-9">
-                            <select class="custom-select form-control-border border-width-2" id="fasilitas_nama" name="fasilitas_nama">
-                                <option value=""></option>
-                                @foreach ($vjenis as $i)
-                                    <option value="{{$i->fasilitas_nama}}">{{$i->fasilitas_nama}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    <x-inputhcomp type="text" label="id" name="pelatih_id"  value="{{$vjenisedit->pelatih_id}}" readonly></x-inputcomp>
+                        <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
+                            <x-inputhcomp type="number" label="nik" value="{{$vjenisedit->pelatih_nik}}" name="nik" ></x-inputcomp>
+                        <x-inputhcomp type="text" label="Nama" name="nama" value="{{$vjenisedit->pelatih_nama}}"></x-inputcomp>
 
+                       <x-inputhcomp type="text" label="keahlian"  value="{{$vjenisedit->pelatih_keahlian}}" name="keahlian" ></x-inputcomp>
 
 
                 </div>
 
                 <div class="card-footer">
+                    <a href="{{ route("pelatih_master") }}"class="btn btn-default"> Cancel</a>
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
-                </form><form action="{{ route("peralatan_masterdel") }}" method="POST">
+                {{-- </form><form action="{{ route("pelatih_masterdel") }}" method="POST">
                     @csrf
-                    <x-inputhcomp type="hidden" label="peralatan_id2" name="peralatan_id2" readonly></x-inputcomp>
+                    <x-inputhcomp type="hidden" label="pelatih_id2" name="pelatih_id2" readonly></x-inputcomp>
                     <button type="submit" class="btn btn-danger">Remove/Restore</button>
-                </form>
+                </form> --}}
             </div>
         </div>
 
-        <div class="col-lg-7 col-md-12">
+        {{-- <div class="col-lg-7 col-md-12">
             <div class="card card-success">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">List Peralatan</h3>
+                        <h3 class="card-title">List Pelatih</h3>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
@@ -69,12 +62,13 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="master_peralatan" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('getDataPeralatan')}}">
+                    <table id="master_pelatih" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('getDataPelatih')}}">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>Fasilitas</th>
+                                <th>NIK</th>
                                 <th>Nama</th>
+                                <th>keahlian</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
@@ -89,7 +83,7 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
 
@@ -109,5 +103,5 @@
 @endsection
 
 @section('script2')
-    <script src="{{asset('dist/js/master_peralatan.js')}}"></script>
+    <script src="{{asset('dist/js/master_pelatih.js')}}"></script>
 @endsection
