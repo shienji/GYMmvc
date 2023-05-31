@@ -35,7 +35,7 @@
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Fasilitas</label>
                         <div class="col-sm-9">
                             <select class="custom-select form-control-border border-width-2" id="fasilitas_nama" name="fasilitas_nama">
-                                {{-- <option selected="{{$vjenisedit->fasilitas_nama}}"></option> --}}
+                                <option value=""></option>
                                 @foreach ($vjenis as $i)
                                 @if ($i->fasilitas_nama==$vjenisedit->fasilitas_nama)
                                 <option selected="{{$vjenisedit->fasilitas_nama}}" value="{{$i->fasilitas_nama}}">{{$i->fasilitas_nama}}</option>

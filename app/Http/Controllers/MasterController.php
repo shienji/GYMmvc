@@ -132,7 +132,8 @@ class MasterController extends Controller
                     'fasilitas_nama' => $r->fasilitas_nama,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-                return view('Master.Peralatan_Master')->with("success", "Data telah diubah");
+                $vjenis = DB::table('peralatan')->get();
+                return view('Master.Peralatan_Master')->with("success", "Data telah diubah")->with("vjenis", $vjenis);
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
