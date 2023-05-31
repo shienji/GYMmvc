@@ -12,10 +12,11 @@
 @endif
 @section('konten')
 <h1 style="text-align: center">Master Peralatan</h1>
-<a href="{{ route("peralatan_master_list") }}" class="btn btn-danger float-right">List</a> <br>
+<a href="{{ route('peralatan_master') }}" class="btn btn-danger float-right">Insert</a>
+<br>
 <br>
     <div class="row">
-        <div class="col-md-12">
+        {{-- <div class="col-lg-5 col-md-12">
             <div class="card card-primary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
@@ -48,18 +49,17 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="reset" class="btn btn-default">Cancel</button>
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
-                {{-- </form><form action="{{ route("peralatan_masterdel") }}" method="POST">
+                </form><form action="{{ route("peralatan_masterdel") }}" method="POST">
                     @csrf
                     <x-inputhcomp type="hidden" label="peralatan_id2" name="peralatan_id2" readonly></x-inputcomp>
                     <button type="submit" class="btn btn-danger">Remove/Restore</button>
-                </form> --}}
+                </form>
             </div>
-        </div>
+        </div> --}}
 
-        {{-- <div class="col-lg-7 col-md-12">
+        <div class=" col-md-12">
             <div class="card card-success">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
@@ -71,7 +71,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="master_peralatan" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('getDataPeralatan')}}">
+                    <table id="master_peralatsan" class="table table-bordered table-hover" style="width:100%" >
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -82,6 +82,30 @@
                         </thead>
                         <tbody>
 
+                            @foreach ($vjenis as $d)
+                            <tr>
+                                <td>{{ $d->peralatan_id }}</td>
+                                <td>{{ $d->fasilitas_nama }}</td>
+                                <td>{{ $d->peralatan_nama }}</td>
+                                <td>{{ $d->peralatan_status }}</td>
+                                <td>
+                                    <a href="{{ route('getDataPeralatan',['id'=>$d->peralatan_id]) }}" class="btn btn-primary">
+                                        Edit
+                                    </a>
+                                    @if ($d->peralatan_status == 'aktif')
+                                        <a href="{{ route('peralatan_masterdel', ['id'=>$d->peralatan_id]) }}" class="btn btn-danger">
+                                            Hapus
+                                        </a>
+                                    @else
+                                    <a href="{{ route('peralatan_masterdel', ['id'=>$d->peralatan_id]) }}" class="btn btn-danger">
+                                            Restore
+                                        </a>
+                                    @endif
+
+                                </td>
+                            </tr>
+                        @endforeach
+
                         </tbody>
                         </table>
 
@@ -91,7 +115,7 @@
 
                 </div>
             </div>
-        </div> --}}
+        </div>
     </div>
 @endsection
 

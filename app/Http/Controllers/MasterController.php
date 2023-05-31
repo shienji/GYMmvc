@@ -106,11 +106,16 @@ class MasterController extends Controller
         $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
         return view('Master.Peralatan_Master')->with("vjenis",$vjenis);
     }
-    public function getDataPeralatan()
+    public function peralatan_master_list()
     {
-        $data = DB::table("peralatan")->get();
-
-        return $data;
+        $vjenis = DB::table('peralatan')->get();
+        return view('Master.Peralatan_Master_list')->with("vjenis", $vjenis);
+    }
+    public function getDataPeralatan($id)
+    {
+        $vjenis = DB::table('peralatan')->get();
+        $vjenisedit = DB::table("peralatan")->where("peralatan_id",$id)->first();
+        return view('Master.Peralatan_Master_edit')->with("vjenisedit", $vjenisedit)->with("vjenis", $vjenis);
     }
     public function peralatan_masterpost(Request $r)
     {
@@ -127,7 +132,7 @@ class MasterController extends Controller
                     'fasilitas_nama' => $r->fasilitas_nama,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+                return view('Master.Peralatan_Master')->with("success", "Data telah diubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -148,12 +153,12 @@ class MasterController extends Controller
             return back()->with("success", "Data telah disimpan");
         }
     }
-    public function peralatan_masterdel(Request $r)
+    public function peralatan_masterdel($id)
     {
-        $status=DB::table("peralatan")->where("peralatan_id",$r->peralatan_id2)->first();
+        $status=DB::table("peralatan")->where("peralatan_id",$id)->first();
 
         if($status->peralatan_status=="aktif"){
-            $cek3 = DB::table("peralatan")->where("peralatan_id", $r->peralatan_id2)
+            $cek3 = DB::table("peralatan")->where("peralatan_id", $id)
             ->update([
                 'peralatan_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
@@ -163,7 +168,7 @@ class MasterController extends Controller
 
         }
         else{
-            $cek3 = DB::table("peralatan")->where("peralatan_id", $r->peralatan_id2)
+            $cek3 = DB::table("peralatan")->where("peralatan_id", $id)
             ->update([
                 'peralatan_status' => 'aktif',
                 "deleted_at" => null,

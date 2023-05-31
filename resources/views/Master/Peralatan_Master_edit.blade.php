@@ -28,16 +28,21 @@
                 <form class="form-horizontal"  action="{{ route("peralatan_masterpost") }}" method="POST">
                     @csrf
                 <div class="card-body">
-                    <x-inputhcomp type="text" label="id" name="peralatan_id" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="id" name="peralatan_id" value="{{$vjenisedit->peralatan_id}}" readonly></x-inputcomp>
                     <x-inputhcomp type="hidden" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
-                    <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
+                    <x-inputhcomp type="text" label="Nama" name="nama" value="{{$vjenisedit->peralatan_nama}}" ></x-inputcomp>
                     <div class="form-group row">
                         <label for="inputEmail3" class="col-sm-3 col-form-label">Fasilitas</label>
                         <div class="col-sm-9">
                             <select class="custom-select form-control-border border-width-2" id="fasilitas_nama" name="fasilitas_nama">
-                                <option value=""></option>
+                                {{-- <option selected="{{$vjenisedit->fasilitas_nama}}"></option> --}}
                                 @foreach ($vjenis as $i)
-                                    <option value="{{$i->fasilitas_nama}}">{{$i->fasilitas_nama}}</option>
+                                @if ($i->fasilitas_nama==$vjenisedit->fasilitas_nama)
+                                <option selected="{{$vjenisedit->fasilitas_nama}}" value="{{$i->fasilitas_nama}}">{{$i->fasilitas_nama}}</option>
+                                @else
+                                <option value="{{$i->fasilitas_nama}}">{{$i->fasilitas_nama}}</option>
+                                @endif
+
                                 @endforeach
                             </select>
                         </div>
@@ -48,7 +53,7 @@
                 </div>
 
                 <div class="card-footer">
-                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <a href="{{ route("peralatan_master") }}"class="btn btn-default"> Cancel</a>
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
                 {{-- </form><form action="{{ route("peralatan_masterdel") }}" method="POST">
