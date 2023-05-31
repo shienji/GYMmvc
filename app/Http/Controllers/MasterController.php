@@ -132,7 +132,7 @@ class MasterController extends Controller
                     'fasilitas_nama' => $r->fasilitas_nama,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-                $vjenis = DB::table('peralatan')->get();
+                $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
                 return view('Master.Peralatan_Master')->with("success", "Data telah diubah")->with("vjenis", $vjenis);
         } else {
             $cek1 = $r->validate([
