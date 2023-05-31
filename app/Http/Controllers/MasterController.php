@@ -271,13 +271,15 @@ class MasterController extends Controller
         $vjenis = DB::table('fasilitas')->select("fasilitas_id", "fasilitas_nama")->get();
         return view('Master.Fasilitas_Master')->with("vjenis", $vjenis);
     }
-
-    public function getDataFasilitas()
+    public function fasilitas_master_list()
     {
-        $data = DB::table("fasilitas")
-            ->get();
+        $vjenis = DB::table('fasilitas')->get();
+        return view('Master.Fasilitas_Master_list')->with("vjenis", $vjenis);
+    }
 
-        return $data;
+    public function getDataFasilitas($id)
+    {$vjenisedit = DB::table("fasilitas")->where("fasilitas_id",$id)->first();
+        return view('Master.Fasilitas_Master_edit')->with("vjenisedit", $vjenisedit);
     }
 
     public function fasilitas_masterpost(Request $r)
@@ -294,7 +296,7 @@ class MasterController extends Controller
                     'fasilitas_nama' => $r->nama,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+                return view('Master.Fasilitas_Master')->with("success", "Data telah diubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -314,12 +316,12 @@ class MasterController extends Controller
         }
     }
 
-    public function fasilitas_masterdel(Request $r)
+    public function fasilitas_masterdel($id)
     {
-        $status=DB::table("fasilitas")->where("fasilitas_id",$r->fasilitas_id2)->first();
+        $status=DB::table("fasilitas")->where("fasilitas_id",$id)->first();
 
         if($status->fasilitas_status=="aktif"){
-            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $r->fasilitas_id2)
+            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $id)
             ->update([
                 'fasilitas_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
@@ -329,7 +331,7 @@ class MasterController extends Controller
 
         }
         else{
-            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $r->fasilitas_id2)
+            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $id)
             ->update([
                 'fasilitas_status' => 'aktif',
                 "deleted_at" => null,
