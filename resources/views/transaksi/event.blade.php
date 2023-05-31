@@ -99,7 +99,8 @@
                         </div>
                     </div>
                 </div>
-                <form action="">
+                <form action="{{route('trans-veventsavereg')}}" method="POST">
+                    @csrf
                 <div class="card-body">
                     <div class="form-group row">
                         <label for="role" class="col-sm-3 col-form-label">Nama Event</label>
@@ -115,7 +116,7 @@
                     <div class="form-group row">
                         <label for="role" class="col-sm-3 col-form-label">Nama Peserta</label>
                         <div class="col-sm-9">
-                            <select class="custom-select form-control-border border-width-2" id="nm_event" name="nm_event">
+                            <select class="custom-select form-control-border border-width-2" id="nm_member" name="nm_member">
                                 <option value=""></option>
                                 @foreach ($vmember as $i)
                                     <option value="{{$i->user_id}}" >{{$i->user_nama}}</option>
@@ -124,10 +125,13 @@
                         </div>
                     </div>
                 </div>
-                </form>
-                <div class="card-footer">
 
+                
+                <div class="card-footer">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" id="btnsubmitreg" class="btn btn-info float-right">Submit</button>
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -141,17 +145,16 @@
               </button>
             </div>
             <div class="modal-body">
-                <input type="hidden" name="modal_eventid" id="modal_eventid" value="">
+                <input type="hidden" name="modal_eventid" id="modal_eventid" value="0">
 
-                <table id="tabel_event" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vrenhis')}}" dataDel="{{route('trans-vrendel')}}">
+                <table id="tabel_event" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-veventpeserta')}}">
                     <thead>
                         <tr>
-                            <th>Tgl Transaksi</th>
-                            <th>Jenis</th>
-                            <th>Harga</th>
-                            <th>Bulan</th>
-                            <th>Tgl Expired</th>
-                            <th>Action</th>
+                            <th>Tgl Daftar</th>
+                            <th>Nama Peserta</th>
+                            <th>Handphone</th>
+                            <th>Alamat</th>
+                            <th>Member sejak</th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -183,6 +186,7 @@
     {{-- <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script> --}}
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
+    <script src="//cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
 @endsection
 
 @section('script2')

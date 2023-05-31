@@ -114,7 +114,15 @@ $(function () {
                         "visible": false
                     }
                 ],
-                order: [[0, "desc"], [1, "desc"]]
+                order: [[0, "desc"], [1, "desc"]],
+                columnDefs: [{
+                        targets: 0,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    },{
+                        targets: 6,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    }
+                ]
                 
             });
         

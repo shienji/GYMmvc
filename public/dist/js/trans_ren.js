@@ -164,8 +164,15 @@ $(function () {
                         "visible": false
                     }
                 ],
-                order: [[0, "desc"], [1, "desc"]]
-                
+                order: [[0, "desc"], [1, "desc"]],
+                columnDefs: [{
+                        targets: 0,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    },{
+                        targets: 6,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    }
+                ]
             });
         
             $(namanya + ' tbody').on('click', 'tr', function () {
@@ -256,7 +263,15 @@ $(function () {
                         "visible": false
                     }
                 ],
-                order: [[0, "desc"], [1, "desc"]]
+                order: [[0, "desc"], [1, "desc"]],
+                columnDefs: [{
+                        targets: 0,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    },{
+                        targets: 4,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    }
+                ]
             });
         
             $(namanya + ' tbody').on('click', 'td input:button', function (e) {
@@ -332,7 +347,15 @@ $(function () {
                         "visible": false
                     }
                 ],
-                order: [[0, "desc"], [1, "desc"]]
+                order: [[0, "desc"], [1, "desc"]],
+                columnDefs: [{
+                        targets: 0,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    },{
+                        targets: 4,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    }
+                ]
             });
         
             $(namanya + ' tbody').on('click', 'td input:button', function (e) {

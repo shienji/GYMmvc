@@ -127,12 +127,18 @@ class TransaksiController extends Controller
 
     // Event
     public function viewEvent(){
-        $vevent=DB::table('event')->where("deleted_at",null)->get();
+        // $vevent=DB::table('event')->where("deleted_at",null)->get();
+        $vevent=DB::select("select v.*,(select count(user_id) from eventd as d where d.event_id=v.event_id) as totalpeserta 
+        from event v where v.deleted_at is null");
+
+        $veventd=DB::table('eventd')->where("deleted_at",null)->get();
         $vmember=DB::table('user')->where("user_status","Active")->get();
+        
         return view('transaksi.event')->with("vevent",$vevent)->with("vmember",$vmember);
     }
     public function getDataEvent(){
-        $data=DB::table("event")->where("deleted_at",null)->get();
+        $data=DB::select("select v.*,(select count(user_id) from eventd as d where d.event_id=v.event_id) as totalpeserta 
+        from event v where v.deleted_at is null order by v.event_id desc ");
 
         return $data;
     }
@@ -151,23 +157,28 @@ class TransaksiController extends Controller
 
         return back()->with("success","Data telah disimpan");
     }
+    public function viewEventSaveReg(Request $r){
+        $cek1=$r->validate([
+            'nm_member' => 'required',
+            'nm_event' => 'required',            
+        ]);
 
-    // Penjualan (Cafe)
-    public function viewJual(){
-        return view('transaksi.jual');
-    }
+        $cek2=DB::table("eventd")->insert(
+            ["event_id"=>$r->nm_event,
+            "user_id"=>$r->nm_member,            
+        ]);
 
-    // temporary
-    public function lapRegister(){
-        return view('transaksi.register');
-    }
-    public function lapRenewal(){
-        return view('transaksi.renewal');
-    }
-    public function lapEvent(){
-        return view('transaksi.event');
-    }
-    public function lapJual(){
-        return view('transaksi.jual');
-    }
+        return back()->with("success","Data telah disimpan");
+    }    
+    public function getDataPeserta(Request $r){
+        $cek1=$r->validate([
+            'event_id' => 'required',            
+        ]);
+        $data=DB::table("eventd as v")
+        ->join('user as u','u.user_id','=','v.user_id')
+        ->select('u.*',"v.created_at as tgldaftar","v.event_id")
+        ->where("v.deleted_at",null)->where("v.event_id",$r->event_id)->get();
+
+        return $data;
+    }    
 }

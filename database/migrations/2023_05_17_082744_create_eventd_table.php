@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('eventd', function (Blueprint $table) {
             $table->increments('eventd_id');
-            $table->string('event_id')->nullable();
-            $table->dateTime('user_id')->nullable();
+            $table->integer('event_id')->default(0);
+            $table->integer('user_id')->default(0);
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();
