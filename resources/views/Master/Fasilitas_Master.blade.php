@@ -106,7 +106,6 @@
     {{-- <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script> --}}
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-@endsectionrc="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
 @endsection
 
 @section('script2')

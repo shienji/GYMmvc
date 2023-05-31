@@ -1,4 +1,22 @@
 $(function () {
+
+    flashpesan("flashpesan");
+    function flashpesan(el){
+        myEle = document.getElementById(el);
+        if (myEle) {
+            xicon=myEle.getAttribute("icon");
+            xtitle=myEle.value;
+            xToast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 3000
+            }).fire({
+                icon: xicon,
+                title: xtitle
+            });
+        }
+    }
     setInterval(updateTime,1000);
    loadListNewMember("#master_pelatih");
    function updateTime(){
