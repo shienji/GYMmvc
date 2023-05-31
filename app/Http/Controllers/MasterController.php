@@ -113,7 +113,7 @@ class MasterController extends Controller
     }
     public function getDataPeralatan($id)
     {
-        $vjenis = DB::table('peralatan')->get();
+        $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
         $vjenisedit = DB::table("peralatan")->where("peralatan_id",$id)->first();
         return view('Master.Peralatan_Master_edit')->with("vjenisedit", $vjenisedit)->with("vjenis", $vjenis);
     }
