@@ -48,7 +48,7 @@ class MasterController extends Controller
                     'role_harga' => $r->Harga,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return view('Master.Role_Master')->with("success", "Data telah diubah");
+            return view('Master.Role_Master')->with("success", "data berhasil di ubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -66,7 +66,7 @@ class MasterController extends Controller
 
 
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
 
@@ -81,7 +81,7 @@ class MasterController extends Controller
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
@@ -92,7 +92,7 @@ class MasterController extends Controller
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 
@@ -133,7 +133,7 @@ class MasterController extends Controller
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
                 $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
-                return view('Master.Peralatan_Master')->with("success", "Data telah diubah")->with("vjenis", $vjenis);
+                return view('Master.Peralatan_Master')->with("success", "data berhasil di ubah")->with("vjenis", $vjenis);
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -151,7 +151,7 @@ class MasterController extends Controller
 
 
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
     public function peralatan_masterdel($id)
@@ -165,7 +165,7 @@ class MasterController extends Controller
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
@@ -176,7 +176,7 @@ class MasterController extends Controller
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 
@@ -220,7 +220,7 @@ class MasterController extends Controller
                     'pelatih_keahlian' => $r->keahlian,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-                return view('Master.Pelatih_Master')->with("success", "Data telah diubah");
+                return view('Master.Pelatih_Master')->with("success", "data berhasil di ubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -238,7 +238,7 @@ class MasterController extends Controller
                 ]
             );
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
     public function pelatih_masterdel($id)
@@ -252,7 +252,7 @@ class MasterController extends Controller
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
@@ -263,7 +263,7 @@ class MasterController extends Controller
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 
@@ -305,7 +305,7 @@ class MasterController extends Controller
                     'fasilitas_nama' => $r->nama,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-                return view('Master.Fasilitas_Master')->with("success", "Data telah diubah");
+                return view('Master.Fasilitas_Master')->with("success", "data berhasil di ubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -321,7 +321,7 @@ class MasterController extends Controller
 
 
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
 
@@ -336,7 +336,7 @@ class MasterController extends Controller
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
@@ -347,7 +347,7 @@ class MasterController extends Controller
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 
