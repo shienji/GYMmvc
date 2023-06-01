@@ -1,6 +1,7 @@
 $(function () {
     setInterval(updateTime,1000);
     loadListEvent("#tabel_reg");
+    loadListPeserta("#tabel_event",0);
     flashpesan("flashpesan");
     loadAwal();
 
@@ -12,51 +13,11 @@ $(function () {
     });
     $("#modal-event").on("shown.bs.modal",function(){
         uid=$('#modal_eventid').val();
-        xurl=$("#tabel_history").attr('dataLoad')+"?user_id="+uid;
-        $('#tabel_history').DataTable().ajax.url(xurl).load();
+        xurl=$("#tabel_event").attr('dataLoad')+"?event_id="+uid;        
+        $('#tabel_event').DataTable().ajax.url(xurl).load();
     });
 
-    // $("#btnsubmit").on("click", function(e) {
-    //     xtglawal = $('#tglawal').datetimepicker('viewDate');
-    //     tglawal=$("#valtglawal").val();
-    //     tglakhir=$("#valtglakhir").val();
-
-    //     cektglawal=moment(tglawal,true).isValid();
-    //     if(!cektglawal){
-    //         alert("Tanggal awal tidak valid");
-    //         return;
-    //     }
-    //     cektglawal=moment(tglakhir,true).isValid();
-    //     if(!cektglawal){
-    //         alert("Tanggal akhir tidak valid");
-    //         return;
-    //     }
-
-    //     $.ajax({
-    //         url: xurl,
-    //         type: 'POST',
-    //         data:{
-    //             'nama': data.transaksi_id,
-    //             'tglawal': data.user_id,
-    //             'tglakhir': data.user_id,
-    //             '_token': $('#tokennya').val(),
-    //         },
-    //         success: function(result) {
-    //             if(result=="success"){
-    //                 nmTabel2.ajax.reload();
-    //                 $("form").trigger('reset');
-    //             }
-    //         },
-    //         error:function(result) {
-    //             alert(JSON.stringify(result));
-    //         }
-    //     });
-
-    // });
-
-    function loadAwal(){
-        // document.getElementById('tglawal').valueAsDate = new Date();
-        // document.getElementById('tglakhir').valueAsDate = new Date();
+    function loadAwal(){        
         $('#tglawal').datetimepicker({
             format: 'YYYY-MM-DD'
         });
@@ -90,7 +51,7 @@ $(function () {
 
     function loadListEvent(namanya) {
         if (namanya) {
-            let xurl=$(namanya).attr('dataLoad');
+            let xurl=$(namanya).attr('dataLoad');            
             var nmTabel = $(namanya).DataTable({
                 scrollY: false,
                 scrollX: true,
@@ -123,17 +84,24 @@ $(function () {
                         "data": "event_end",
                         "width": "8%"
                     },{
-                        "data": null,
-                        "width": "5%",
-                        "className": "center",
-                        "defaultContent": "0"
+                        "data": "totalpeserta",
+                        "width": "5%"
+                        // "className": "center",
+                        // "defaultContent": "0"
                     }, {
                         "data": "event_id",
                         "visible": false
                     }
                 ],
-                order: [[0, "desc"], [1, "desc"]]
-
+                order: [[0, "desc"], [1, "desc"]],
+                columnDefs: [{
+                        targets: 1,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    },{
+                        targets: 2,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    }
+                ]
             });
 
             $(namanya + ' tbody').on('click', 'tr', function () {
@@ -143,5 +111,64 @@ $(function () {
             });
         }
     }
-
+    function loadListPeserta(namanya,id) {
+        if (namanya) {
+            let xurl=$(namanya).attr('dataLoad')+"?event_id="+id;
+            var nmTabel = $(namanya).DataTable({
+                scrollY: false,
+                scrollX: true,
+                scrollCollapse: true,
+                orderCellsTop: true,
+                fixedHeader: true,
+                processing: true,
+                serverSide: false,
+                searching: true,
+                lengthChange: true,
+                cache: false,
+                autoWidth: true,
+                select: {
+                    style: 'single'
+                },
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, 'All']],
+                dom: "<'row'<'col-md-2' f><'col-md-6'><'col-md-4'> >" + "<'row'<'col-md-12'rt>> <'row'<'col-md-4'i><'col-md-8'p>>",
+                ajax: {
+                    url: xurl,
+                    dataSrc: ""
+                },
+                columns: [{
+                        "data": "tgldaftar",
+                        "width": "15%"
+                    }, {
+                        "data": "user_nama",
+                        "width": "8%"
+                    }, {
+                        "data": "user_nohp",
+                        "width": "8%"
+                    },{
+                        "data": "user_alamat",
+                        "width": "5%"
+                    },{
+                        "data": "created_at",
+                        "width": "5%"                        
+                    }, {
+                        "data": "user_id",
+                        "visible": false
+                    }, {
+                        "data": "event_id",
+                        "visible": false
+                    }
+                ],
+                order: [[0, "desc"], [1, "desc"]],
+                columnDefs: [{
+                        targets: 0,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    },{
+                        targets: 4,
+                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
+                    }
+                ]
+            });
+        }
+    }
 });

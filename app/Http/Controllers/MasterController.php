@@ -23,12 +23,15 @@ class MasterController extends Controller
         $vjenis = DB::table('role')->select("role_id", "role_nama")->get();
         return view('Master.Role_Master')->with("vjenis", $vjenis);
     }
-    public function getDataRole()
+    public function role_master_list()
     {
-        $data = DB::table("role")
-            ->get();
-
-        return $data;
+        $vjenis = DB::table('role')->get();
+        return view('Master.Role_Master_list')->with("vjenis", $vjenis);
+    }
+    public function getDataRole($id)
+    {
+        $vjenisedit = DB::table("role")->where("role_id",$id)->first();
+        return view('Master.Role_Master_edit')->with("vjenisedit", $vjenisedit);
     }
     public function role_masterpost(Request $r)
     {
@@ -45,7 +48,7 @@ class MasterController extends Controller
                     'role_harga' => $r->Harga,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+            return view('Master.Role_Master')->with("success", "data berhasil di ubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -63,33 +66,33 @@ class MasterController extends Controller
 
 
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
 
-    public function role_masterdel(Request $r)
+    public function role_masterdel($id)
     {
-        $status=DB::table("role")->where("role_id",$r->role_id2)->first();
+        $status=DB::table("role")->where("role_id",$id)->first();
 
         if($status->role_status=="aktif"){
-            $cek3 = DB::table("role")->where("role_id", $r->role_id2)
+            $cek3 = DB::table("role")->where("role_id", $id)
             ->update([
                 'role_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
-            $cek3 = DB::table("role")->where("role_id", $r->role_id2)
+            $cek3 = DB::table("role")->where("role_id", $id)
             ->update([
                 'role_status' => 'aktif',
                 "deleted_at" => null,
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 
@@ -103,11 +106,16 @@ class MasterController extends Controller
         $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
         return view('Master.Peralatan_Master')->with("vjenis",$vjenis);
     }
-    public function getDataPeralatan()
+    public function peralatan_master_list()
     {
-        $data = DB::table("peralatan")->get();
-
-        return $data;
+        $vjenis = DB::table('peralatan')->get();
+        return view('Master.Peralatan_Master_list')->with("vjenis", $vjenis);
+    }
+    public function getDataPeralatan($id)
+    {
+        $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
+        $vjenisedit = DB::table("peralatan")->where("peralatan_id",$id)->first();
+        return view('Master.Peralatan_Master_edit')->with("vjenisedit", $vjenisedit)->with("vjenis", $vjenis);
     }
     public function peralatan_masterpost(Request $r)
     {
@@ -124,7 +132,8 @@ class MasterController extends Controller
                     'fasilitas_nama' => $r->fasilitas_nama,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+                $vjenis=DB::table('fasilitas')->where("deleted_at",null)->get();
+                return view('Master.Peralatan_Master')->with("success", "data berhasil di ubah")->with("vjenis", $vjenis);
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -142,32 +151,32 @@ class MasterController extends Controller
 
 
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
-    public function peralatan_masterdel(Request $r)
+    public function peralatan_masterdel($id)
     {
-        $status=DB::table("peralatan")->where("peralatan_id",$r->peralatan_id2)->first();
+        $status=DB::table("peralatan")->where("peralatan_id",$id)->first();
 
         if($status->peralatan_status=="aktif"){
-            $cek3 = DB::table("peralatan")->where("peralatan_id", $r->peralatan_id2)
+            $cek3 = DB::table("peralatan")->where("peralatan_id", $id)
             ->update([
                 'peralatan_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
-            $cek3 = DB::table("peralatan")->where("peralatan_id", $r->peralatan_id2)
+            $cek3 = DB::table("peralatan")->where("peralatan_id", $id)
             ->update([
                 'peralatan_status' => 'aktif',
                 "deleted_at" => null,
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 
@@ -183,13 +192,16 @@ class MasterController extends Controller
         $vjenis = DB::table('pelatih')->get();
         return view('Master.Pelatih_Master')->with("vjenis", $vjenis);
     }
-
-    public function getDataPelatih()
+    public function pelatih_master_list()
     {
-        $data = DB::table("pelatih")
-            ->get();
+        $vjenis = DB::table('pelatih')->get();
+        return view('Master.Pelatih_Master_list')->with("vjenis", $vjenis);
+    }
 
-        return $data;
+    public function getDataPelatih($id)
+    {
+        $vjenisedit = DB::table("pelatih")->where("pelatih_id",$id)->first();
+        return view('Master.Pelatih_Master_edit')->with("vjenisedit", $vjenisedit);
     }
       public function pelatih_masterpost(Request $r)
     {
@@ -208,7 +220,7 @@ class MasterController extends Controller
                     'pelatih_keahlian' => $r->keahlian,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+                return view('Master.Pelatih_Master')->with("success", "data berhasil di ubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -226,32 +238,32 @@ class MasterController extends Controller
                 ]
             );
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
-    public function pelatih_masterdel(Request $r)
+    public function pelatih_masterdel($id)
     {
-        $status=DB::table("pelatih")->where("pelatih_id",$r->pelatih_id2)->first();
+        $status=DB::table("pelatih")->where("pelatih_id",$id)->first();
 
         if($status->pelatih_status=="aktif"){
-            $cek3 = DB::table("pelatih")->where("pelatih_id", $r->pelatih_id2)
+            $cek3 = DB::table("pelatih")->where("pelatih_id", $id)
             ->update([
                 'pelatih_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
-            $cek3 = DB::table("pelatih")->where("pelatih_id", $r->pelatih_id2)
+            $cek3 = DB::table("pelatih")->where("pelatih_id", $id)
             ->update([
                 'pelatih_status' => 'aktif',
                 "deleted_at" => null,
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 
@@ -268,13 +280,15 @@ class MasterController extends Controller
         $vjenis = DB::table('fasilitas')->select("fasilitas_id", "fasilitas_nama")->get();
         return view('Master.Fasilitas_Master')->with("vjenis", $vjenis);
     }
-
-    public function getDataFasilitas()
+    public function fasilitas_master_list()
     {
-        $data = DB::table("fasilitas")
-            ->get();
+        $vjenis = DB::table('fasilitas')->get();
+        return view('Master.Fasilitas_Master_list')->with("vjenis", $vjenis);
+    }
 
-        return $data;
+    public function getDataFasilitas($id)
+    {$vjenisedit = DB::table("fasilitas")->where("fasilitas_id",$id)->first();
+        return view('Master.Fasilitas_Master_edit')->with("vjenisedit", $vjenisedit);
     }
 
     public function fasilitas_masterpost(Request $r)
@@ -291,7 +305,7 @@ class MasterController extends Controller
                     'fasilitas_nama' => $r->nama,
                     "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 ]);
-            return back()->with("success", "Data telah diubah");
+                return view('Master.Fasilitas_Master')->with("success", "data berhasil di ubah");
         } else {
             $cek1 = $r->validate([
                 'nama' => 'required',
@@ -307,33 +321,33 @@ class MasterController extends Controller
 
 
 
-            return back()->with("success", "Data telah disimpan");
+            return back()->with("success", "data berhasil di simpan");
         }
     }
 
-    public function fasilitas_masterdel(Request $r)
+    public function fasilitas_masterdel($id)
     {
-        $status=DB::table("fasilitas")->where("fasilitas_id",$r->fasilitas_id2)->first();
+        $status=DB::table("fasilitas")->where("fasilitas_id",$id)->first();
 
         if($status->fasilitas_status=="aktif"){
-            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $r->fasilitas_id2)
+            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $id)
             ->update([
                 'fasilitas_status' => 'Non Aktif',
                 "deleted_at" => Carbon::now()->format('Y-m-d H:i:s'),
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
-            return back()->with("success", "Data telah hapus");
+            return back()->with("success", "data berhasil di hapus");
 
         }
         else{
-            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $r->fasilitas_id2)
+            $cek3 = DB::table("fasilitas")->where("fasilitas_id", $id)
             ->update([
                 'fasilitas_status' => 'aktif',
                 "deleted_at" => null,
                 "updated_at" => Carbon::now()->format('Y-m-d H:i:s'),
             ]);
 
-        return back()->with("success", "Data telah restore");
+        return back()->with("success", "data berhasil di restore");
         }
 
 

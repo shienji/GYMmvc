@@ -6,15 +6,24 @@
     <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+    {{-- <link rel="stylesheet" href="{{asset('/plugins/jquery-ui/jquery-ui.css') }}"> --}}
+    <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{asset('/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+
+    {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script> --}}
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/js/tempusdominus-bootstrap-4.min.js" integrity="sha512-k6/Bkb8Fxf/c1Tkyl39yJwcOZ1P4cRrJu77p83zJjN2Z55prbFHxPs9vN7q3l3+tSMGPDdoH51AEU8Vgo1cgAA==" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.39.0/css/tempusdominus-bootstrap-4.min.css" integrity="sha512-3JRrEUwaCkFUBLK1N8HehwQgu8e23jTH4np5NHOmQOobuC4ROQxFwFgBLTnhcnQRMs84muMh0PnnwXlPq5MGjg==" crossorigin="anonymous" /> --}}
 @endsection
 @if(Session::has('success'))
-    <input type="" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
+    <input type="hidden" id="flashpesan" icon="success" value="{{ Session::get('success') }}">
 @endif
 @section('konten')
 <h1 style="text-align: center">Master Fasilitas</h1>
+<a href="{{ route("fasilitas_master_list") }}" class="btn btn-danger float-right">List</a> <br>
 <br>
     <div class="row">
-        <div class="col-lg-5 col-md-12">
+        <div class="col-md-12">
             <div class="card card-primary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
@@ -36,17 +45,18 @@
                 </div>
 
                 <div class="card-footer">
+                    <button type="reset" class="btn btn-default">Cancel</button>
                     <button type="submit" class="btn btn-info float-right">Submit</button>
                 </div>
-                </form><form action="{{ route("fasilitas_masterdel") }}" method="POST">
+                {{-- </form><form action="{{ route("fasilitas_masterdel") }}" method="POST">
                     @csrf
                     <x-inputhcomp type="hidden" label="fasilitas_id2" name="fasilitas_id2" readonly></x-inputcomp>
                     <button type="submit" class="btn btn-danger">Remove/Restore</button>
-                </form>
+                </form> --}}
             </div>
         </div>
 
-        <div class="col-lg-7 col-md-12">
+        {{-- <div class="col-lg-7 col-md-12">
             <div class="card card-success">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
@@ -77,11 +87,10 @@
 
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
-
- @section('script1')
+@section('script1')
     <script src="{{asset('plugins/datatables/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-bs4/js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-responsive/js/dataTables.responsive.min.js')}}"></script>
@@ -94,6 +103,9 @@
     <script src="{{asset('plugins/datatables-buttons/js/buttons.html5.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
+    {{-- <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script> --}}
+    <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
 @endsection
 
 @section('script2')

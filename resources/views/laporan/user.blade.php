@@ -70,18 +70,22 @@
         </div>
     </div>
 
-    <table id="tabel-laporan-user" class="table table-bordered table-hover table-sm text-center">
-        <thead>
-            <tr>
-                <th></th>
-                <th>NAMA</th>
-                <th>ROLE</th>
-                <th>STATUS</th>
-                <th>CREATED_AT</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <table id="tabel-laporan-user" class="table table-bordered table-hover table-sm text-center">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>NAMA</th>
+                        <th>ROLE</th>
+                        <th>STATUS</th>
+                        <th>CREATED_AT</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('script1')

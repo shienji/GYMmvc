@@ -1,4 +1,5 @@
 $(function () {
+    flashpesan("flashpesan");
     setInterval(updateTime,1000);
    loadListNewMember("#master_role");
    function updateTime(){
@@ -6,6 +7,22 @@ $(function () {
        timestamp=moment().add(serverOffset,'ms').format('DD-MM-YYYY HH:mm:ss');
        $('.timestamp').val(timestamp);
    }
+   function flashpesan(el){
+    myEle = document.getElementById(el);
+    if (myEle) {
+        xicon=myEle.getAttribute("icon");
+        xtitle=myEle.value;
+        xToast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000
+        }).fire({
+            icon: xicon,
+            title: xtitle
+        });
+    }
+}
 
    function loadListNewMember(namanya) {
        if (namanya) {
