@@ -60,19 +60,22 @@
         </div>
     </div>
 
-    <table id="tabel-laporan-event" class="table table-bordered table-hover table-sm text-center">
-        <thead>
-            <tr>
-                <th></th>
-                <th>NAMA</th>
-                <th>MULAI</th>
-                <th>BERAKHIR</th>
-            </tr>
-        </thead>
-        <tbody>
-
-        </tbody>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <table id="tabel-laporan-event" class="table table-bordered table-hover table-sm text-center">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>NAMA</th>
+                        <th>MULAI</th>
+                        <th>BERAKHIR</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('script1')
