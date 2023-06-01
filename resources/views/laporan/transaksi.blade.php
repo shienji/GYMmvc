@@ -75,19 +75,23 @@
         </div>
     </div>
 
-    <table id="tabel-laporan-transaksi" class="table table-bordered table-hover table-sm text-center">
-        <thead>
-            <tr>
-                <th></th>
-                <th>NAMA</th>
-                <th>DAFTAR</th>
-                <th>EXPIRED</th>
-                <th>ROLE</th>
-                <th>HARGA</th>
-            </tr>
-        </thead>
-        <tbody></tbody>
-    </table>
+    <div class="card">
+        <div class="card-body">
+            <table id="tabel-laporan-transaksi" class="table table-bordered table-hover table-sm text-center">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>NAMA</th>
+                        <th>DAFTAR</th>
+                        <th>EXPIRED</th>
+                        <th>ROLE</th>
+                        <th>HARGA</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
 @endsection
 
 @section('script1')
