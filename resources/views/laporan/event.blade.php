@@ -71,8 +71,7 @@
                         <th>BERAKHIR</th>
                     </tr>
                 </thead>
-                <tbody>
-                </tbody>
+                <tbody></tbody>
             </table>
         </div>
     </div>
