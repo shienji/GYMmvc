@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LayoutController extends Controller
 {
@@ -18,6 +19,8 @@ class LayoutController extends Controller
 
     public function adminPage()
     {
-        return view('layout.User_Admin_Profile');
+        $a = "Admin";
+        $admin = DB::table('user')->where("user_role", $a)->get();
+        return view('layout.User_Admin_Profile')->with("admin", $admin);
     }
 }
