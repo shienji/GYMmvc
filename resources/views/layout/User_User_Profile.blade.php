@@ -1,14 +1,4 @@
 @extends('layout.User_Master')
-
-@section('stylesheet1')
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
-@endsection
-
 @section('konten')
     <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">
@@ -38,7 +28,7 @@
                         <!-- Profile Image -->
                         <div class="card card-primary card-outline">
                             <div class="card-body box-profile">
-                                @foreach ($admin as $c)
+                                @foreach ($user as $c)
                                     <h3 class="profile-username text-center">{{ $c->user_nama }}</h3>
                                     <p class="text-muted text-center">{{ $c->user_role }}</p>
                                     <ul class="list-group list-group-unbordered mb-3">
@@ -111,7 +101,7 @@
                                     <div class="active tab-pane" id="profile">
 
                                         <div class="card-body">
-                                            @foreach ($admin as $d)
+                                            @foreach ($user as $d)
                                                 <strong>Email</strong>
 
                                                 <p class="text-muted">{{ $d->user_email }}</p>
@@ -158,7 +148,7 @@
                                     </div>
                                     <div class="tab-pane" id="settings">
                                         <form class="form-horizontal">
-                                            @foreach ($admin as $e)
+                                            @foreach ($user as $e)
                                                 <div class="form-group row">
                                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                                     <div class="col-sm-10">

@@ -23,4 +23,10 @@ class LayoutController extends Controller
         $admin = DB::table('user')->where("user_role", $a)->get();
         return view('layout.User_Admin_Profile')->with("admin", $admin);
     }
+    public function userPage()
+    {
+        $u = "Gold";
+        $user = DB::table('user')->where("user_role", $u)->get();
+        return view('layout.User_User_Profile')->with("user", $user);
+    }
 }

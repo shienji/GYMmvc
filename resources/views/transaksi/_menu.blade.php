@@ -15,7 +15,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="#" class="nav-link side-trans-vdashboard">
+            <a href="{{ route('layout-userpage') }}" class="nav-link side-trans-vdashboard">
                 <i class="far fa-circle nav-icon  text-secondary"></i>
                 <p>User Page</p>
             </a>
