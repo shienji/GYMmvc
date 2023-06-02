@@ -17,6 +17,7 @@ Route::get('/contact', function () {
 Route::prefix("/user")->group(function () {
     Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
     Route::get('/register', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
+    Route::get('/admin', [LayoutController::class, 'adminPage'])->name("layout-adminpage");
 });
 //Route::get('posts', 'PostController@index')->middleware('admin');
 
