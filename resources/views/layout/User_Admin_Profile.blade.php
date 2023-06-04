@@ -47,6 +47,13 @@
                                         </li>
                                     </ul>
                                 @endforeach
+                                {{-- <h3 class="profile-username text-center">{{ Auth::user()->user_nama }}</h3>
+                                    <p class="text-muted text-center">{{ Auth::user()->user_role }}</p>
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Member Since</b> <a class="float-right">{{ Auth::user()->created_at }}</a>
+                                        </li>
+                                    </ul> --}}
                                 <a href="#" class="btn btn-danger btn-block"><b>Logout</b></a>
                             </div>
                             <!-- /.card-body -->
@@ -174,10 +181,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="inputNIK" class="col-sm-2 col-form-label">NIK</label>
+                                                    <label for="inputNIK" class="col-sm-2 col-form-label">NIK (TIDAK BISA
+                                                        DIUBAH)</label>
                                                     <div class="col-sm-10">
-                                                        <input type="email" readonly class="form-control" id="inputNIK"
-                                                            value="{{ $e->user_nik }}">
+                                                        <input disabled type="email" readonly class="form-control"
+                                                            id="inputNIK" value="{{ $e->user_nik }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

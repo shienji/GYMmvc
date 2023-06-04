@@ -164,10 +164,11 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="inputNIK" class="col-sm-2 col-form-label">NIK</label>
+                                                    <label for="inputNIK" class="col-sm-2 col-form-label">NIK (TIDAK BISA
+                                                        DIUBAH)</label>
                                                     <div class="col-sm-10">
-                                                        <input type="email" readonly class="form-control" id="inputNIK"
-                                                            value="{{ $e->user_nik }}">
+                                                        <input disabled type="email" readonly class="form-control"
+                                                            id="inputNIK" value="{{ $e->user_nik }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">

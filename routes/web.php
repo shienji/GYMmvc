@@ -16,11 +16,12 @@ Route::get('/contact', function () {
 
 Route::prefix("/user")->group(function () {
     Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
+    Route::post('actionlogin', [LayoutController::class, 'actionlogin'])->name('actionlogin');
+    Route::get('actionlogout', [LayoutController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
     Route::get('/register', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
     Route::get('/admin', [LayoutController::class, 'adminPage'])->name("layout-adminpage");
     Route::get('/user', [LayoutController::class, 'userPage'])->name("layout-userpage");
 });
-//Route::get('posts', 'PostController@index')->middleware('admin');
 
 Route::prefix("/transaksi")->group(function () {
     Route::get('/', [TransaksiController::class, 'viewDash'])->name("trans-vdashboard");
