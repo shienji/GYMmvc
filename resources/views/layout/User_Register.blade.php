@@ -84,14 +84,14 @@
 <body class="hold-transition register-page">
     <div class="register-box">
         <div class="register-logo">
-            <a href="../../index2.html"><b>GYMMVC</b></a>
+            <a href="#"><b>GYMMVC</b></a>
         </div>
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Register a new membership</p>
-                <form action="../../index.html" method="post">
+                <form action="#" method="get">
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Nama">
+                        <input type="text" class="form-control" placeholder="Nama" name="user_nama">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-user"></span>
@@ -99,7 +99,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" class="form-control" placeholder="Email" name="user_email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" class="form-control" placeholder="Password" name="user_password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -115,11 +115,28 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Ketik Ulang Password">
+                        <input type="password" class="form-control" placeholder="Ketik Ulang Password"
+                            name="con_password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="input-group col-12">
+                    </div>
+                    <div class="card-body table-responsive pad">
+                        <p class="login-box-msg">Silahkan Pilih Tipe Member</p>
+                        <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
+                            <label class="btn bg-white">
+                                <input type="radio" name="gold" autocomplete="off"> Gold
+                            </label>
+                            <label class="btn bg-white">
+                                <input type="radio" name="silver" autocomplete="off"> Silver
+                            </label>
+                            <label class="btn bg-white">
+                                <input type="radio" name="bronze" autocomplete="off"> Bronze
+                            </label>
                         </div>
                     </div>
                     <div class="row">
@@ -140,7 +157,7 @@
                 </form>
                 <div class="social-auth-links text-center">
                     <p>- OR -</p>
-                    <a href="{{ Route("layout-loginpage") }}" class="btn btn-block btn-danger">
+                    <a href="{{ Route('layout-loginpage') }}" class="btn btn-block btn-danger">
                         Back to Login Page
                     </a>
                     {{-- <a href="#" class="btn btn-block btn-primary">

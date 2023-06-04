@@ -19,8 +19,14 @@ Route::prefix("/user")->group(function () {
     Route::post('/actionlogin', [LayoutController::class, 'actionlogin'])->name('actionlogin');
     Route::get('/actionlogout', [LayoutController::class, 'actionlogout'])->name('actionlogout');
     Route::get('/register', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
+    Route::post('/actionRegister', [LayoutController::class, 'actionRegister'])->name('layout-actionRegister');
     Route::get('/admin', [LayoutController::class, 'adminPage'])->name("layout-adminpage");
     Route::get('/user', [LayoutController::class, 'userPage'])->name("layout-userpage");
+
+    Route::prefix("/pendaftaran")->group(function () {
+        Route::get('/', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
+        Route::get('/add-user', [LayoutController::class, 'actionRegister'])->name('layout-adduser');
+    });
 });
 
 Route::prefix("/transaksi")->group(function () {

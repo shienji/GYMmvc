@@ -72,6 +72,13 @@ class LayoutController extends Controller
         return view('layout.User_Register');
     }
 
+    public function actionRegister(Request $request)
+    {
+        $user = $request->input('user_email');
+        $password = $request->input('user_password');
+        dd($user, $password);
+    }
+
     public function adminPage(request $request)
     {
         if ($request->session()->get('nama') == 'Admin') {
