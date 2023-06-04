@@ -16,8 +16,8 @@ Route::get('/contact', function () {
 
 Route::prefix("/user")->group(function () {
     Route::get('/login', [LayoutController::class, 'loginPage'])->name("layout-loginpage");
-    Route::post('actionlogin', [LayoutController::class, 'actionlogin'])->name('actionlogin');
-    Route::get('actionlogout', [LayoutController::class, 'actionlogout'])->name('actionlogout')->middleware('auth');
+    Route::post('/actionlogin', [LayoutController::class, 'actionlogin'])->name('actionlogin');
+    Route::get('/actionlogout', [LayoutController::class, 'actionlogout'])->name('actionlogout');
     Route::get('/register', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
     Route::get('/admin', [LayoutController::class, 'adminPage'])->name("layout-adminpage");
     Route::get('/user', [LayoutController::class, 'userPage'])->name("layout-userpage");

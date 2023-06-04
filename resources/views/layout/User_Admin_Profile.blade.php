@@ -45,6 +45,9 @@
                                         <li class="list-group-item">
                                             <b>Member Since</b> <a class="float-right">{{ $c->created_at }}</a>
                                         </li>
+                                        <li class="list-group-item">
+                                            <b>Status</b> <a class="float-right">{{ $c->user_status }}</a>
+                                        </li>
                                     </ul>
                                 @endforeach
                                 {{-- <h3 class="profile-username text-center">{{ Auth::user()->user_nama }}</h3>
@@ -54,7 +57,7 @@
                                             <b>Member Since</b> <a class="float-right">{{ Auth::user()->created_at }}</a>
                                         </li>
                                     </ul> --}}
-                                <a href="#" class="btn btn-danger btn-block"><b>Logout</b></a>
+                                <a href="{{ Route('actionlogout') }}" class="btn btn-danger btn-block"><b>Logout</b></a>
                             </div>
                             <!-- /.card-body -->
                         </div>
@@ -181,11 +184,12 @@
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="inputNIK" class="col-sm-2 col-form-label">NIK (TIDAK BISA
-                                                        DIUBAH)</label>
+                                                    <label for="inputNIK" class="col-sm-2 col-form-label">NIK</label>
                                                     <div class="col-sm-10">
-                                                        <input disabled type="email" readonly class="form-control"
-                                                            id="inputNIK" value="{{ $e->user_nik }}">
+                                                        <input type="number" class="form-control" id="inputNIK"
+                                                            value="{{ $e->user_nik }}"
+                                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                            type="number" maxlength="16" min="0">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -199,12 +203,15 @@
                                                 <div class="form-group row">
                                                     <label for="inputNohp" class="col-sm-2 col-form-label">No. HP</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="inputNohp"
-                                                            value="{{ $e->user_nohp }}">
+                                                        <input type="number" class="form-control" id="inputNohp"
+                                                            value="{{ $e->user_nohp }}"
+                                                            oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
+                                                            type="number" maxlength="16" min="0">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
-                                                    <label for="inputAlamat" class="col-sm-2 col-form-label">Alamat</label>
+                                                    <label for="inputAlamat"
+                                                        class="col-sm-2 col-form-label">Alamat</label>
                                                     <div class="col-sm-10">
                                                         <input type="text" class="form-control" id="inputAlamat"
                                                             value="{{ $e->user_alamat }}">
@@ -233,4 +240,14 @@
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+@endsection
+
+@section('script1')
+    <script>
+        var msg = '{{ Session::get('alert') }}';
+        var exist = '{{ Session::has('alert') }}';
+        if (exist) {
+            alert(msg);
+        }
+    </script>
 @endsection
