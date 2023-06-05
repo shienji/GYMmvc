@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
     {{-- <link rel="stylesheet" href="{{asset('/plugins/jquery-ui/jquery-ui.css') }}"> --}}
-    <link rel="stylesheet" href="{{asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{asset('/plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{asset('/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
 
     {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -19,48 +19,21 @@
 
 @section('konten')
     <div class="row">
-        <div class="col-lg-5 col-md-12">
-            <form class="form-horizontal" id="form-input" action="{{route('trans-veventsave')}}" method="POST">
-            @csrf
-            <div class="card card-secondary">
-                <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Tambah Event</h3>
-                        <div class="card-tools">
-                            <div class="btn-group" style="display: none;">
-                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" data-offset="-62">
-                                  <i class="fas fa-bars"></i>
-                                </button>
-                                <div class="dropdown-menu" role="menu">
-                                  <a href="#" data-toggle="modal" data-target="#modal-transaksi" class="dropdown-item" style="color:black">History Transaksi</a>
-                                  {{-- <a href="#" data-toggle="modal" data-target="#modal-event" class="dropdown-item" style="color:black">History Event</a> --}}
-                                </div>
-                            </div>
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
-                    <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
-                    <x-inputhcomp type="datesaja" label="Tgl Mulai" name="tglawal" ></x-inputcomp>
-                    <x-inputhcomp type="datesaja" label="Tgl Selesai" name="tglakhir" ></x-inputcomp>
-                </div>
-
-                <div class="card-footer">
-                    <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="submit" id="btnsubmit" class="btn btn-info float-right">Submit</button>
-                </div>
-            </div>
-            </form>
-        </div>
-
-        <div class="col-lg-7 col-md-12">
+        <div class="col-12">
             <div class="card card-secondary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
                         <h3 class="card-title">List Event</h3>
                         <div class="card-tools">
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" data-offset="-62">
+                                  <i class="fas fa-bars"></i>
+                                </button>
+                                <div class="dropdown-menu" role="menu">
+                                  <a href="#" data-toggle="modal" data-target="#modal-addevent" class="dropdown-item" style="color:black">Add Event</a>
+                                  <a href="#" data-toggle="modal" data-target="#modal-regevent" class="dropdown-item" style="color:black">Register Event</a>
+                                </div>
+                            </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
@@ -73,7 +46,8 @@
                                 <th>Nama</th>
                                 <th>Tgl Mulai</th>
                                 <th>Tgl Berakhir</th>
-                                <th>Peserta</th>
+                                <th>Koordinator</th>
+                                <th>Keterangan</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -88,53 +62,86 @@
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="card card-secondary">
-                <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Registrasi Event</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-                <form action="{{route('trans-veventsavereg')}}" method="POST">
-                    @csrf
-                <div class="card-body">
-                    <div class="form-group row">
-                        <label for="role" class="col-sm-3 col-form-label">Nama Event</label>
-                        <div class="col-sm-9">
-                            <select class="custom-select form-control-border border-width-2" id="nm_event" name="nm_event">
-                                <option value=""></option>
-                                @foreach ($vevent as $i)
-                                    <option value="{{$i->event_id}}" >{{$i->event_nama}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="role" class="col-sm-3 col-form-label">Nama Peserta</label>
-                        <div class="col-sm-9">
-                            <select class="custom-select form-control-border border-width-2" id="nm_member" name="nm_member">
-                                <option value=""></option>
-                                @foreach ($vmember as $i)
-                                    <option value="{{$i->user_id}}" >{{$i->user_nama}}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
-                </div>
 
-                
-                <div class="card-footer">
-                    <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="submit" id="btnsubmitreg" class="btn btn-info float-right">Submit</button>
-                </div>
-                </form>
+    <div class="modal fade" id="modal-addevent">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add Event</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+
+            <form class="form-horizontal" id="form-input" action="{{route('trans-veventsave')}}" method="POST">
+            @csrf
+            <div class="modal-body">
+                <x-inputhcomp type="hidden" label="event_id" name="event_id" ></x-inputcomp>
+                <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
+                <x-inputhcomp type="text" label="Nama" name="nama" ></x-inputcomp>
+                <x-inputhcomp type="datesaja" label="Tgl Mulai" name="tglawal" ></x-inputcomp>
+                <x-inputhcomp type="datesaja" label="Tgl Selesai" name="tglakhir" ></x-inputcomp>
+                <x-inputhcomp type="text" label="Koordinator" name="eventby" ></x-inputcomp>
+            </div>
+            
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btnsubmit" class="btn btn-info float-right">Save</button>
+            </div>
+            </form>
+
+          </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modal-regevent">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Add Event</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <form class="form-horizontal" id="form-input" action="{{route('trans-veventsavereg')}}" method="POST">                
+            @csrf
+            <div class="modal-body">
+
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Nama Event</label>
+                    <div class="col-sm-9">
+                        <select class="custom-select form-control-border border-width-2" id="nm_event" name="nm_event">
+                            <option value="" value2=""></option>
+                            @foreach ($vevent as $i)
+                                <option value="{{$i->event_id}}" value2="{{$i->event_by}}" >{{$i->event_nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+                <x-inputhcomp type="text" label="Koordinator" name="event_by" readonly ></x-inputcomp>
+                <div class="form-group row">
+                    <label class="col-sm-3 col-form-label">Nama Peserta</label>
+                    <div class="col-sm-9">
+                        <select class="custom-select form-control-border border-width-2" id="nm_member" name="nm_member">
+                            <option value=""></option>
+                            @foreach ($vmember as $i)
+                                <option value="{{$i->user_id}}" >{{$i->user_nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="submit" id="btnsubmitreg" class="btn btn-info float-right">Save</button>
+            </div>
+            </form>
+
+          </div>
+        </div>
+    </div>
+
     <div class="modal fade" id="modal-event">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">

@@ -180,33 +180,38 @@ class DatabaseSeeder extends Seeder
 
         //event
         DB::table('event')->insert([
-            'event_nama' => "Lompat Tali",
+            'event_nama' => "Lompat Indah",
             'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-29 12:00:00'),
             'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-25 01:00:00'),
+            'event_by' => "Panitia",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('event')->insert([
             'event_nama' => "Renang",
             'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-30 09:00:00'),
             'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-01 01:00:00'),
+            'event_by' => "Panitia",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('event')->insert([
             'event_nama' => "Lari Marathon",
             'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-29 01:00:00'),
             'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-15 01:00:00'),
+            'event_by' => "Panitia",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('event')->insert([
-            'event_nama' => "Tenggelam",
+            'event_nama' => "Bakar Karbo Yes..!!",
             'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-25 06:00:00'),
             'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-07-01 01:00:00'),
+            'event_by' => "Panitia",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
         DB::table('event')->insert([
-            'event_nama' => "Balap Karung",
+            'event_nama' => "Balap Kurangi Lemak",
             'event_start' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-05-30 09:00:00'),
             'event_end' => Carbon::createFromFormat("Y-m-d H:i:s",'2023-06-11 01:00:00'),
+            'event_by' => "Panitia",
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 

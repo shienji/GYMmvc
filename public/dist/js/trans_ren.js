@@ -1,6 +1,6 @@
 $(function () {
     $(".card-tools .btn-group").hide();
-    setInterval(updateTime,1000);
+    // setInterval(updateTime,1000);
     loadListNewMember("#tabel_reg");
     loadListHisMember("#tabel_history",0);
     loadListEventMember("#tabel_event",0);
@@ -26,6 +26,9 @@ $(function () {
     });
     $("#modal-transaksi").on("hidden.bs.modal",function(){        
         location.reload();
+    });
+    $("#modal-renewal").on("hidden.bs.modal",function(){
+        document.getElementById("form-input").reset();
     });
 
     function loadAwal(){
@@ -131,31 +134,36 @@ $(function () {
                 },
                 columns: [{
                         "data": "transaksi_daftar",
-                        "width": "15%"                        
+                        "width": "10%"
                     }, {
                         "data": "user_nama",
+                        "width": "10%"           
+                    }, {
+                        "data": "user_email",
                         "width": "8%"
                     }, {
                         "data": "user_nohp",
                         "width": "15%"
                     }, {
+                        "data": "user_alamat",
+                        "width": "5%"
+                    }, {
                         "data": "user_role",
                         "width": "5%"
                     }, {
-                        "data": "user_alamat",
-                        "visible": false
-                    }, {
-                        "data": "user_email",
-                        "visible": false
+                        "data": "transaksi_expired",
+                        "width": "8%"
+                    },{
+                        "data": null,
+                        "width": "8%",
+                        "className": "center",
+                        "defaultContent": "<div class='row'> <button class='btn' name='btnrenewal' data-toggle='modal' data-target='#modal-renewal'> <i class='fa fa-pen'></i> </button> <button class='btn' name='btnhistory' data-toggle='modal' data-target='#modal-transaksi'> <i class='fa fa-trash'></i> </button>  </div>"
                     }, {
                         "data": "user_tgllahir",
                         "visible": false
                     }, {
                         "data": "user_nik",
-                        "visible": false
-                    }, {
-                        "data": "transaksi_expired",
-                        "visible": false
+                        "visible": false                    
                     }, {
                         "data": "user_id",
                         "visible": false
@@ -175,45 +183,52 @@ $(function () {
                 ]
             });
         
-            $(namanya + ' tbody').on('click', 'tr', function () {
+            $(namanya + ' tbody').on('click', 'td button', function (e) {            
                 resetClass();
-                data = nmTabel.row(this).data();
-                xtglsekarang=moment().format("YYYY-MM-DD");
-                xtglexpiredold=moment(data.transaksi_expired).format("YYYY-MM-DD");
-                xcreated_at=moment(data.created_at).format("YYYY-MM-DD");
+                indexRow=$(this).closest('tr');
+                data = nmTabel.row(indexRow).data();
+                // data = nmTabel.row(this).data();
+                if ($(this).attr("name")=='btnrenewal'){
+                    xtglsekarang=moment().format("YYYY-MM-DD");
+                    xtglexpiredold=moment(data.transaksi_expired).format("YYYY-MM-DD");
+                    xcreated_at=moment(data.created_at).format("YYYY-MM-DD");
 
-                xusia =Math.abs(moment(xtglsekarang).diff(data.user_tgllahir,'year'))+" Tahun";
-                xusiam =Math.abs(moment(xtglsekarang).diff(data.created_at,'month'))+" Bulan";
-                xusiakad=moment(xtglexpiredold).diff(xtglsekarang,'month');
-                xusiak =(xusiakad)+" Bulan";
+                    xusia =Math.abs(moment(xtglsekarang).diff(data.user_tgllahir,'year'))+" Tahun";
+                    xusiam =Math.abs(moment(xtglsekarang).diff(data.created_at,'month'))+" Bulan";
+                    xusiakad=moment(xtglexpiredold).diff(xtglsekarang,'month');
+                    xusiak =(xusiakad)+" Bulan";
 
-                $('#trans_id').val(data.transaksi_id);
-                $('#user_id').val(data.user_id);
-                $('#created_at').val(xcreated_at);
-                $('#email').val(data.user_email);
-                $('#nama').val(data.user_nama);
-                $('#nohp').val(data.user_nohp);
-                $('#nik').val(data.user_nik);
-                $('#tgllahir').val(data.user_tgllahir);
-                $('#alamat').val(data.user_alamat);
-                $('#role').val(data.user_role);
-                $('#tglexpiredold').val(xtglexpiredold);
-                
-                $('#usia').val(xusia);
-                $('#usiamember').val(xusiam);
-                $('#usiakadaluarsa').val(xusiak);
+                    $('#trans_id').val(data.transaksi_id);
+                    $('#user_id').val(data.user_id);
+                    $('#created_at').val(xcreated_at);
+                    $('#email').val(data.user_email);
+                    $('#nama').val(data.user_nama);
+                    $('#nohp').val(data.user_nohp);
+                    $('#nik').val(data.user_nik);
+                    $('#tgllahir').val(data.user_tgllahir);
+                    $('#alamat').val(data.user_alamat);
+                    $('#role').val(data.user_role);
+                    $('#tglexpiredold').val(xtglexpiredold);
+                    
+                    $('#usia').val(xusia);
+                    $('#usiamember').val(xusiam);
+                    $('#usiakadaluarsa').val(xusiak);
 
-                if(xusiakad<=0){
-                    $('#usiakadaluarsa').addClass( "is-invalid" );
+                    if(xusiakad<=0){
+                        $('#usiakadaluarsa').addClass( "is-invalid" );
+                    }else{
+                        $('#usiakadaluarsa').addClass( "is-valid" );
+                    }
+                    $('#role').addClass( "is-warning" );
+                    $('#nohp').addClass( "is-warning" );
+                    $('#tglexpiredold').addClass( "is-warning" );
+                    $('#role').trigger("change");
+
+                    // $(".card-tools .btn-group").show();
                 }else{
-                    $('#usiakadaluarsa').addClass( "is-valid" );
+                    $('#user_id').val(data.user_id);                                        
                 }
-                $('#role').addClass( "is-warning" );
-                $('#nohp').addClass( "is-warning" );
-                $('#tglexpiredold').addClass( "is-warning" );
-                $('#role').trigger("change");
 
-                $(".card-tools .btn-group").show();
             });         
         }
     }
