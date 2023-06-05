@@ -292,28 +292,46 @@ $(function () {
             $(namanya + ' tbody').on('click', 'td input:button', function (e) {
                 indexRow=$(this).closest('tr');
                 data = nmTabel2.row(indexRow).data();
-                xtglsekarang=moment().format("YYYY-MM-DD");                                
-                $.ajax({
-                    url: xurldel,
-                    type: 'DELETE',
-                    data:{
-                        'id': data.transaksi_id,
-                        'userid': data.user_id,
-                        '_token': $('#tokennya').val(),
-                    },
-                    success: function(result) {
-                        if(result=="success"){
-                            nmTabel2.ajax.reload();
-                            $("form").trigger('reset');
-                        }
-                    },
-                    error:function(result) {
-                        alert(JSON.stringify(result));
+                xtglsekarang=moment().format("YYYY-MM-DD");
+
+                Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        $.ajax({
+                            url: xurldel,
+                            type: 'DELETE',
+                            data:{
+                                'id': data.transaksi_id,
+                                'userid': data.user_id,
+                                '_token': $('#tokennya').val(),
+                            },
+                            success: function(result) {
+                                if(result=="success"){
+                                    nmTabel2.ajax.reload();
+                                    $("form").trigger('reset');
+                                    Swal.fire(
+                                        'Deleted!',
+                                        'Your file has been deleted.',
+                                        'success'
+                                    );
+                                }else{
+                                    alert(JSON.stringify(result));
+                                }
+                            },
+                            error:function(result) {
+                                alert(JSON.stringify(result));
+                            }
+                        });    
                     }
                 });
             });
-
-            
         }
     }
 

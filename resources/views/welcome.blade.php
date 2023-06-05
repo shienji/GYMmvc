@@ -8,17 +8,12 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free Website Template" name="keywords">
     <meta content="Free Website Template" name="description">
-
-    <!-- Favicon -->
-    <link href="{{ asset('dist/img/favicon.ico')}}" rel="icon">
-
-    <!-- Font Awesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
-
-    <!-- Flaticon Font -->
-    <link href="{{ asset('dist/lib/flaticon/font/flaticon.css') }}" rel="stylesheet">
-
-    <!-- Customized Bootstrap Stylesheet -->
+    
+    <link href="{{ asset('dist/img/favicon.ico')}}" rel="icon">    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">    
+    <link rel="stylesheet" href="{{ asset('plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('plugins/toastr/toastr.min.css')}}">
+    <link href="{{ asset('dist/lib/flaticon/font/flaticon.css') }}" rel="stylesheet">    
     <link href="{{ asset('dist/css/style.min.css') }}" rel="stylesheet">
 </head>
 
@@ -539,30 +534,31 @@
                 <div class="col-md-6 bg-secondary py-5">
                     <div class="py-5 px-3">
                         <h1 class="mb-4 text-white">Calculate your BMI</h1>
-                        <form>
+                        <form action="#" method="POST" id="formbmi">
+                            @csrf
                             <div class="form-row">
                                 <div class="col form-group">
-                                    <input type="text" class="form-control form-control-lg bg-dark text-white" placeholder="Weight (KG)">
+                                    <input type="number" id="bmiw" name="bmiw" class="form-control form-control-lg bg-dark text-white" placeholder="Weight (KG)" value="">                                    
                                 </div>
                                 <div class="col form-group">
-                                    <input type="text" class="form-control form-control-lg bg-dark text-white" placeholder="Height (CM)">
+                                    <input type="number" id="bmih" name="bmih" class="form-control form-control-lg bg-dark text-white" placeholder="Height (CM)" value="">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col form-group">
-                                    <input type="text" class="form-control form-control-lg bg-dark text-white" placeholder="Age">
+                                    <input type="number" id="bmiage" name="bmiage" class="form-control form-control-lg bg-dark text-white" placeholder="Age" value="">
                                 </div>
                                 <div class="col form-group">
-                                    <select class="custom-select custom-select-lg bg-dark text-muted">
+                                    <select class="custom-select custom-select-lg bg-dark text-muted"  id="bmigender" name="bmigender">
                                         <option>Gender</option>
-                                        <option>Mal</option>
-                                        <option>Female</option>
+                                        <option value="M">Male</option>
+                                        <option value="F">Female</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="col">
-                                    <input type="button" class="btn btn-lg btn-block btn-dark border-light"
+                                    <input type="button" id="btnbmi" class="btn btn-lg btn-block btn-dark border-light"
                                         value="Calculate Now">
                                 </div>
                             </div>
@@ -824,6 +820,9 @@
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+    <script src="{{ asset('plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('plugins/sweetalert2/sweetalert2.min.js')}}"></script>
+    <script src="{{ asset('plugins/toastr/toastr.min.js')}}"></script> 
     <script src="{{ asset('dist/lib/easing/easing.min.js') }}"></script>
     <script src="{{ asset('dist/lib/waypoints/waypoints.min.js') }}"></script>
 
@@ -833,6 +832,7 @@
 
     {{-- <!-- Template Javascript --> --}}
     <script src="{{ asset('dist/js/main.js') }}"></script>
+    <script src="{{ asset('dist/js/welcome.js') }}"></script>    
 </body>
 
 </html>
