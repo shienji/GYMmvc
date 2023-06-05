@@ -33,11 +33,12 @@ Route::prefix("/transaksi")->group(function () {
     Route::get('/member/get', [TransaksiController::class, 'getDataNewMember'])->name("trans-vdataregister");
     Route::get('/member/getrenewal', [TransaksiController::class, 'getDataRenewal'])->name("trans-vdatarenewal");
     Route::get('/member/getevent', [TransaksiController::class, 'getDataEvent'])->name("trans-vdataevent");
+    Route::get('/cekpage', [TransaksiController::class, 'cekPage'])->name("trans-cekpage");
 
     Route::prefix("/login")->group(function () {
-        Route::get('/', [TransaksiController::class, 'viewLogin'])->name("trans-vlogin");
-        Route::post('/save', [TransaksiController::class, 'viewLogin'])->name("trans-vloginsave");
-        Route::get('/profile', [TransaksiController::class, 'viewLoginProfile'])->name("trans-vloginprofile");
+        // Route::get('/', [TransaksiController::class, 'viewLogin'])->name("trans-vlogin");
+        // Route::post('/save', [TransaksiController::class, 'viewLogin'])->name("trans-vloginsave");
+        // Route::get('/profile', [TransaksiController::class, 'viewLoginProfile'])->name("trans-vloginprofile");
         Route::get('/event', [TransaksiController::class, 'viewLoginEvent'])->name("trans-vloginevent");        
     });
 
@@ -60,8 +61,8 @@ Route::prefix("/transaksi")->group(function () {
     });
 
     Route::prefix("/jual")->group(function () {
-        Route::get('/', [TransaksiController::class, 'viewJual'])->name("trans-vjual");
-        Route::post('/save', [TransaksiController::class, 'viewJualSave'])->name("trans-vjualsave");
+        // Route::get('/', [TransaksiController::class, 'viewJual'])->name("trans-vjual");
+        // Route::post('/save', [TransaksiController::class, 'viewJualSave'])->name("trans-vjualsave");
     });
     Route::get('/flow', [TransaksiController::class, 'viewFlow'])->name("trans-vflow");
 

@@ -12,12 +12,16 @@ class TransaksiController extends Controller
         // return view('transaksi.dashboard');
         return redirect()->route('trans-vregister');
     }
+    public function cekPage(){
+        return view('transaksi.cek');
+    }
+
     // User event
     
     public function viewLoginEvent(){
         // $vjenis=DB::table('role')->select("role_id","role_nama","role_harga")->where("deleted_at",null)->get();
         $vevent=DB::table('event')->where("deleted_at",null)->where("event_end",">=",Carbon::now())->get();
-        $vmember=DB::table('user')->where("user_status","Active")->get();
+        $vmember=DB::table('user')->where("user_status","Active")->where("user_role","!=","Admin")->get();
         return view('transaksi.userevent')->with("vevent",$vevent)->with('vmember',$vmember);
     }
 
@@ -53,8 +57,10 @@ class TransaksiController extends Controller
 
         $cek3=DB::table("user")->where("user_id",$r->user_id)
         ->update(['user_status' => 'Active',"created_at"=>$tglsekarang]);
-
+        
+        // session()->flash('success', "Data telah disimpan");
         return back()->with("success","Data telah disimpan");
+        // return redirect()->route('trans-cekpage');
     }
 
     // Renewal
@@ -141,7 +147,8 @@ class TransaksiController extends Controller
         // from event v where v.deleted_at is null");
 
         $veventd=DB::table('eventd')->where("deleted_at",null)->get();
-        $vmember=DB::table('user')->where("user_status","Active")->get();
+        // $vmember=DB::table('user')->where("user_status","Active")->get();
+        $vmember=DB::table('user')->where("user_status","Active")->where("user_role","!=","Admin")->get();
         
         return view('transaksi.event')->with("vevent",$vevent)->with("vmember",$vmember);
     }
@@ -189,6 +196,7 @@ class TransaksiController extends Controller
                 ]);   
             }
         }
+
         return back()->with("success","Data telah disimpan");
     }    
 
