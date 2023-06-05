@@ -70,7 +70,7 @@
                 <nav class="mt-2">
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
-                        @include('layout.User_User_Menu')
+                        @include('layout.User_Admin_Menu')
                     </ul>
                 </nav>
             </div>

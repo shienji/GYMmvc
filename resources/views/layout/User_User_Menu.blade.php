@@ -24,7 +24,7 @@
 </li> --}}
 
 {{-- MASTER --}}
-<li class="nav-item menu-open">
+{{-- <li class="nav-item menu-open">
     <a href="#" class="nav-link side-trans">
         <i class="nav-icon fas fa-money-check"></i>
         <p>
@@ -64,9 +64,9 @@
             </a>
         </li>
     </ul>
-</li>
+</li> --}}
 
-{{-- TRANSAKSI --}}
+{{-- TRANSAKSI
 <li class="nav-item menu-open">
     <a href="#" class="nav-link side-trans">
         <i class="nav-icon fas fa-money-check"></i>
@@ -82,7 +82,7 @@
                 <p>Dashboard</p>
             </a>
         </li> --}}
-        <li class="nav-item">
+{{-- <li class="nav-item">
             <a href="{{ route('trans-vregister') }}" class="nav-link side-trans-vregister">
                 <i class="far fa-circle nav-icon  text-warning"></i>
                 <p>Pembayaran Anggota</p>
@@ -101,10 +101,10 @@
             </a>
         </li>
     </ul>
-</li>
+</li> --}}
 
 {{-- LAPORAN --}}
-<li class="nav-item menu-open">
+{{-- <li class="nav-item menu-open">
     <a href="#" class="nav-link side-trans">
         <i class="nav-icon fas fa-chart-pie"></i>
         <p>
@@ -138,7 +138,7 @@
             </a>
         </li>
     </ul>
-</li>
+</li> --}}
 {{-- JANGAN LUPA DI HIDE BAGIAN INI --}}
 {{-- LOGIN REGISTER --}}
 {{-- <li class="nav-item menu-open">
