@@ -74,7 +74,7 @@ Route::prefix("/transaksi")->group(function(){
     // });
 
     // chat
-    
+
 });
 
 Route::prefix("/laporan")->group(function(){
@@ -97,6 +97,7 @@ Route::prefix("/laporan")->group(function(){
     Route::get('/event/data',[LaporanController::class, 'data_event'])->name('data-event');
 });
 
+
 Route::prefix("/master")->group(function(){
     Route::get('/',[MasterController::class, 'home_master'])->name("home_master");
     Route::prefix("/role")->group(function(){
@@ -109,19 +110,22 @@ Route::prefix("/master")->group(function(){
     Route::prefix("/peralatan")->group(function(){
         Route::get('/',[MasterController::class, 'peralatan_master'])->name("peralatan_master");
         Route::post('/',[MasterController::class, 'peralatan_masterpost'])->name("peralatan_masterpost");
-        Route::post('/delete',[MasterController::class, 'peralatan_masterdel'])->name("peralatan_masterdel");
-        Route::get('/get',[MasterController::class, 'getDataPeralatan'])->name("getDataPeralatan");
+        Route::get('/delete/{id}',[MasterController::class, 'peralatan_masterdel'])->name("peralatan_masterdel");
+        Route::get('/get/{id}',[MasterController::class, 'getDataPeralatan'])->name("getDataPeralatan");
+        Route::get('/list',[MasterController::class, 'peralatan_master_list'])->name("peralatan_master_list");
     });
-    Route::prefix("/Pelatih")->group(function(){
+    Route::prefix("/pelatih")->group(function(){
         Route::get('/',[MasterController::class, 'pelatih_master'])->name("pelatih_master");
         Route::post('/',[MasterController::class, 'pelatih_masterpost'])->name("pelatih_masterpost");
-        Route::post('/delete',[MasterController::class, 'pelatih_masterdel'])->name("pelatih_masterdel");
-        Route::get('/get',[MasterController::class, 'getDataPelatih'])->name("getDataPelatih");
+        Route::get('/delete/{id}',[MasterController::class, 'pelatih_masterdel'])->name("pelatih_masterdel");
+        Route::get('/get/{id}',[MasterController::class, 'getDataPelatih'])->name("getDataPelatih");
+        Route::get('/list',[MasterController::class, 'pelatih_master_list'])->name("pelatih_master_list");
     });
     Route::prefix("/fasilitas")->group(function(){
         Route::get('/',[MasterController::class, 'fasilitas_master'])->name("fasilitas_master");
         Route::post('/',[MasterController::class, 'fasilitas_masterpost'])->name("fasilitas_masterpost");
-        Route::post('/delete',[MasterController::class, 'fasilitas_masterdel'])->name("fasilitas_masterdel");
-        Route::get('/get',[MasterController::class, 'getDataFasilitas'])->name("getDataFasilitas");
+        Route::get('/delete/{id}',[MasterController::class, 'fasilitas_masterdel'])->name("fasilitas_masterdel");
+        Route::get('/edit/{id}',[MasterController::class, 'getDataFasilitas'])->name("getDataFasilitas");
+        Route::get('/list',[MasterController::class, 'fasilitas_master_list'])->name("fasilitas_master_list");
     });
 });
