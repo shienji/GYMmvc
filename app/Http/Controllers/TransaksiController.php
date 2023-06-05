@@ -178,6 +178,19 @@ class TransaksiController extends Controller
 
         return back()->with("success","Data telah disimpan");
     }    
+
+    public function viewEventDelPeserta(Request $r){        
+        if(isset($r->event_id)){
+            $event_id=$r->event_id;
+            $cek1=DB::table("event")->where("event_id",$event_id)
+            ->update(["deleted_at"=>Carbon::now()->format('Y-m-d H:i:s')]);
+
+            $pesan="Failed";
+            if($cek1){$pesan="success";}
+            return $pesan;
+        }
+    }    
+    
     public function getDataPeserta(Request $r){
         $cek1=$r->validate([
             'event_id' => 'required',            

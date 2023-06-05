@@ -18,6 +18,7 @@
 @endif
 
 @section('konten')
+    <input type="hidden" id="tokennya" name="tokennya" value="{{ csrf_token() }}">
     <div class="row">
         <div class="col-12">
             <div class="card card-secondary">
@@ -40,7 +41,7 @@
                 </div>
 
                 <div class="card-body">
-                    <table id="tabel_reg" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vdataevent')}}">
+                    <table id="tabel_reg" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vdataevent')}}" dataDel="{{route('trans-veventpesertadel')}}">
                         <thead>
                             <tr>
                                 <th>Nama</th>

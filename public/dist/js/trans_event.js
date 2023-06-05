@@ -143,6 +143,42 @@ $(function () {
                     $('#event_id').val(data.event_id);
                     $('#nama').val(data.event_nama);
                     $('#eventby').val(data.event_by);
+                }else if($(this).attr("name")=='btnhapus'){
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                      }).then((result) => {
+                        if (result.isConfirmed) {
+                            xurldel=$("#tabel_reg").attr('dataDel');                            
+                            xdatadel={
+                                'event_id': data.event_id,
+                                '_token': $('#tokennya').val(),
+                                }
+                            $.ajax({
+                                url: xurldel,
+                                type: 'DELETE',
+                                data: xdatadel,
+                                success: function(result) {                                    
+                                    if(result=="success"){
+                                        Swal.fire(
+                                            'Deleted!',
+                                            'Your file has been deleted.',
+                                            'success'
+                                        );
+                                        nmTabel.ajax.reload();
+                                    }
+                                },
+                                error:function(result) {
+                                    alert(JSON.stringify(result));
+                                }
+                            });
+                        }
+                      })
                 }
             });
         }

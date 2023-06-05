@@ -57,7 +57,9 @@ Route::prefix("/transaksi")->group(function(){
         Route::post('/save',[TransaksiController::class, 'viewEventSave'])->name("trans-veventsave");
         Route::post('/regsave',[TransaksiController::class, 'viewEventSaveReg'])->name("trans-veventsavereg");
         Route::get('/detpeserta',[TransaksiController::class, 'getDataPeserta'])->name("trans-veventpeserta");
+        Route::delete('/delpeserta',[TransaksiController::class, 'viewEventDelPeserta'])->name("trans-veventpesertadel");
     });
+
     Route::prefix("/jual")->group(function(){
         Route::get('/',[TransaksiController::class, 'viewJual'])->name("trans-vjual");
         Route::post('/save',[TransaksiController::class, 'viewJualSave'])->name("trans-vjualsave");
