@@ -12,6 +12,14 @@ class TransaksiController extends Controller
         // return view('transaksi.dashboard');
         return redirect()->route('trans-vregister');
     }
+    // User event
+    
+    public function viewLoginEvent(){
+        // $vjenis=DB::table('role')->select("role_id","role_nama","role_harga")->where("deleted_at",null)->get();
+        $vevent=DB::table('event')->where("deleted_at",null)->where("event_end",">=",Carbon::now())->get();
+        $vmember=DB::table('user')->where("user_status","Active")->get();
+        return view('transaksi.userevent')->with("vevent",$vevent)->with('vmember',$vmember);
+    }
 
     // Register
     public function viewRegister(){
@@ -170,12 +178,17 @@ class TransaksiController extends Controller
             'nm_member' => 'required',
             'nm_event' => 'required',            
         ]);
-
-        $cek2=DB::table("eventd")->insert(
-            ["event_id"=>$r->nm_event,
-            "user_id"=>$r->nm_member,            
-        ]);
-
+        $event=(object)$r->nm_event;
+        foreach ($event as $k => $v) {
+            $cek2=DB::table("eventd")
+            ->where("deleted_at",null)->where("event_id",$v)->where("user_id",$r->nm_member)->first();            
+            if(!$cek2->event_id){
+                $cek3=DB::table("eventd")->insert(
+                    ["event_id"=>$v,
+                    "user_id"=>$r->nm_member,
+                ]);   
+            }
+        }
         return back()->with("success","Data telah disimpan");
     }    
 

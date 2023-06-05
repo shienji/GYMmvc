@@ -832,7 +832,7 @@
 
     {{-- <!-- Template Javascript --> --}}
     <script src="{{ asset('dist/js/main.js') }}"></script>
-    <script src="{{ asset('dist/js/welcome.js') }}"></script>    
+    <script src="{{ asset('dist/js/welcome.js') }}"></script>
 </body>
 
 </html>
