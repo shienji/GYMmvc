@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="{{ asset('dist/css/ionicons.min.css') }}">
 
     @yield('stylesheet1')
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
+    <link rel="stylesheet" href="{{asset('/dist/css/style.chat.css')}}">    
     @yield('stylesheet2')
 </head>
 
@@ -40,7 +41,7 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
+                        <i class="fas fa-comment"></i>
                     </a>
                 </li>
             </ul>
@@ -100,6 +101,7 @@
         </div>
 
         <aside class="control-sidebar control-sidebar-dark">
+            @include('transaksi._chat')
         </aside>
 
         <footer class="main-footer">

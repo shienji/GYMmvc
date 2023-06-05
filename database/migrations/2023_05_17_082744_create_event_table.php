@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('event_nama')->nullable();
             $table->dateTime('event_start')->nullable();
             $table->dateTime('event_end')->nullable();
+            $table->string('event_by')->default("");
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();

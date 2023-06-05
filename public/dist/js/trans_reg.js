@@ -1,5 +1,4 @@
 $(function () {
-    setInterval(updateTime,1000);
     loadListNewMember("#tabel_reg");
     flashpesan("flashpesan");
     loadAwal();
@@ -10,7 +9,6 @@ $(function () {
         $('#tglexpiredold').removeClass( "is-warning" );
         $('#tglexpired').removeClass( "is-valid" );
         $('#totalbyr').removeClass( "is-valid" );
-
     });
     $("#jmlbulan").on("change", function(e) {        
         updateBayar();
@@ -19,6 +17,9 @@ $(function () {
         option = $('option:selected', this).attr('value2');
         $('#role_harga').val(option);        
         updateBayar();
+    });
+    $("#modal-register").on("hidden.bs.modal",function(){
+        document.getElementById("form-input").reset();
     });
 
     function loadAwal(){
@@ -86,22 +87,27 @@ $(function () {
                 },
                 columns: [{
                         "data": "created_at",
-                        "width": "15%"                        
+                        "width": "10%"
                     }, {
                         "data": "user_nama",
+                        "width": "15%"
+                    }, {
+                        "data": "user_email",
                         "width": "8%"
                     }, {
                         "data": "user_nohp",
-                        "width": "15%"
+                        "width": "8%"
+                    }, {
+                        "data": "user_alamat",
+                        "width": "10%"
                     }, {
                         "data": "user_role",
                         "width": "5%"
-                    }, {
-                        "data": "user_alamat",
-                        "visible": false
-                    }, {
-                        "data": "user_email",
-                        "visible": false
+                    },{
+                        "data": null,
+                        "width": "5%",
+                        "className": "center",
+                        "defaultContent": "<input type='button' data-toggle='modal' data-target='#modal-register' value='Approve' class='btn btn-success'>"
                     }, {
                         "data": "user_tgllahir",
                         "visible": false
@@ -118,16 +124,14 @@ $(function () {
                 columnDefs: [{
                         targets: 0,
                         render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
-                    },{
-                        targets: 6,
-                        render: $.fn.dataTable.render.moment( '', 'YYYY-MM-DD')
                     }
                 ]
                 
             });
         
-            $(namanya + ' tbody').on('click', 'tr', function () {
-                data = nmTabel.row(this).data();
+            $(namanya + ' tbody').on('click', 'td input:button', function (e) {
+                indexRow=$(this).closest('tr');
+                data = nmTabel.row(indexRow).data();               
                 $('#email').val(data.user_email);
                 $('#nama').val(data.user_nama);
                 $('#nohp').val(data.user_nohp);

@@ -127,9 +127,10 @@ class TransaksiController extends Controller
 
     // Event
     public function viewEvent(){
-        // $vevent=DB::table('event')->where("deleted_at",null)->get();
-        $vevent=DB::select("select v.*,(select count(user_id) from eventd as d where d.event_id=v.event_id) as totalpeserta 
-        from event v where v.deleted_at is null");
+        $vevent=DB::table('event')->where("deleted_at",null)->where("event_end",">=",Carbon::now())->get();
+        // $vevent=DB::select("select event.*,cast(CURRENT_DATE() as datetime) as tglsekarang from event where deleted_at is null and event_end>=CURRENT_DATE()");
+        // $vevent=DB::select("select v.*,(select count(user_id) from eventd as d where d.event_id=v.event_id) as totalpeserta 
+        // from event v where v.deleted_at is null");
 
         $veventd=DB::table('eventd')->where("deleted_at",null)->get();
         $vmember=DB::table('user')->where("user_status","Active")->get();
@@ -137,7 +138,7 @@ class TransaksiController extends Controller
         return view('transaksi.event')->with("vevent",$vevent)->with("vmember",$vmember);
     }
     public function getDataEvent(){
-        $data=DB::select("select v.*,(select count(user_id) from eventd as d where d.event_id=v.event_id) as totalpeserta 
+        $data=DB::select("select v.*,(select count(user_id) from eventd as d where d.event_id=v.event_id) as totalpeserta,current_date() as  tglsekarang
         from event v where v.deleted_at is null order by v.event_id desc ");
 
         return $data;
@@ -146,15 +147,22 @@ class TransaksiController extends Controller
         $cek1=$r->validate([
             'nama' => 'required',
             'valtglawal' => 'required',
-            'valtglakhir' => 'required'
+            'valtglakhir' => 'required',
+            'eventby'=>'required'
         ]);
-
-        $cek2=DB::table("event")->insert(
-            ["event_nama"=>$r->nama,
-            "event_start"=>$r->valtglawal,
-            "event_end"=>$r->valtglakhir
-        ]);
-
+        if($r->event_id=="" or $r->event_id<=0){
+            $cek2=DB::table("event")->insert(
+                ["event_nama"=>$r->nama,
+                "event_start"=>$r->valtglawal,
+                "event_end"=>$r->valtglakhir,
+                'event_by'=>$r->eventby
+            ]);
+        }else{
+            $cek2=DB::table('event')
+            ->where("event_id",$r->event_id)
+            ->update(['event_nama' => $r->nama,"event_start"=>$r->valtglawal,
+            'event_end' => $r->valtglakhir,"event_by"=>$r->eventby]);
+        }
         return back()->with("success","Data telah disimpan");
     }
     public function viewEventSaveReg(Request $r){
@@ -170,6 +178,19 @@ class TransaksiController extends Controller
 
         return back()->with("success","Data telah disimpan");
     }    
+
+    public function viewEventDelPeserta(Request $r){        
+        if(isset($r->event_id)){
+            $event_id=$r->event_id;
+            $cek1=DB::table("event")->where("event_id",$event_id)
+            ->update(["deleted_at"=>Carbon::now()->format('Y-m-d H:i:s')]);
+
+            $pesan="Failed";
+            if($cek1){$pesan="success";}
+            return $pesan;
+        }
+    }    
+    
     public function getDataPeserta(Request $r){
         $cek1=$r->validate([
             'event_id' => 'required',            

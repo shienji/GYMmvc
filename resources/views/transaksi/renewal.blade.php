@@ -12,29 +12,58 @@
 @section('konten')
     <input type="hidden" id="tokennya" name="tokennya" value="{{ csrf_token() }}">
     <div class="row">
-        <div class="col-lg-5 col-md-12">
-            <form class="form-horizontal" id="form-input" action="{{route('trans-vrensave')}}" method="POST">
-            @csrf
+        <div class="col-12">
             <div class="card card-secondary">
                 <div class="card-header border-0">
                     <div class="d-flex justify-content-between">
-                        <h3 class="card-title">Revewal</h3>
+                        <h3 class="card-title">List Member</h3>
                         <div class="card-tools">
-                            <div class="btn-group" style="display: none;">
-                                <button type="button" class="btn btn-tool dropdown-toggle" data-toggle="dropdown" data-offset="-62">
-                                  <i class="fas fa-bars"></i>
-                                </button>
-                                <div class="dropdown-menu" role="menu">
-                                  <a href="#" data-toggle="modal" data-target="#modal-transaksi" class="dropdown-item" style="color:black">History Transaksi</a>
-                                  {{-- <a href="#" data-toggle="modal" data-target="#modal-event" class="dropdown-item" style="color:black">History Event</a> --}}
-                                </div>
-                            </div>
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                         </div>
                     </div>
                 </div>
+
                 <div class="card-body">
-                    <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp>
+                    <table id="tabel_reg" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vdatarenewal')}}">
+                        <thead>
+                            <tr>
+                                <th>Tgl Daftar</th>
+                                <th>Nama</th>
+                                <th>Email</th>
+                                <th>Handphone</th>
+                                <th>Alamat</th>
+                                <th>Tipe</th>
+                                <th>Tgl Expired</th>
+                                <th>Action</th>
+                            </tr>                            
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>                    
+                </div>
+
+                <div class="card-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="modal fade" id="modal-renewal">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h4 class="modal-title">Data Anggota</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+
+                <form class="form-horizontal" id="form-input" action="{{route('trans-vrensave')}}" method="POST">
+                @csrf
+                <div class="modal-body">
+                    {{-- <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp> --}}
                     <x-inputhcomp type="hidden" label="user_id" name="user_id" readonly></x-inputcomp>
                     <x-inputhcomp type="hidden" label="trans_id" name="trans_id" readonly></x-inputcomp>
                     <x-inputhcomp type="text" label="NIK" name="nik" readonly></x-inputcomp>
@@ -108,52 +137,17 @@
                             <input type="text" name="tglexpired" id="tglexpired" class="form-control" value="" readonly >
                         </div>
                     </div>
-                    <x-inputhcomp type="text" label="Total" name="totalbyr" readonly></x-inputcomp>
+                    <x-inputhcomp type="text" label="Total" name="totalbyr" readonly></x-inputcomp>                
                 </div>
-
-                <div class="card-footer">
-                    <button type="reset" class="btn btn-default">Cancel</button>
-                    <button type="submit" class="btn btn-info float-right">Submit</button>
+                <div class="modal-footer justify-content-between">
+                    <button type="reset" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-info float-right">Save</button>
                 </div>
-            </div>
-            </form>    
-        </div>
-        
-
-        <div class="col-lg-7 col-md-12">
-            <div class="card card-secondary">
-                <div class="card-header border-0">
-                    <div class="d-flex justify-content-between">
-                        <h3 class="card-title">List Member</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-body">
-                    <table id="tabel_reg" class="table table-bordered table-hover" style="width:100%" dataLoad="{{route('trans-vdatarenewal')}}">
-                        <thead>
-                            <tr>
-                                <th>Tgl Daftar</th>                                
-                                <th>Nama</th>
-                                <th>Handphone</th>
-                                <th>Tipe</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            
-                        </tbody>
-                    </table>                    
-                </div>
-
-                <div class="card-footer">
-
-                </div>
+                </form>
             </div>
         </div>
     </div>
-    
+
     <div class="modal fade" id="modal-transaksi">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -172,7 +166,7 @@
                             <th>Jenis</th>
                             <th>Harga</th>
                             <th>Bulan</th>                            
-                            <th>Tgl Expired</th>                            
+                            <th>Tgl Expired</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -187,6 +181,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="modal-event">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
