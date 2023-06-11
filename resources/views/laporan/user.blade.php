@@ -25,7 +25,7 @@
                     </button>
                 </div>
             </div>
-            <div class="card-body" style="margin-bottom: -20px;">
+            <div class="card-body" style="margin-bottom: -10px;">
                 <div class="form-group row">
                     <div class="col-4 pt-1">
                         <label>ROLE</label>
@@ -78,9 +78,9 @@
 
     <div class="col-6">
         <div class="card">
-            <div class="card-header border-0">
+            <div class="card-header border-0 bg-gradient-info">
                 <h3 class="card-title pt-1">
-                    <i class="fas fa-filter mr-1"></i>
+                    <i class="fas fa-chart-pie mr-1"></i>
                     Chart
                 </h3>
                 <div class="card-tools">
