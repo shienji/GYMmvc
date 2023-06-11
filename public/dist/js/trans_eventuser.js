@@ -1,38 +1,33 @@
 $(function () {
-    setInterval(updateTime,1000);
-    $('#nm_fasilitas').select2({ dropdownAutoWidth: true, width: 'auto' });
-    loadListEvent("#tabel_reg");
-    loadListPeserta("#tabel_event",0);
+    $('#nm_event').select2();
+    // setInterval(updateTime,1000);
+    // loadListEvent("#tabel_reg");
+    // loadListPeserta("#tabel_event",0);
     flashpesan("flashpesan");
     loadAwal();
 
-    $("form").on( "reset", function(e) {
+    // $("form").on( "reset", function(e) {
 
-    });
-    $("form").on( "submit", function(e) {
+    // });
+    // $("form").on( "submit", function(e) {
 
-    });
+    // });
     $("#nm_event").on("change", function(e) {
         option = $('option:selected', this).attr('value2');
         $('#event_by').val(option);
     });
     
-    $("#modal-event").on("shown.bs.modal",function(){
-        uid=$('#modal_eventid').val();
-        xurl=$("#tabel_event").attr('dataLoad')+"?event_id="+uid;        
-        $('#tabel_event').DataTable().ajax.url(xurl).load();
-    });
-    $("#modal-addevent").on("hidden.bs.modal",function(){        
-        $("#form-input").trigger("reset");
-    });
+    // $("#modal-event").on("shown.bs.modal",function(){
+    //     uid=$('#modal_eventid').val();
+    //     xurl=$("#tabel_event").attr('dataLoad')+"?event_id="+uid;        
+    //     $('#tabel_event').DataTable().ajax.url(xurl).load();
+    // });
+    // $("#modal-addevent").on("hidden.bs.modal",function(){        
+    //     $("#form-input").trigger("reset");
+    // });
 
-    function loadAwal(){        
-        $('#tglawal').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
-        $('#tglakhir').datetimepicker({
-            format: 'YYYY-MM-DD'
-        });
+    function loadAwal(){
+        $('#nm_member').val();
     }
 
     function updateTime(){

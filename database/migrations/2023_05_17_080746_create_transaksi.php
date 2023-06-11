@@ -19,6 +19,9 @@ return new class extends Migration
             $table->string('transaksi_role')->nullable();
             $table->integer('transaksi_harga')->default(0);
             $table->integer('transaksi_bulan')->default(1);
+            $table->string('transaksi_bukti1')->nullable();
+            $table->string('transaksi_bukti2')->nullable();
+            $table->string('transaksi_bukti3')->nullable();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
             $table->timestamp('deleted_at')->nullable();

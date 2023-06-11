@@ -3,6 +3,9 @@
     <link rel="stylesheet" href="{{asset('/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-responsive/css/responsive.bootstrap4.min.css')}}">
     <link rel="stylesheet" href="{{asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css')}}">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.min.css" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/css/fileinput.min.css" media="all" rel="stylesheet" type="text/css" />
 @endsection
 
 @if(Session::has('success'))
@@ -50,6 +53,34 @@
         </div>
     </div>
     
+    <div class="modal fade" id="modal-bukti" style="z-index: 1600" dataLoad="{{ route('trans-vbukti') }}" dataImage="{{ asset("storage/upload/") }}">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Bukti Bayar</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <img id="transaksi_bukti1" src="https://via.placeholder.com/300/FFF000?text=1" class="img-fluid mb-2" alt="bukti"/>
+                        </div>
+                        <div class="col-4">
+                            <img  id="transaksi_bukti2" src="https://via.placeholder.com/300/000000?text=2" class="img-fluid mb-2" alt="bukti"/>
+                        </div>
+                        <div class="col-4">
+                            <img  id="transaksi_bukti3" src="https://via.placeholder.com/300/FF0000/FFFFFF?text=3" class="img-fluid mb-2" alt="bukti"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-between">
+                    <button type="reset" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="modal fade" id="modal-renewal">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
@@ -60,7 +91,7 @@
                 </button>
                 </div>
 
-                <form class="form-horizontal" id="form-input" action="{{route('trans-vrensave')}}" method="POST">
+                <form class="form-horizontal" id="form-input" action="{{route('trans-vrensave')}}" method="POST"  enctype="multipart/form-data">
                 @csrf
                 <div class="modal-body">
                     {{-- <x-inputhcomp type="text" label="Tanggal" name="tgldaftar" class="timestamp" readonly></x-inputcomp> --}}
@@ -137,7 +168,18 @@
                             <input type="text" name="tglexpired" id="tglexpired" class="form-control" value="" readonly >
                         </div>
                     </div>
-                    <x-inputhcomp type="text" label="Total" name="totalbyr" readonly></x-inputcomp>                
+                    <x-inputhcomp type="text" label="Total" name="totalbyr" readonly></x-inputcomp>
+
+                    <div class="form-group row">
+                        <label class="col-sm-3 col-form-label">Bukti Bayar</label>
+                        <div class="col-9">
+                            <div class="form-group">
+                                <div class="file-loading">
+                                    <input id="buktiimg" name="buktiimg[]"  type="file" class="file" data-show-upload="false" data-max-file-count="3" data-theme="fa5" multiple>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="reset" class="btn btn-default" data-dismiss="modal">Cancel</button>
@@ -216,6 +258,14 @@
     <script src="{{asset('plugins/datatables-buttons/js/buttons.print.min.js')}}"></script>
     <script src="{{asset('plugins/datatables-buttons/js/buttons.colVis.min.js')}}"></script>
     <script src="//cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/js/plugins/buffer.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/js/plugins/filetype.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/js/plugins/piexif.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/js/plugins/sortable.min.js" type="text/javascript"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/js/fileinput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/kartik-v/bootstrap-fileinput@5.5.2/js/locales/LANG.js"></script>
 @endsection
 
 @section('script2')

@@ -1,8 +1,27 @@
 $(function () {
+    $.fn.fileinputBsVersion = '4';
     loadListNewMember("#tabel_reg");
     flashpesan("flashpesan");
     loadAwal();
     
+    // $("#buktiimg").fileinput();
+    $("#buktiimg").fileinput({
+        theme: 'fa5',
+        showUpload: false,
+        uploadUrl: '#', 
+        previewFileType: 'any',
+        // theme: 'fa5',
+        // showUpload: false,
+        // showCaption: false,
+        // browseClass: "btn btn-primary btn-lg",
+        allowedFileExtensions: ['jpg','jpeg', 'png', 'gif'],
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+    });
+    
+
     $("form").on( "reset", function(e) {        
         $('#role').removeClass( "is-warning" );
         $('#nohp').removeClass( "is-warning" );

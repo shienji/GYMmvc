@@ -7,6 +7,24 @@ $(function () {
     flashpesan("flashpesan"); 
     loadAwal();
 
+    // $("#buktiimg").fileinput();
+    $("#buktiimg").fileinput({
+        theme: 'fa5',
+        showUpload: false,
+        uploadUrl: '#', 
+        previewFileType: 'any',
+        // theme: 'fa5',
+        // showUpload: false,
+        // showCaption: false,
+        // browseClass: "btn btn-primary btn-lg",
+        allowedFileExtensions: ['jpg','jpeg', 'png', 'gif'],
+        fileType: "any",
+        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+        overwriteInitial: false,
+        initialPreviewAsData: true,
+    });
+    
+
     $("form").on( "reset", function(e) {
         resetClass();
         $(".card-tools .btn-group").hide();
@@ -29,6 +47,12 @@ $(function () {
     });
     $("#modal-renewal").on("hidden.bs.modal",function(){
         document.getElementById("form-input").reset();
+    });
+
+    $("#modal-bukti").on("shown.bs.modal",function(){
+        uid=$('#bukti_transid').val();
+        xurl=$("#modal-bukti").attr('dataLoad')+"?r="+uid;
+        
     });
 
     function loadAwal(){
@@ -272,7 +296,17 @@ $(function () {
                     },{
                         "data": null,
                         "className": "center",
-                        "defaultContent": "<input type='button' value='Hapus' class='btn btn-block btn-danger'>"
+                        // "defaultContent": "<input type='button' value='Hapus' class='btn btn-block btn-danger'>"
+                        "defaultContent":"<div class='row'> <button class='btn' name='btndetail' data-toggle='modal' data-target='#modal-bukti'> <i class='fa fa-money-bill'></i> </button> <button class='btn' name='btnhapus' > <i class='fa fa-trash'></i> </button> </div>"
+                    }, {
+                        "data": "transaksi_bukti1",
+                        "visible": false
+                    }, {
+                        "data": "transaksi_bukti2",
+                        "visible": false
+                    }, {
+                        "data": "transaksi_bukti3",
+                        "visible": false
                     }, {
                         "data": "transaksi_id",
                         "visible": false
@@ -288,32 +322,73 @@ $(function () {
                     }
                 ]
             });
-        
-            $(namanya + ' tbody').on('click', 'td input:button', function (e) {
+            
+
+            $(namanya + ' tbody').on('click', 'td button', function (e) {
                 indexRow=$(this).closest('tr');
                 data = nmTabel2.row(indexRow).data();
-                xtglsekarang=moment().format("YYYY-MM-DD");                                
-                $.ajax({
-                    url: xurldel,
-                    type: 'DELETE',
-                    data:{
-                        'id': data.transaksi_id,
-                        'userid': data.user_id,
-                        '_token': $('#tokennya').val(),
-                    },
-                    success: function(result) {
-                        if(result=="success"){
-                            nmTabel2.ajax.reload();
-                            $("form").trigger('reset');
-                        }
-                    },
-                    error:function(result) {
-                        alert(JSON.stringify(result));
+                xtglsekarang=moment().format("YYYY-MM-DD");
+                nama=($(this).attr('name'));
+                if(nama=='btndetail'){
+                    var imgBukti1 = $('#modal-bukti').attr('dataImage')+"/" + data.transaksi_bukti1;
+                    var imgBukti2 = $('#modal-bukti').attr('dataImage')+"/"  + data.transaksi_bukti2;
+                    var imgBukti3 = $('#modal-bukti').attr('dataImage')+"/"  + data.transaksi_bukti3;
+                    if(imgBukti1==$('#modal-bukti').attr('dataImage')+"/"){
+                        $('#transaksi_bukti1').hide();
+                    }else{
+                        $('#transaksi_bukti1').attr('src',imgBukti1);
                     }
-                });
+                    if(imgBukti2==$('#modal-bukti').attr('dataImage')+"/"){
+                        $('#transaksi_bukti2').hide();
+                    }else{
+                        $('#transaksi_bukti2').attr('src',imgBukti2);
+                    }
+                    if(imgBukti3==$('#modal-bukti').attr('dataImage')+"/"){
+                        $('#transaksi_bukti3').hide();
+                    }else{
+                        $('#transaksi_bukti3').attr('src',imgBukti3);
+                    }
+                }
+                if(nama=='btnhapus'){
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#3085d6',
+                        cancelButtonColor: '#d33',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            $.ajax({
+                                url: xurldel,
+                                type: 'DELETE',
+                                data:{
+                                    'id': data.transaksi_id,
+                                    'userid': data.user_id,
+                                    '_token': $('#tokennya').val(),
+                                },
+                                success: function(result) {
+                                    if(result=="success"){
+                                        nmTabel2.ajax.reload();
+                                        $("form").trigger('reset');
+                                        Swal.fire(
+                                            'Deleted!',
+                                            'Your file has been deleted.',
+                                            'success'
+                                        );
+                                    }else{
+                                        alert(JSON.stringify(result));
+                                    }
+                                },
+                                error:function(result) {
+                                    alert(JSON.stringify(result));
+                                }
+                            });    
+                        }
+                    });
+                }
             });
-
-            
         }
     }
 
@@ -372,7 +447,7 @@ $(function () {
                     }
                 ]
             });
-        
+
             $(namanya + ' tbody').on('click', 'td input:button', function (e) {
                 indexRow=$(this).closest('tr');
                 data = nmTabel2.row(indexRow).data();

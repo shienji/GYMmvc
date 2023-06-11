@@ -21,7 +21,6 @@ class LayoutController extends Controller
             return redirect(route("layout-adminpage"));
         } else  if ($request->session()->get('nama') == 'Gold') {
             $request->session()->put('user_email', $p);
-            dd($request);
             return redirect(route("layout-userpage"));
         } else  if ($request->session()->get('nama') == 'Silver') {
             $request->session()->put('user_email', $p);
@@ -67,6 +66,13 @@ class LayoutController extends Controller
         }
     }
 
+    // public function updateuser(Request $request)
+    // {
+    //     return view('upda', [
+    //         'user' => $request->user()
+    //     ]);
+    // }
+
     public function registerPage()
     {
         return view('layout.User_Register');
@@ -81,15 +87,15 @@ class LayoutController extends Controller
 
     public function adminPage(request $request)
     {
-        if ($request->session()->get('nama') == 'Admin') {
-            $a = $request->session()->get('nama');
-            $b = $request->session()->get('user_email');
-            $admin = DB::table('user')->where("user_role", $a)->where("user_email", $b)->get();
-            return view('layout.User_Admin_Profile')->with("admin", $admin);
-        } else if ($request->session()->get('nama') == 'Gold' || $request->session()->get('nama') == 'Silver' || $request->session()->get('nama') == 'Bronze') {
-            return redirect(route("layout-userpage"));
+        if ($request->session()->get('user_email') == '') {
+            return view('layout.User_Login');
         } else {
-            return redirect(route("layout-loginpage"));
+            if ($request->session()->get('nama') == 'Admin') {
+                $a = $request->session()->get('nama');
+                $b = $request->session()->get('user_email');
+                $admin = DB::table('user')->where("user_role", $a)->where("user_email", $b)->get();
+                return view('layout.User_Admin_Profile')->with("admin", $admin);
+            }
         }
     }
     public function userPage(request $request)
