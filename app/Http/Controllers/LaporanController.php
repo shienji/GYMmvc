@@ -21,11 +21,13 @@ class LaporanController extends Controller
             UNION ALL
             SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="GOLD"
         ';
+
         $data = DB::select($query_chart);
         $dataChart = [];
         foreach ($data as $row) {
             $dataChart[] = $row->hasil;
         }
+
         // dd($dataChart);
         return view('laporan.user', compact('dataChart'));
     }
