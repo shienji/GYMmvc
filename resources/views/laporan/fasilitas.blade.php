@@ -29,7 +29,7 @@
                     <select class="form-control" id="filter-status">
                         <option value="-">-</option>
                         <option value="aktif">Aktif</option>
-                        <option value="tidak aktif">Tidak Aktif</option>
+                        <option value="non aktif">Tidak Aktif</option>
                     </select>
                 </div>
             </div>
