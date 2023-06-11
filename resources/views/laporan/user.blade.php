@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/jquery-ui/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/chart.js/Chart.min.css') }}">
 @endsection
 
 @section('konten')
@@ -86,6 +87,12 @@
             </table>
         </div>
     </div>
+
+    <div class="card">
+        <div class="card-body">
+            <canvas id="userChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+        </div>
+    </div>
 @endsection
 
 @section('script1')
@@ -103,6 +110,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('plugins/chart.js/Chart.js') }}"></script>
 @endsection
 
 @section('script2')
@@ -206,6 +214,43 @@
 
                 panggil_tabel_user(x, y, z, a);
             });
+
+            var userChart = $('#userChart').get(0).getContext('2d')
+            new Chart(userChart, {
+            type: 'pie',
+            data: {
+            labels: [
+                'ADMIN',
+                'BRONZE',
+                'SILVER',
+                'GOLD',
+            ],
+            datasets: [
+                {
+                data: [700,500,400,600],
+                backgroundColor : ['green', 'brown', 'gray', 'orange'],
+                }
+            ]
+            },
+            options: {
+                maintainAspectRatio : false,
+                responsive : true,
+                plugins: {
+        datalabels: {
+            formatter: (value, ctx) => {
+                let sum = 0;
+                let dataArr = ctx.chart.data.datasets[0].data;
+                dataArr.map(data => {
+                    sum += data;
+                });
+                let percentage = (value*100 / sum).toFixed(2)+"%";
+                return percentage;
+                        },
+                        color: '#fff',
+                    }
+                }
+                }
+            })
         });
     </script>
 @endsection
