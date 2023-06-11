@@ -104,14 +104,14 @@ class LaporanController extends Controller
         if ($x=='-' && $y=='-' && $z=='-' && $a=='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->get();
         // transaksi filter daftar
         } else if ($x!='-' && $y!='-' && $z=='-' && $a=='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
                 ->get();
@@ -119,7 +119,7 @@ class LaporanController extends Controller
         } else if ($x=='-' && $y=='-' && $z!='-' && $a!='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_expired', [$z, $a])
                 ->get();
@@ -127,7 +127,7 @@ class LaporanController extends Controller
         } else if ($x=='-' && $y=='-' && $z=='-' && $a=='-' && $b!='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->where('transaksi.transaksi_role','=',$b)
                 ->get();
@@ -135,7 +135,7 @@ class LaporanController extends Controller
         } else if ($x!='-' && $y!='-' && $z!='-' && $a!='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
                 ->whereBetween('transaksi.transaksi_expired', [$z, $a])
@@ -144,7 +144,7 @@ class LaporanController extends Controller
         } else if ($x!='-' && $y!='-' && $z=='-' && $a=='-' && $b=='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
                 ->where('transaksi.transaksi_role','=',$b)
@@ -153,7 +153,7 @@ class LaporanController extends Controller
         } else if ($x=='-' && $y=='-' && $z!='-' && $a!='-' && $b!='-') {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_expired', [$z, $a])
                 ->where('transaksi.transaksi_role','=',$b)
@@ -162,7 +162,7 @@ class LaporanController extends Controller
         } else {
             $query_transaksi = DB::table('transaksi')
                 ->select('transaksi.*', DB::raw("DATE_FORMAT(transaksi.transaksi_daftar, '%d-%m-%Y') AS transaksi_daftar"), DB::raw("DATE_FORMAT(transaksi.transaksi_expired, '%d-%m-%Y') AS transaksi_expired"), 'user.user_nama', 'role.role_nama')
-                ->join('role','role.role_id','=','transaksi.transaksi_role')
+                ->join('role','role.role_nama','=','transaksi.transaksi_role')
                 ->join('user','user.user_id','=','transaksi.user_id')
                 ->whereBetween('transaksi.transaksi_daftar', [$x, $y])
                 ->whereBetween('transaksi.transaksi_expired', [$z, $a])

@@ -131,28 +131,37 @@
                     },
                 },
                 columns: [{
+                        width: '5%',
                         data: 'transaksi_id',
                         name: 'transaksi_id'
                     },
                     {
+                        width: '15%',
                         data: 'user_nama',
                         name: 'user_nama'
                     },
                     {
+                        width: '15%',
                         data: 'transaksi_daftar',
                         name: 'transaksi_daftar'
                     },
                     {
+                        width: '15%',
                         data: 'transaksi_expired',
                         name: 'transaksi_expired'
                     },
                     {
+                        width: '15%',
                         data: 'role_nama',
                         name: 'role_nama'
                     },
                     {
+                        width: '15%',
                         data: 'transaksi_harga',
-                        name: 'transaksi_harga'
+                        name: 'transaksi_harga',
+                        render: function ( data, type, row ) {
+                            return 'Rp.' + data;
+                        }
                     },
                 ],
                 "info": false,
