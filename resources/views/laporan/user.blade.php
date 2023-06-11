@@ -10,66 +10,92 @@
 @endsection
 
 @section('konten')
-    <div class="card bg-gradient-danger">
-        <div class="card-header border-0">
-            <h3 class="card-title pt-1">
-                <i class="fas fa-filter mr-1"></i>
-                Filter
-            </h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
+
+<div class="row">
+    <div class="col-6">
+        <div class="card bg-gradient-danger">
+            <div class="card-header border-0">
+                <h3 class="card-title pt-1">
+                    <i class="fas fa-filter mr-1"></i>
+                    Filter
+                </h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="card-body" style="margin-bottom: -20px;">
-            <div class="form-group row">
-                <div class="col-1 pt-1">
-                    <label>ROLE</label>
-                    <span class="float-right">:</span>
-                </div>
-                <div class="col-2">
-                    <select class="form-control" id="filter-role">
-                        <option value="-">-</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Bronze">Bronze</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div class="col-5"></div>
-                <div class="col-1 pt-1">
-                    <label>TANGGAL</label>
-                    <span class="float-right">:</span>
-                </div>
-                <div class="col-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control" id="filter-tanggal">
-                        <input type="hidden" class="form-control" id="startDate" value="-">
-                        <input type="hidden" class="form-control" id="endDate" value="-">
+            <div class="card-body" style="margin-bottom: -20px;">
+                <div class="form-group row">
+                    <div class="col-4 pt-1">
+                        <label>ROLE</label>
+                        <span class="float-right">:</span>
+                    </div>
+                    <div class="col-8">
+                        <select class="form-control" id="filter-role">
+                            <option value="-">-</option>
+                            <option value="Gold">Gold</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Bronze">Bronze</option>
+                            <option value="Admin">Admin</option>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-1 pt-1">
-                    <label>STATUS</label>
-                    <span class="float-right">:</span>
+                <div class="form-group row">
+                    <div class="col-4 pt-1">
+                        <label>TANGGAL</label>
+                        <span class="float-right">:</span>
+                    </div>
+                    <div class="col-8">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                            </div>
+                            <input type="text" class="form-control" id="filter-tanggal">
+                            <input type="hidden" class="form-control" id="startDate" value="-">
+                            <input type="hidden" class="form-control" id="endDate" value="-">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <select class="form-control" id="filter-status">
-                        <option value="-">-</option>
-                        <option value="Active">Active</option>
-                        <option value="Process">Process</option>
-                    </select>
+                <div class="form-group row">
+                    <div class="col-4 pt-1">
+                        <label>STATUS</label>
+                        <span class="float-right">:</span>
+                    </div>
+                    <div class="col-8">
+                        <select class="form-control" id="filter-status">
+                            <option value="-">-</option>
+                            <option value="Active">Active</option>
+                            <option value="Process">Process</option>
+                        </select>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="col-6">
+        <div class="card">
+            <div class="card-header border-0">
+                <h3 class="card-title pt-1">
+                    <i class="fas fa-filter mr-1"></i>
+                    Chart
+                </h3>
+                <div class="card-tools">
+                    <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <canvas id="userChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <div class="card">
         <div class="card-body">
@@ -85,12 +111,6 @@
                 </thead>
                 <tbody></tbody>
             </table>
-        </div>
-    </div>
-
-    <div class="card">
-        <div class="card-body">
-            <canvas id="userChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
         </div>
     </div>
 @endsection
@@ -174,9 +194,8 @@
             }).draw();
         }
 
-
         $(document).ready(function() {
-            $('.card:first').find('[data-card-widget="collapse"]').click();
+            $('.card').find('[data-card-widget="collapse"]').click();
 
             panggil_tabel_user('-', '-', '-', '-');
 
@@ -227,7 +246,7 @@
             ],
             datasets: [
                 {
-                data: [700,500,400,600],
+                data: [100,500,60,10],
                 backgroundColor : ['green', 'brown', 'gray', 'orange'],
                 }
             ]
@@ -236,19 +255,19 @@
                 maintainAspectRatio : false,
                 responsive : true,
                 plugins: {
-        datalabels: {
-            formatter: (value, ctx) => {
-                let sum = 0;
-                let dataArr = ctx.chart.data.datasets[0].data;
-                dataArr.map(data => {
-                    sum += data;
-                });
-                let percentage = (value*100 / sum).toFixed(2)+"%";
-                return percentage;
-                        },
-                        color: '#fff',
+            datalabels: {
+                formatter: (value, ctx) => {
+                    let sum = 0;
+                    let dataArr = ctx.chart.data.datasets[0].data;
+                    dataArr.map(data => {
+                        sum += data;
+                    });
+                    let percentage = (value*100 / sum).toFixed(2)+"%";
+                    return percentage;
+                            },
+                            color: '#fff',
+                        }
                     }
-                }
                 }
             })
         });
