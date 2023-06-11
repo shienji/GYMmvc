@@ -40,7 +40,7 @@ Route::prefix("/transaksi")->group(function () {
         // Route::get('/', [TransaksiController::class, 'viewLogin'])->name("trans-vlogin");
         // Route::post('/save', [TransaksiController::class, 'viewLogin'])->name("trans-vloginsave");
         // Route::get('/profile', [TransaksiController::class, 'viewLoginProfile'])->name("trans-vloginprofile");
-        Route::get('/event', [TransaksiController::class, 'viewLoginEvent'])->name("trans-vloginevent");        
+        Route::get('/event', [TransaksiController::class, 'viewLoginEvent'])->name("trans-vloginevent");
     });
 
     Route::prefix("/register")->group(function () {
@@ -85,6 +85,7 @@ Route::prefix("/laporan")->group(function () {
     // USER
     Route::get('/user', [LaporanController::class, 'view_user'])->name("laporan-user");
     Route::get('/user/data', [LaporanController::class, 'data_user'])->name('data-user');
+    Route::get('/user/chart', [LaporanController::class, 'chart_user'])->name('chart-user');
 
     // TRANSAKSI
     Route::get('/transaksi', [LaporanController::class, 'view_transaksi'])->name('laporan-transaksi');

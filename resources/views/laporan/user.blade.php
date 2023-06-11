@@ -90,7 +90,7 @@
                 </div>
             </div>
             <div class="card-body">
-                <canvas id="userChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                <canvas id="userChart" style="min-height: 200px; height: 200px; max-height: 200px; max-width: 100%;"></canvas>
             </div>
         </div>
     </div>
@@ -246,7 +246,7 @@
             ],
             datasets: [
                 {
-                data: [100,500,60,10],
+                data: {!! json_encode($dataChart) !!},
                 backgroundColor : ['green', 'brown', 'gray', 'orange'],
                 }
             ]

@@ -13,7 +13,21 @@ class LaporanController extends Controller
     // USER
     public function view_user()
     {
-        return view('laporan.user');
+        $query_chart = 'SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="admin"
+            UNION ALL
+            SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="BRONZE"
+            UNION ALL
+            SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="SILVER"
+            UNION ALL
+            SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="GOLD"
+        ';
+        $data = DB::select($query_chart);
+        $dataChart = [];
+        foreach ($data as $row) {
+            $dataChart[] = $row->hasil;
+        }
+        // dd($dataChart);
+        return view('laporan.user', compact('dataChart'));
     }
 
     public function data_user(Request $request){
