@@ -297,24 +297,32 @@ class LaporanController extends Controller
         // event tanpa filter
         if ($x == '-' && $y == '-' && $z == '-' && $a == '-') {
             $query_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
+                ->select('event.event_id', 'event.event_nama', 'fasilitas.fasilitas_nama', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
+                ->leftJoin('eventfas', 'eventfas.event_id', '=', 'event.event_id')
+                ->leftJoin('fasilitas', 'fasilitas.fasilitas_id', '=', 'eventfas.fasilitas_id')
                 ->get();
             // event filter tanggal mulai
         } else if ($x != '-' && $y != '-' && $z == '-' && $a == '-') {
             $query_event = DB::table('event')
-                ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->select('event.event_id', 'event.event_nama', 'fasilitas.fasilitas_nama', DB::raw("DATE_FORMAT(event.event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event.event_end, '%d-%m-%Y') AS event_end"))
+                ->leftJoin('eventfas', 'eventfas.event_id', '=', 'event.event_id')
+                ->leftJoin('fasilitas', 'fasilitas.fasilitas_id', '=', 'eventfas.fasilitas_id')
                 ->whereBetween('event_start', [$x, $y])
                 ->get();
             // event filter tanggal berakhir
         } else if ($x == '-' && $y == '-' && $z != '-' && $a != '-') {
             $query_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->leftJoin('eventfas', 'eventfas.event_id', '=', 'event.event_id')
+                ->leftJoin('fasilitas', 'fasilitas.fasilitas_id', '=', 'eventfas.fasilitas_id')
                 ->whereBetween('event_end', [$z, $a])
                 ->get();
             // event filter semua
         } else {
             $query_event = DB::table('event')
                 ->select('*', DB::raw("DATE_FORMAT(event_start, '%d-%m-%Y') AS event_start"), DB::raw("DATE_FORMAT(event_end, '%d-%m-%Y') AS event_end"))
+                ->leftJoin('eventfas', 'eventfas.event_id', '=', 'event.event_id')
+                ->leftJoin('fasilitas', 'fasilitas.fasilitas_id', '=', 'eventfas.fasilitas_id')
                 ->whereBetween('event_start', [$x, $y])
                 ->whereBetween('event_end', [$z, $a])
                 ->get();

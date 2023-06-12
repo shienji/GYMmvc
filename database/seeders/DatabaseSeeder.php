@@ -215,7 +215,21 @@ class DatabaseSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
 
-        // transaksi
-        DB::query("INSERT INTO transaksi(user_id, transaksi_daftar, transaksi_expired, transaksi_role, transaksi_harga, transaksi_bulan, created_at) VALUES('1','2023-05-29 06:00:00','2023-06-12 08:00:00','Admin','0','1',NOW()), ('2','2023-05-29 12:00:00','2023-06-25 12:00:00','Gold','0','1',NOW()), ('3','2023-05-30 08:00:00','2023-06-11 13:00:00','Silver','0','1',NOW()),('4','2023-06-10 12:30:15','2023-07-01 16:30:00','Bronze','0','1',NOW())");
+        // eventfas
+        DB::table('eventfas')->insert([
+            'event_id' => "1",
+            'fasilitas_id' => "1",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'deleted_at' => NULL,
+        ]);
+
+        DB::table('eventfas')->insert([
+            'event_id' => "2",
+            'fasilitas_id' => "3",
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'deleted_at' => NULL,
+        ]);
     }
 }

@@ -69,6 +69,7 @@
                         <th>NAMA</th>
                         <th>MULAI</th>
                         <th>BERAKHIR</th>
+                        <th>FASILITAS TERPAKAI</th>
                     </tr>
                 </thead>
                 <tbody></tbody>
@@ -118,20 +119,25 @@
                         name: 'event_id'
                     },
                     {
-                        width: '30%',
+                        width: '25%',
                         data: 'event_nama',
                         name: 'event_nama'
                     },
                     {
-                        width: '30%',
+                        width: '25%',
                         data: 'event_start',
                         name: 'event_start'
                     },
                     {
-                        width: '30%',
+                        width: '25%',
                         data: 'event_end',
                         name: 'event_end'
                     },
+                    {
+                        width: '25%',
+                        data: 'fasilitas_nama',
+                        name: 'fasilitas_nama'
+                    }
                 ],
                 "info": false,
                 dom: 'Bfrtip',
