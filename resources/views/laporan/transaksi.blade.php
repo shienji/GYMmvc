@@ -93,7 +93,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <canvas id="lineChart" style="min-height: 340px; height: 340px; max-height: 340px; max-width: 100%;"></canvas>
+                    <div class="mb-2 text-center"><i class="fas fa-square" style="color: #3b8bba;"></i> DAFTAR <i class="fas fa-square ml-3" style="color: #c1c7d1;"></i></span> EXPIRED</div>
+                    <canvas id="lineChart" style="min-height: 240px; height: 240px; max-height: 240px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
@@ -114,6 +115,15 @@
                 </thead>
                 <tbody></tbody>
             </table>
+        </div>
+    </div>
+    
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-10"></div>
+                <div class="col-2 font-weight-bold">TOTAL : <span class="float-right">Rp. {{ $dataTotal }}</span> </div>
+            </div>
         </div>
     </div>
 
@@ -208,7 +218,7 @@
         }
 
         $(document).ready(function() {
-            // $('.card').find('[data-card-widget="collapse"]').click();
+            $('.card').find('[data-card-widget="collapse"]').click();
 
             panggil_tabel_transaksi('-', '-', '-', '-', '-');
 
@@ -270,7 +280,7 @@
                     pointStrokeColor    : 'rgba(60,141,188,1)',
                     pointHighlightFill  : '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data                : {!! json_encode($dataDaftar) !!}
+                    data                : {!! json_encode($arrayDaftar) !!}
                     },
                     {
                     label               : 'Electronics',
@@ -281,7 +291,7 @@
                     pointStrokeColor    : '#c1c7d1',
                     pointHighlightFill  : '#fff',
                     pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data                : {!! json_encode($dataExpired) !!}
+                    data                : {!! json_encode($arrayExpired) !!}
                     },
                 ]
             }

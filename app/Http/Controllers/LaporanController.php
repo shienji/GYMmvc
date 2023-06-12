@@ -132,10 +132,10 @@ class LaporanController extends Controller
             SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-12-01 00:00:00" AND "2023-12-28 23:00:00"
         ';
 
-        $data = DB::select($query_daftar);
-        $dataDaftar = [];
-        foreach ($data as $row) {
-            $dataDaftar[] = $row->daftar;
+        $dataDaftar = DB::select($query_daftar);
+        $arrayDaftar = [];
+        foreach ($dataDaftar as $row) {
+            $arrayDaftar[] = $row->daftar;
         }
 
         $query_expired = 'SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-01-01 00:00:00" AND "2023-01-28 23:00:00"
@@ -163,14 +163,16 @@ class LaporanController extends Controller
             SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-12-01 00:00:00" AND "2023-12-28 23:00:00"
         ';
 
-        $data = DB::select($query_expired);
-        $dataExpired = [];
-        foreach ($data as $row) {
-            $dataExpired[] = $row->expired;
+        $dataExpired = DB::select($query_expired);
+        $arrayExpired = [];
+        foreach ($dataExpired as $row) {
+            $arrayExpired[] = $row->expired;
         }
 
+        $dataTotal = DB::table('transaksi')->sum('transaksi_harga');
+
         // dd($dataChart);
-        return view('laporan.transaksi', compact('dataDaftar'), compact('dataExpired'));
+        return view('laporan.transaksi', compact('arrayDaftar', 'arrayExpired', 'dataTotal'));
     }
 
     public function data_transaksi(Request $request){
