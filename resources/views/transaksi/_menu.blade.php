@@ -40,25 +40,25 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('role_master') }}" class="nav-link side-trans-vdashboard">
+            <a href="{{ route('role_master_list') }}" class="nav-link side-trans-vdashboard">
                 <i class="far fa-circle nav-icon  text-danger"></i>
                 <p>Master Role</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('fasilitas_master') }}" class="nav-link side-trans-vregister">
+            <a href="{{ route('fasilitas_master_list') }}" class="nav-link side-trans-vregister">
                 <i class="far fa-circle nav-icon  text-warning"></i>
                 <p>Master Fasilitas</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('peralatan_master') }}" class="nav-link side-trans-vrenewal">
+            <a href="{{ route('peralatan_master_list') }}" class="nav-link side-trans-vrenewal">
                 <i class="far fa-circle nav-icon  text-success"></i>
                 <p>Master Peralatan</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('pelatih_master') }}" class="nav-link">
+            <a href="{{ route('pelatih_master_list') }}" class="nav-link">
                 <i class="far fa-circle nav-icon text-info"></i>
                 <p>Master Pelatih</p>
             </a>
