@@ -1,5 +1,6 @@
 $(function () {
     setInterval(updateTime,1000);
+    $('#nm_fasilitas').select2({ dropdownAutoWidth: true, width: 'auto' });
     loadListEvent("#tabel_reg");
     loadListPeserta("#tabel_event",0);
     flashpesan("flashpesan");

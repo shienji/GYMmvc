@@ -35,6 +35,7 @@ Route::prefix("/transaksi")->group(function () {
     Route::get('/member/getrenewal', [TransaksiController::class, 'getDataRenewal'])->name("trans-vdatarenewal");
     Route::get('/member/getevent', [TransaksiController::class, 'getDataEvent'])->name("trans-vdataevent");
     Route::get('/cekpage', [TransaksiController::class, 'cekPage'])->name("trans-cekpage");
+    Route::get('/uploadfile', [TransaksiController::class, 'uploadFile'])->name("trans-uploadfile");
 
     Route::prefix("/login")->group(function () {
         // Route::get('/', [TransaksiController::class, 'viewLogin'])->name("trans-vlogin");
@@ -52,6 +53,7 @@ Route::prefix("/transaksi")->group(function () {
         Route::post('/', [TransaksiController::class, 'viewRenewalSave'])->name("trans-vrensave");
         Route::delete('/del', [TransaksiController::class, 'viewRenewalDel'])->name("trans-vrendel");
         Route::get('/history', [TransaksiController::class, 'viewRenewalHis'])->name("trans-vrenhis");
+        Route::get('/bukti', [TransaksiController::class, 'getDataBukti'])->name("trans-vbukti");
     });
     Route::prefix("/revent")->group(function () {
         Route::get('/', [TransaksiController::class, 'viewEvent'])->name("trans-vevent");
@@ -84,6 +86,7 @@ Route::prefix("/laporan")->group(function () {
     // USER
     Route::get('/user', [LaporanController::class, 'view_user'])->name("laporan-user");
     Route::get('/user/data', [LaporanController::class, 'data_user'])->name('data-user');
+    Route::get('/user/chart', [LaporanController::class, 'chart_user'])->name('chart-user');
 
     // TRANSAKSI
     Route::get('/transaksi', [LaporanController::class, 'view_transaksi'])->name('laporan-transaksi');

@@ -13,7 +13,23 @@ class LaporanController extends Controller
     // USER
     public function view_user()
     {
-        return view('laporan.user');
+        $query_chart = 'SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="admin"
+            UNION ALL
+            SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="BRONZE"
+            UNION ALL
+            SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="SILVER"
+            UNION ALL
+            SELECT COUNT(*) AS "hasil" FROM user WHERE user_role="GOLD"
+        ';
+
+        $data = DB::select($query_chart);
+        $dataChart = [];
+        foreach ($data as $row) {
+            $dataChart[] = $row->hasil;
+        }
+
+        // dd($dataChart);
+        return view('laporan.user', compact('dataChart'));
     }
 
     public function data_user(Request $request)
@@ -91,7 +107,73 @@ class LaporanController extends Controller
     // TRANSAKSI
     public function view_transaksi()
     {
-        return view('laporan.transaksi');
+        // return view('laporan.transaksi');
+        $query_daftar = 'SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-01-01 00:00:00" AND "2023-01-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-02-01 00:00:00" AND "2023-02-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-03-01 00:00:00" AND "2023-03-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-04-01 00:00:00" AND "2023-04-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-05-01 00:00:00" AND "2023-05-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-06-01 00:00:00" AND "2023-06-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-07-01 00:00:00" AND "2023-07-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-08-01 00:00:00" AND "2023-08-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-09-01 00:00:00" AND "2023-09-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-10-01 00:00:00" AND "2023-10-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-11-01 00:00:00" AND "2023-11-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-12-01 00:00:00" AND "2023-12-28 23:00:00"
+        ';
+
+        $dataDaftar = DB::select($query_daftar);
+        $arrayDaftar = [];
+        foreach ($dataDaftar as $row) {
+            $arrayDaftar[] = $row->daftar;
+        }
+
+        $query_expired = 'SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-01-01 00:00:00" AND "2023-01-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-02-01 00:00:00" AND "2023-02-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-03-01 00:00:00" AND "2023-03-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-04-01 00:00:00" AND "2023-04-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-05-01 00:00:00" AND "2023-05-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-06-01 00:00:00" AND "2023-06-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-07-01 00:00:00" AND "2023-07-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-08-01 00:00:00" AND "2023-08-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-09-01 00:00:00" AND "2023-09-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-10-01 00:00:00" AND "2023-10-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-11-01 00:00:00" AND "2023-11-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-12-01 00:00:00" AND "2023-12-28 23:00:00"
+        ';
+
+        $dataExpired = DB::select($query_expired);
+        $arrayExpired = [];
+        foreach ($dataExpired as $row) {
+            $arrayExpired[] = $row->expired;
+        }
+
+        $dataTotal = DB::table('transaksi')->sum('transaksi_harga');
+
+        // dd($dataChart);
+        return view('laporan.transaksi', compact('arrayDaftar', 'arrayExpired', 'dataTotal'));
     }
 
     public function data_transaksi(Request $request)

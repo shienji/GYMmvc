@@ -6,6 +6,7 @@
     {{-- <link rel="stylesheet" href="{{asset('/plugins/jquery-ui/jquery-ui.css') }}"> --}}
     <link rel="stylesheet" href="{{asset('/plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="stylesheet" href="{{asset('/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     {{-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.0/moment.min.js"></script> --}}
@@ -83,6 +84,17 @@
                 <x-inputhcomp type="datesaja" label="Tgl Mulai" name="tglawal" ></x-inputcomp>
                 <x-inputhcomp type="datesaja" label="Tgl Selesai" name="tglakhir" ></x-inputcomp>
                 <x-inputhcomp type="text" label="Koordinator" name="eventby" ></x-inputcomp>
+                <div class="form-group row">
+                    <label class="col-3 col-form-label">Fasilitas</label>
+                    <div class="col-9">
+                        <select class="col-9 custom-select form-control-border border-width-2" id="nm_fasilitas" name="nm_fasilitas[]" multiple="multiple">
+                            <option value="" ></option>
+                            @foreach ($vfasilitas as $i)
+                                <option value="{{$i->fasilitas_id}}" >{{$i->fasilitas_nama}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
             </div>
             
             <div class="modal-footer justify-content-between">
@@ -194,7 +206,8 @@
     {{-- <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script> --}}
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
     <script src="{{asset('plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js')}}"></script>
-    <script src="//cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
+    <script src="https://cdn.datatables.net/plug-ins/1.10.19/dataRender/datetime.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @endsection
 
 @section('script2')

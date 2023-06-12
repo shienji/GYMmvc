@@ -21,7 +21,7 @@
                 </button>
             </div>
         </div>
-        <div class="card-body" style="margin-bottom: -20px;">
+        <div class="card-body" style="margin-bottom: -10px;">
             <div class="form-group row">
                 <div class="col-2 pt-1">
                     <label>TANGGAL MULAI</label>

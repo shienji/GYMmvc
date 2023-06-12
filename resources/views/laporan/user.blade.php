@@ -6,65 +6,90 @@
     <link rel="stylesheet" href="{{ asset('/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('/plugins/jquery-ui/jquery-ui.css') }}">
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('plugins/chart.js/Chart.min.css') }}">
 @endsection
 
 @section('konten')
-    <div class="card bg-gradient-danger">
-        <div class="card-header border-0">
-            <h3 class="card-title pt-1">
-                <i class="fas fa-filter mr-1"></i>
-                Filter
-            </h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
-            </div>
-        </div>
-        <div class="card-body" style="margin-bottom: -20px;">
-            <div class="form-group row">
-                <div class="col-1 pt-1">
-                    <label>ROLE</label>
-                    <span class="float-right">:</span>
+    <div class="row">
+        <div class="col-6">
+            <div class="card bg-gradient-danger">
+                <div class="card-header border-0">
+                    <h3 class="card-title pt-1">
+                        <i class="fas fa-filter mr-1"></i>
+                        Filter
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <select class="form-control" id="filter-role">
-                        <option value="-">-</option>
-                        <option value="Gold">Gold</option>
-                        <option value="Silver">Silver</option>
-                        <option value="Bronze">Bronze</option>
-                        <option value="Admin">Admin</option>
-                    </select>
-                </div>
-                <div class="col-5"></div>
-                <div class="col-1 pt-1">
-                    <label>TANGGAL</label>
-                    <span class="float-right">:</span>
-                </div>
-                <div class="col-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
+                <div class="card-body" style="margin-bottom: -10px;">
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>ROLE</label>
+                            <span class="float-right">:</span>
                         </div>
-                        <input type="text" class="form-control" id="filter-tanggal">
-                        <input type="hidden" class="form-control" id="startDate" value="-">
-                        <input type="hidden" class="form-control" id="endDate" value="-">
+                        <div class="col-8">
+                            <select class="form-control" id="filter-role">
+                                <option value="-">-</option>
+                                <option value="Gold">Gold</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Bronze">Bronze</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>TANGGAL</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="filter-tanggal">
+                                <input type="hidden" class="form-control" id="startDate" value="-">
+                                <input type="hidden" class="form-control" id="endDate" value="-">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>STATUS</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <select class="form-control" id="filter-status">
+                                <option value="-">-</option>
+                                <option value="Active">Active</option>
+                                <option value="Process">Process</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group row">
-                <div class="col-1 pt-1">
-                    <label>STATUS</label>
-                    <span class="float-right">:</span>
+        </div>
+
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header border-0 bg-gradient-info">
+                    <h3 class="card-title pt-1">
+                        <i class="fas fa-chart-pie mr-1"></i>
+                        Chart
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <select class="form-control" id="filter-status">
-                        <option value="-">-</option>
-                        <option value="Active">Active</option>
-                        <option value="Process">Process</option>
-                    </select>
+                <div class="card-body">
+                    <canvas id="userChart" style="min-height: 200px; height: 200px; max-height: 200px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
@@ -103,6 +128,7 @@
     <script src="{{ asset('plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
     <script src="{{ asset('plugins/jquery-ui/jquery-ui.js') }}"></script>
     <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    <script src="{{ asset('plugins/chart.js/Chart.js') }}"></script>
 @endsection
 
 @section('script2')
@@ -166,9 +192,8 @@
             }).draw();
         }
 
-
         $(document).ready(function() {
-            $('.card:first').find('[data-card-widget="collapse"]').click();
+            $('.card').find('[data-card-widget="collapse"]').click();
 
             panggil_tabel_user('-', '-', '-', '-');
 
@@ -206,6 +231,43 @@
 
                 panggil_tabel_user(x, y, z, a);
             });
+
+            var userChart = $('#userChart').get(0).getContext('2d')
+            new Chart(userChart, {
+            type: 'pie',
+            data: {
+            labels: [
+                'ADMIN',
+                'BRONZE',
+                'SILVER',
+                'GOLD',
+            ],
+            datasets: [
+                {
+                data: {!! json_encode($dataChart) !!},
+                backgroundColor : ['green', 'brown', 'gray', 'orange'],
+                }
+            ]
+            },
+            options: {
+                maintainAspectRatio : false,
+                responsive : true,
+                plugins: {
+            datalabels: {
+                formatter: (value, ctx) => {
+                    let sum = 0;
+                    let dataArr = ctx.chart.data.datasets[0].data;
+                    dataArr.map(data => {
+                        sum += data;
+                    });
+                    let percentage = (value*100 / sum).toFixed(2)+"%";
+                    return percentage;
+                            },
+                            color: '#fff',
+                        }
+                    }
+                }
+            })
         });
     </script>
 @endsection
