@@ -10,71 +10,95 @@
 @endsection
 
 @section('konten')
-    <div class="card bg-gradient-warning">
-        <div class="card-header border-0">
-            <h3 class="card-title pt-1">
-                <i class="fas fa-filter mr-1"></i>
-                Filter
-            </h3>
-            <div class="card-tools">
-                <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
-                    <i class="fas fa-minus"></i>
-                </button>
+    <div class="row">
+        <div class="col-6">
+            <div class="card bg-gradient-warning">
+                <div class="card-header border-0">
+                    <h3 class="card-title pt-1">
+                        <i class="fas fa-filter mr-1"></i>
+                        Filter
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body" style="margin-bottom: -10px;">
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>TANGGAL DAFTAR</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control filter-tanggal" id="filter-tanggal-transaksi-daftar">
+                                <input type="hidden" class="form-control" id="startDate-daftar" value="-">
+                                <input type="hidden" class="form-control" id="endDate-daftar" value="-">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>TANGGAL EXPIRED</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control filter-tanggal" id="filter-tanggal-transaksi-expired">
+                                <input type="hidden" class="form-control" id="startDate-expired" value="-">
+                                <input type="hidden" class="form-control" id="endDate-expired" value="-">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>ROLE</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <select class="form-control" id="filter-role-transaksi">
+                                <option value="-">-</option>
+                                <option value="1">Gold</option>
+                                <option value="2">Silver</option>
+                                <option value="3">Bronze</option>
+                                <option value="4">Admin</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="card-body" style="margin-bottom: -10px;">
-            <div class="form-group row">
-                <div class="col-2 pt-1">
-                    <label>TANGGAL DAFTAR</label>
-                    <span class="float-right">:</span>
-                </div>
-                <div class="col-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control filter-tanggal" id="filter-tanggal-transaksi-daftar">
-                        <input type="hidden" class="form-control" id="startDate-daftar" value="-">
-                        <input type="hidden" class="form-control" id="endDate-daftar" value="-">
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header border-0 bg-gradient-info">
+                    <h3 class="card-title pt-1">
+                        <i class="fas fa-chart-pie mr-1"></i>
+                        Chart
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="col-2"></div>
-                <div class="col-2 pt-1">
-                    <label>TANGGAL EXPIRED</label>
-                    <span class="float-right">:</span>
-                </div>
-                <div class="col-3">
-                    <div class="input-group">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text">
-                                <i class="far fa-calendar-alt"></i>
-                            </span>
-                        </div>
-                        <input type="text" class="form-control filter-tanggal" id="filter-tanggal-transaksi-expired">
-                        <input type="hidden" class="form-control" id="startDate-expired" value="-">
-                        <input type="hidden" class="form-control" id="endDate-expired" value="-">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-1 pt-1">
-                    <label>ROLE</label>
-                    <span class="float-right">:</span>
-                </div>
-                <div class="col-2">
-                    <select class="form-control" id="filter-role-transaksi">
-                        <option value="-">-</option>
-                        <option value="1">Gold</option>
-                        <option value="2">Silver</option>
-                        <option value="3">Bronze</option>
-                        <option value="4">Admin</option>
-                    </select>
+                <div class="card-body">
+                    <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
     </div>
+    
 
     <div class="card">
         <div class="card-body">
@@ -94,7 +118,6 @@
         </div>
     </div>
 
-    <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
 @endsection
 
 @section('script1')

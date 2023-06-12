@@ -10,92 +10,90 @@
 @endsection
 
 @section('konten')
-
-<div class="row">
-    <div class="col-6">
-        <div class="card bg-gradient-danger">
-            <div class="card-header border-0">
-                <h3 class="card-title pt-1">
-                    <i class="fas fa-filter mr-1"></i>
-                    Filter
-                </h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body" style="margin-bottom: -10px;">
-                <div class="form-group row">
-                    <div class="col-4 pt-1">
-                        <label>ROLE</label>
-                        <span class="float-right">:</span>
-                    </div>
-                    <div class="col-8">
-                        <select class="form-control" id="filter-role">
-                            <option value="-">-</option>
-                            <option value="Gold">Gold</option>
-                            <option value="Silver">Silver</option>
-                            <option value="Bronze">Bronze</option>
-                            <option value="Admin">Admin</option>
-                        </select>
+    <div class="row">
+        <div class="col-6">
+            <div class="card bg-gradient-danger">
+                <div class="card-header border-0">
+                    <h3 class="card-title pt-1">
+                        <i class="fas fa-filter mr-1"></i>
+                        Filter
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-4 pt-1">
-                        <label>TANGGAL</label>
-                        <span class="float-right">:</span>
+                <div class="card-body" style="margin-bottom: -10px;">
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>ROLE</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <select class="form-control" id="filter-role">
+                                <option value="-">-</option>
+                                <option value="Gold">Gold</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Bronze">Bronze</option>
+                                <option value="Admin">Admin</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="col-8">
-                        <div class="input-group">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="far fa-calendar-alt"></i>
-                                </span>
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>TANGGAL</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="far fa-calendar-alt"></i>
+                                    </span>
+                                </div>
+                                <input type="text" class="form-control" id="filter-tanggal">
+                                <input type="hidden" class="form-control" id="startDate" value="-">
+                                <input type="hidden" class="form-control" id="endDate" value="-">
                             </div>
-                            <input type="text" class="form-control" id="filter-tanggal">
-                            <input type="hidden" class="form-control" id="startDate" value="-">
-                            <input type="hidden" class="form-control" id="endDate" value="-">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <div class="col-4 pt-1">
+                            <label>STATUS</label>
+                            <span class="float-right">:</span>
+                        </div>
+                        <div class="col-8">
+                            <select class="form-control" id="filter-status">
+                                <option value="-">-</option>
+                                <option value="Active">Active</option>
+                                <option value="Process">Process</option>
+                            </select>
                         </div>
                     </div>
                 </div>
-                <div class="form-group row">
-                    <div class="col-4 pt-1">
-                        <label>STATUS</label>
-                        <span class="float-right">:</span>
+            </div>
+        </div>
+
+        <div class="col-6">
+            <div class="card">
+                <div class="card-header border-0 bg-gradient-info">
+                    <h3 class="card-title pt-1">
+                        <i class="fas fa-chart-pie mr-1"></i>
+                        Chart
+                    </h3>
+                    <div class="card-tools">
+                        <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
+                            <i class="fas fa-minus"></i>
+                        </button>
                     </div>
-                    <div class="col-8">
-                        <select class="form-control" id="filter-status">
-                            <option value="-">-</option>
-                            <option value="Active">Active</option>
-                            <option value="Process">Process</option>
-                        </select>
-                    </div>
+                </div>
+                <div class="card-body">
+                    <canvas id="userChart" style="min-height: 200px; height: 200px; max-height: 200px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
     </div>
-
-    <div class="col-6">
-        <div class="card">
-            <div class="card-header border-0 bg-gradient-info">
-                <h3 class="card-title pt-1">
-                    <i class="fas fa-chart-pie mr-1"></i>
-                    Chart
-                </h3>
-                <div class="card-tools">
-                    <button type="button" class="btn btn-default btn-sm" data-card-widget="collapse" title="Collapse">
-                        <i class="fas fa-minus"></i>
-                    </button>
-                </div>
-            </div>
-            <div class="card-body">
-                <canvas id="userChart" style="min-height: 200px; height: 200px; max-height: 200px; max-width: 100%;"></canvas>
-            </div>
-        </div>
-    </div>
-</div>
-
 
     <div class="card">
         <div class="card-body">
