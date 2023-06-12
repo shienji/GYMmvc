@@ -115,13 +115,13 @@
     <ul class="nav nav-treeview">
         <li class="nav-item">
             <a href="{{ route('laporan-user') }}" class="nav-link side-trans-vdashboard">
-                <i class="far fa-circle nav-icon  text-danger"></i>
+                <i class="far fa-circle nav-icon text-danger"></i>
                 <p>User</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ route('laporan-transaksi') }}" class="nav-link side-trans-vregister">
-                <i class="far fa-circle nav-icon  text-warning"></i>
+                <i class="far fa-circle nav-icon text-warning"></i>
                 <p>Transaksi</p>
             </a>
         </li>
@@ -133,7 +133,7 @@
         </li> --}}
         <li class="nav-item">
             <a href="{{ route('laporan-event') }}" class="nav-link">
-                <i class="far fa-circle nav-icon text-info"></i>
+                <i class="far fa-circle nav-icon text-success"></i>
                 <p>Event</p>
             </a>
         </li>
