@@ -213,7 +213,7 @@ class TransaksiController extends Controller
             'eventby'=>'required'
         ]);
 
-        DB::beginTransaction();
+        //DB::beginTransaction();
         if($r->event_id=="" or $r->event_id<=0){
             $cek2=DB::table("event")->insertGetId(
                 ["event_nama"=>$r->nama,
@@ -249,7 +249,8 @@ class TransaksiController extends Controller
         if($cekstatus==true){
             return back()->with("success","Data telah disimpan");
         }else{
-            DB::rollBack();
+            //dd($cekstatus);
+            //DB::rollBack();
             return back()->with("error","Gagal simpan data");
         }
     }
