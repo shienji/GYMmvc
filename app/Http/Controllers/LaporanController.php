@@ -284,7 +284,40 @@ class LaporanController extends Controller
     // EVENT
     public function view_event()
     {
-        return view('laporan.event');
+        // return view('laporan.event');
+        $query_start = 'SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-01-01 00:00:00" AND "2023-01-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-02-01 00:00:00" AND "2023-02-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-03-01 00:00:00" AND "2023-03-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-04-01 00:00:00" AND "2023-04-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-05-01 00:00:00" AND "2023-05-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-06-01 00:00:00" AND "2023-06-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-07-01 00:00:00" AND "2023-07-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-08-01 00:00:00" AND "2023-08-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-09-01 00:00:00" AND "2023-09-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-10-01 00:00:00" AND "2023-10-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-11-01 00:00:00" AND "2023-11-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "start" FROM event WHERE event_start BETWEEN "2023-12-01 00:00:00" AND "2023-12-28 23:00:00"
+        ';
+
+        $dataStart = DB::select($query_start);
+        $arrayStart = [];
+        foreach ($dataStart as $row) {
+            $arrayStart[] = $row->start;
+        }
+
+        // dd($dataChart);
+        return view('laporan.event', compact('arrayStart'));
     }
 
     public function data_event(Request $request)

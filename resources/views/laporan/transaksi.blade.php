@@ -94,7 +94,7 @@
                 </div>
                 <div class="card-body">
                     <div class="mb-2 text-center"><i class="fas fa-square" style="color: #3b8bba;"></i> DAFTAR <i class="fas fa-square ml-3" style="color: #c1c7d1;"></i></span> EXPIRED</div>
-                    <canvas id="lineChart" style="min-height: 240px; height: 240px; max-height: 240px; max-width: 100%;"></canvas>
+                    <canvas id="chartTransaksi" style="min-height: 240px; height: 240px; max-height: 240px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
@@ -301,22 +301,22 @@
                 responsive : true,
                 legend: {
                     display: false
-            },
-            scales: {
-                xAxes: [{
-                gridLines : {
-                    display : true,
+                },
+                scales: {
+                    xAxes: [{
+                    gridLines : {
+                        display : true,
+                    }
+                    }],
+                    yAxes: [{
+                    gridLines : {
+                        display : true,
+                    }
+                    }]
                 }
-                }],
-                yAxes: [{
-                gridLines : {
-                    display : true,
-                }
-                }]
-            }
             }
 
-            var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+            var lineChartCanvas = $('#chartTransaksi').get(0).getContext('2d')
             var lineChartOptions = $.extend(true, {}, areaChartOptions)
             var lineChartData = $.extend(true, {}, areaChartData)
             lineChartData.datasets[0].fill = false;
