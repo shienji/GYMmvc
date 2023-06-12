@@ -125,12 +125,12 @@
                 <p>Transaksi</p>
             </a>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a href="{{ route('laporan-fasilitas') }}" class="nav-link side-trans-vrenewal">
                 <i class="far fa-circle nav-icon  text-success"></i>
                 <p>Fasilitas</p>
             </a>
-        </li>
+        </li> --}}
         <li class="nav-item">
             <a href="{{ route('laporan-event') }}" class="nav-link">
                 <i class="far fa-circle nav-icon text-info"></i>

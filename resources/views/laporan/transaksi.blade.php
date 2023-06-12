@@ -69,10 +69,10 @@
                         <div class="col-8">
                             <select class="form-control" id="filter-role-transaksi">
                                 <option value="-">-</option>
-                                <option value="1">Gold</option>
-                                <option value="2">Silver</option>
-                                <option value="3">Bronze</option>
-                                <option value="4">Admin</option>
+                                <option value="Gold">Gold</option>
+                                <option value="Silver">Silver</option>
+                                <option value="Bronze">Bronze</option>
+                                {{-- <option value="Admin">Admin</option> --}}
                             </select>
                         </div>
                     </div>
@@ -83,7 +83,7 @@
             <div class="card">
                 <div class="card-header border-0 bg-gradient-info">
                     <h3 class="card-title pt-1">
-                        <i class="fas fa-chart-pie mr-1"></i>
+                        <i class="fas fa-chart-line mr-1"></i>
                         Chart
                     </h3>
                     <div class="card-tools">
