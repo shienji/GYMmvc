@@ -27,6 +27,7 @@ class TransaksiController extends Controller
     public function viewLoginEvent(){
         // $vjenis=DB::table('role')->select("role_id","role_nama","role_harga")->where("deleted_at",null)->get();
         $vevent=DB::table('event')->where("deleted_at",null)->where("event_end",">=",Carbon::now())->get();
+        //$vevent=DB::select("select event.* from event left outer join eventd on eventd.event_id=event.event_id where ")->get();
         $vmember=DB::table('user')->where("user_status","Active")->where("user_role","!=","Admin")->get();
         return view('transaksi.userevent')->with("vevent",$vevent)->with('vmember',$vmember);
     }
@@ -262,7 +263,7 @@ class TransaksiController extends Controller
         foreach ($event as $k => $v) {
             $cek2=DB::table("eventd")
             ->where("deleted_at",null)->where("event_id",$v)->where("user_id",$r->nm_member)->first();            
-            if(!$cek2->event_id){
+            if($cek2==null or !$cek2->event_id){
                 $cek3=DB::table("eventd")->insert(
                     ["event_id"=>$v,
                     "user_id"=>$r->nm_member,

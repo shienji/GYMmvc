@@ -23,7 +23,7 @@
                     </div>
                 </div>
 
-                <form class="form-horizontal" id="form-input" action="{{route('trans-veventsavereg')}}" method="POST">                
+                <form class="form-horizontal" id="form-input" action="{{route('trans-veventsavereg')}}" method="POST">
                 @csrf
                 <div class="card-body">
                     {{-- <x-inputhcomp type="text" label="peserta" name="nm_member" value="{{islogin.user_id}}" readonly ></x-inputcomp> --}}
