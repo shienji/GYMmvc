@@ -12,12 +12,15 @@ class isAdmin
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param \Illuminate\Http\Request $request 
+     * @param (\Symfony\Component\HttpFoundation\Response)  $next
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::check() && Auth::user()->user_role == 'Admin') {
-            return $next($request);
+        if ($request->session()->has('nama')) {
+            if($request->session()->get('nama') == 'Admin'){
+                return $next($request);
+            }
         }
 
         return redirect('/');
