@@ -182,7 +182,7 @@
         };
 
         $(document).ready(function() {
-            // $('.card').find('[data-card-widget="collapse"]').click();
+            $('.card').find('[data-card-widget="collapse"]').click();
 
             panggil_tabel_event('-', '-', '-', '-');
 
