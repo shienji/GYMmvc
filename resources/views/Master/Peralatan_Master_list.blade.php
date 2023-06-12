@@ -12,7 +12,7 @@
 @endif
 @section('konten')
 <h1 style="text-align: center">Master Peralatan</h1>
-<a href="{{ route('peralatan_master') }}" class="btn btn-danger float-right">Insert</a>
+<a href="{{ route('peralatan_master') }}" class="btn btn-success float-right">Insert</a>
 <br>
 <br>
     <div class="row">
