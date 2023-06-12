@@ -167,26 +167,30 @@
 
                                     </div>
                                     <div class="tab-pane" id="settings">
-                                        <form class="form-horizontal">
+                                        <form method="POST" action="{{ Route('updateuser') }}" class="form-horizontal">
+                                            {{-- @method('patch') --}}
+                                            @csrf
                                             @foreach ($admin as $e)
+                                                <input type="hidden" class="form-control" name="user_id"
+                                                    value="{{ $e->user_id }}">
                                                 <div class="form-group row">
                                                     <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                                     <div class="col-sm-10">
-                                                        <input type="email" class="form-control" id="inputEmail"
-                                                            value="{{ $e->user_email }}">
+                                                        <input type="email" readonly class="form-control"
+                                                            name="user_email" value="{{ $e->user_email }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="inputNama" class="col-sm-2 col-form-label">Nama</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="inputNama"
+                                                        <input type="text" class="form-control" name="user_nama"
                                                             value="{{ $e->user_nama }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="inputNIK" class="col-sm-2 col-form-label">NIK</label>
                                                     <div class="col-sm-10">
-                                                        <input type="number" class="form-control" id="inputNIK"
+                                                        <input type="number" class="form-control" name="user_nik"
                                                             value="{{ $e->user_nik }}"
                                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                             type="number" maxlength="19" min="0">
@@ -196,14 +200,14 @@
                                                     <label for="inputTgllahir" class="col-sm-2 col-form-label">Tanggal
                                                         Lahir</label>
                                                     <div class="col-sm-10">
-                                                        <input type="date" class="form-control" id="inputTgllahir"
+                                                        <input type="date" class="form-control" name="user_tgllahir"
                                                             value="{{ $e->user_tgllahir }}">
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
                                                     <label for="inputNohp" class="col-sm-2 col-form-label">No. HP</label>
                                                     <div class="col-sm-10">
-                                                        <input type="number" class="form-control" id="inputNohp"
+                                                        <input type="number" class="form-control" name="user_nohp"
                                                             value="{{ $e->user_nohp }}"
                                                             oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);"
                                                             type="number" maxlength="16" min="0">
@@ -213,17 +217,16 @@
                                                     <label for="inputAlamat"
                                                         class="col-sm-2 col-form-label">Alamat</label>
                                                     <div class="col-sm-10">
-                                                        <input type="text" class="form-control" id="inputAlamat"
+                                                        <input type="text" class="form-control" name="user_alamat"
                                                             value="{{ $e->user_alamat }}">
                                                     </div>
                                                 </div>
-                                                <div class="form-group row">
-                                                    <div class="offset-sm-2 col-sm-10">
-                                                        <a href="#"><button type="submit"
-                                                                class="btn btn-danger">Update</button></a>
-                                                    </div>
-                                                </div>
                                             @endforeach
+                                            <div class="form-group row">
+                                                <div class="offset-sm-2 col-sm-10">
+                                                    <button type="submit" class="btn btn-danger">Update</button>
+                                                </div>
+                                            </div>
                                         </form>
                                     </div>
                                     <!-- /.tab-pane -->

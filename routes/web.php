@@ -5,6 +5,7 @@ use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LayoutController;
 use App\Http\Controllers\MasterController;
 use App\Http\Controllers\TransaksiController;
+use App\Http\Controllers\UserController;
 use App\Http\Middleware\isAdmin;
 
 Route::get('/', function () {
@@ -24,7 +25,7 @@ Route::prefix("/user")->group(function () {
 
     Route::prefix("/pendaftaran")->group(function () {
         Route::get('/', [LayoutController::class, 'registerPage'])->name("layout-registerpage");
-        Route::get('/add-user', [LayoutController::class, 'actionRegister'])->name('layout-adduser');
+        Route::post('/add-user', [LayoutController::class, 'actionRegister'])->name('layout-adduser');
     });
 });
 
@@ -39,7 +40,7 @@ Route::prefix("/transaksi")->group(function () {
         // Route::get('/', [TransaksiController::class, 'viewLogin'])->name("trans-vlogin");
         // Route::post('/save', [TransaksiController::class, 'viewLogin'])->name("trans-vloginsave");
         // Route::get('/profile', [TransaksiController::class, 'viewLoginProfile'])->name("trans-vloginprofile");
-        Route::get('/event', [TransaksiController::class, 'viewLoginEvent'])->name("trans-vloginevent");        
+        Route::get('/event', [TransaksiController::class, 'viewLoginEvent'])->name("trans-vloginevent");
     });
 
     Route::prefix("/register")->group(function () {

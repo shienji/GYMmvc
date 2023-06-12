@@ -78,10 +78,12 @@
                     "DOMContentLoaded", zaraz.init)
             }(w, d, "zarazData", "script");
         })(window, document);
+        @include('components.alert')
     </script>
 </head>
 
 <body class="hold-transition register-page">
+    @include('components.alert')
     <div class="register-box">
         <div class="register-logo">
             <a href="#"><b>GYMMVC</b></a>
@@ -89,7 +91,8 @@
         <div class="card">
             <div class="card-body register-card-body">
                 <p class="login-box-msg">Register a new membership</p>
-                <form action="#" method="get">
+                <form action="{{ Route('layout-adduser') }}" method="POST">
+                    @csrf
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Nama" name="user_nama">
                         <div class="input-group-append">
@@ -129,26 +132,17 @@
                         <p class="login-box-msg">Silahkan Pilih Tipe Member</p>
                         <div class="btn-group btn-group-toggle col-12" data-toggle="buttons">
                             <label class="btn bg-white">
-                                <input type="radio" name="gold" autocomplete="off"> Gold
+                                <input type="radio" value="Gold" name="user_role" autocomplete="off"> Gold
                             </label>
                             <label class="btn bg-white">
-                                <input type="radio" name="silver" autocomplete="off"> Silver
+                                <input type="radio" value="Silver" name="user_role" autocomplete="off"> Silver
                             </label>
                             <label class="btn bg-white">
-                                <input type="radio" name="bronze" autocomplete="off"> Bronze
+                                <input type="radio" value="Bronze" name="user_role" autocomplete="off"> Bronze
                             </label>
                         </div>
                     </div>
                     <div class="row">
-                        {{-- <div class="col-8">
-                            <div class="icheck-primary">
-                                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                                <label for="agreeTerms">
-                                    I agree to the <a href="#">terms</a>
-                                </label>
-                            </div>
-                        </div> --}}
-
                         <div class="col-12">
                             <button type="submit" class="btn btn-primary btn-block">Register</button>
                         </div>
@@ -175,6 +169,13 @@
         </div>
     </div>
 
+    <script>
+        var msg = '{{ Session::get('alert') }}';
+        var exist = '{{ Session::has('alert') }}';
+        if (exist) {
+            alert(msg);
+        }
+    </script>
 
     <script src="../../plugins/jquery/jquery.min.js"></script>
 

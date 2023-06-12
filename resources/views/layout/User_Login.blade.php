@@ -78,6 +78,7 @@
                     "DOMContentLoaded", zaraz.init)
             }(w, d, "zarazData", "script");
         })(window, document);
+        @include('components.alert')
     </script>
 </head>
 
@@ -90,7 +91,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in</p>
-                <form action="{{ route('actionlogin') }}" method="post">
+                <form action="{{ Route('actionlogin') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
                         <input type="email" name="user_email" class="form-control" placeholder="Email"
@@ -126,6 +127,13 @@
         </div>
     </div>
 
+    <script>
+        var msg = '{{ Session::get('alert') }}';
+        var exist = '{{ Session::has('alert') }}';
+        if (exist) {
+            alert(msg);
+        }
+    </script>
 
     <script src="../../plugins/jquery/jquery.min.js"></script>
 
