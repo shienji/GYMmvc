@@ -106,7 +106,71 @@ class LaporanController extends Controller
     // TRANSAKSI
     public function view_transaksi()
     {
-        return view('laporan.transaksi');
+        // return view('laporan.transaksi');
+        $query_daftar = 'SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-01-01 00:00:00" AND "2023-01-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-02-01 00:00:00" AND "2023-02-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-03-01 00:00:00" AND "2023-03-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-04-01 00:00:00" AND "2023-04-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-05-01 00:00:00" AND "2023-05-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-06-01 00:00:00" AND "2023-06-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-07-01 00:00:00" AND "2023-07-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-08-01 00:00:00" AND "2023-08-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-09-01 00:00:00" AND "2023-09-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-10-01 00:00:00" AND "2023-10-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-11-01 00:00:00" AND "2023-11-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "daftar" FROM transaksi WHERE transaksi_daftar BETWEEN "2023-12-01 00:00:00" AND "2023-12-28 23:00:00"
+        ';
+
+        $data = DB::select($query_daftar);
+        $dataDaftar = [];
+        foreach ($data as $row) {
+            $dataDaftar[] = $row->daftar;
+        }
+
+        $query_expired = 'SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-01-01 00:00:00" AND "2023-01-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-02-01 00:00:00" AND "2023-02-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-03-01 00:00:00" AND "2023-03-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-04-01 00:00:00" AND "2023-04-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-05-01 00:00:00" AND "2023-05-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-06-01 00:00:00" AND "2023-06-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-07-01 00:00:00" AND "2023-07-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-08-01 00:00:00" AND "2023-08-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-09-01 00:00:00" AND "2023-09-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-10-01 00:00:00" AND "2023-10-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-11-01 00:00:00" AND "2023-11-28 23:00:00"
+            UNION ALL
+            SELECT COUNT(*) AS "expired" FROM transaksi WHERE transaksi_expired BETWEEN "2023-12-01 00:00:00" AND "2023-12-28 23:00:00"
+        ';
+
+        $data = DB::select($query_expired);
+        $dataExpired = [];
+        foreach ($data as $row) {
+            $dataExpired[] = $row->expired;
+        }
+
+        // dd($dataChart);
+        return view('laporan.transaksi', compact('dataDaftar'), compact('dataExpired'));
     }
 
     public function data_transaksi(Request $request){

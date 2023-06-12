@@ -93,12 +93,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                    <canvas id="lineChart" style="min-height: 340px; height: 340px; max-height: 340px; max-width: 100%;"></canvas>
                 </div>
             </div>
         </div>
-    </div>
-    
+    </div> 
 
     <div class="card">
         <div class="card-body">
@@ -209,7 +208,7 @@
         }
 
         $(document).ready(function() {
-            $('.card:first').find('[data-card-widget="collapse"]').click();
+            // $('.card').find('[data-card-widget="collapse"]').click();
 
             panggil_tabel_transaksi('-', '-', '-', '-', '-');
 
@@ -260,10 +259,10 @@
             });
 
             var areaChartData = {
-                labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+                labels  : ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'],
                 datasets: [
                     {
-                    label               : 'Digital Goods',
+                    label               : 'Daftar',
                     backgroundColor     : 'rgba(60,141,188,0.9)',
                     borderColor         : 'rgba(60,141,188,0.8)',
                     pointRadius          : false,
@@ -271,7 +270,7 @@
                     pointStrokeColor    : 'rgba(60,141,188,1)',
                     pointHighlightFill  : '#fff',
                     pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data                : [28, 48, 40, 19, 86, 27, 90]
+                    data                : {!! json_encode($dataDaftar) !!}
                     },
                     {
                     label               : 'Electronics',
@@ -282,26 +281,26 @@
                     pointStrokeColor    : '#c1c7d1',
                     pointHighlightFill  : '#fff',
                     pointHighlightStroke: 'rgba(220,220,220,1)',
-                    data                : [65, 59, 80, 81, 56, 55, 40]
+                    data                : {!! json_encode($dataExpired) !!}
                     },
                 ]
             }
 
             var areaChartOptions = {
-            maintainAspectRatio : false,
-            responsive : true,
-            legend: {
-                display: false
+                maintainAspectRatio : false,
+                responsive : true,
+                legend: {
+                    display: false
             },
             scales: {
                 xAxes: [{
                 gridLines : {
-                    display : false,
+                    display : true,
                 }
                 }],
                 yAxes: [{
                 gridLines : {
-                    display : false,
+                    display : true,
                 }
                 }]
             }
